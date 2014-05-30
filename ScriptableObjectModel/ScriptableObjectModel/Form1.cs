@@ -15,7 +15,9 @@ namespace ScriptableObjectModel
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // connect the scripting language to the IDrawing instance
             ScriptingLanguage.SetDrawing(this);
+            // establish the scriptable object model used by WinWrap Basic
             basicIdeCtl1.AddScriptableObjectModel(typeof(ScriptingLanguage));
             basicIdeCtl1.FileName = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + @"\..\..\Macro1.bas";
         }
@@ -25,15 +27,19 @@ namespace ScriptableObjectModel
             EraseLines();
         }
 
-        private Stack<int> _iter;
-        private int _lim = 20;
-        
+        #region Draw Ellipses
+
+        private Stack<int> _iter; // pop element for each ellipse
+        private int _lim = 20; // # of ellipses to draw
+
+        // initialize ellipses count and start timer
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
             _iter = new Stack<int>(Enumerable.Range(1, _lim).Reverse());
             timer1.Enabled = true;
         }
 
+        // draw ellipse and pop stack
         private void timer1_Tick(object sender, EventArgs e)
         {
             int w = pictureBox1.Width;
@@ -55,9 +61,11 @@ namespace ScriptableObjectModel
             pictureBox1.Image = _drawArea;
         }
 
-        private Bitmap _drawArea;
+        #endregion
 
         #region IDrawing
+
+        private Bitmap _drawArea;
 
         // get the width of the drawing area
         public int PictureWidth { get { return pictureBox1.Width; } }

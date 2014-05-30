@@ -10,7 +10,7 @@
 
 namespace ScriptableObjectModel
 {
-    // used by application, not used by WinWrap Basic scripts
+    // interface to access non-scriptable portions of the host application
     public interface IDrawing
     {
         int PictureWidth { get; }
