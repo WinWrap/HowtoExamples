@@ -1,5 +1,5 @@
 ﻿
-namespace ScriptableExample1
+namespace ScriptableObjectModel
 {
     [Scriptable] public static class ScriptingLanguage
     {

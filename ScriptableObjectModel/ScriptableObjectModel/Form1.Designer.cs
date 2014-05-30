@@ -1,4 +1,4 @@
-﻿namespace ScriptableExample1
+﻿namespace ScriptableObjectModel
 {
     partial class Form1
     {

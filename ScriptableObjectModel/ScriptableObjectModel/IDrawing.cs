@@ -8,7 +8,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace ScriptableExample1
+namespace ScriptableObjectModel
 {
     // used by application, not used by WinWrap Basic scripts
     public interface IDrawing
