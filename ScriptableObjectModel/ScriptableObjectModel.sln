@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptableExample1", "ScriptableExample1\ScriptableExample1.csproj", "{34FEA540-B6EB-493F-A391-D413A964B5D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptableObjectModel", "ScriptableObjectModel\ScriptableObjectModel.csproj", "{34FEA540-B6EB-493F-A391-D413A964B5D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
