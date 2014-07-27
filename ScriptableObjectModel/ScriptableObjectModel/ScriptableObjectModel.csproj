@@ -42,7 +42,10 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="ww10_net, Version=10.25.0.18, Culture=neutral, PublicKeyToken=d08a0738ecd16506, processorArchitecture=MSIL" />
+    <Reference Include="ww10_net, Version=10.30.0.7, Culture=neutral, PublicKeyToken=d08a0738ecd16506, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Polar Engineering\WinWrap Basic v10 - For .NET 4.0\REDIST\ww10_net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Form1.cs">
