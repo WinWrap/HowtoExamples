@@ -3,7 +3,7 @@
 Imports System
 
 Sub Main()
-    'x()
+    x()
     'Dim w As Integer = PictureWidth
     'EraseLines()
 End Sub

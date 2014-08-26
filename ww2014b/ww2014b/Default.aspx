@@ -8,7 +8,7 @@
 <head runat="server">
     <link rel="stylesheet" href="StyleSheet1.css" />
     <title></title>
-    <script>
+    <!--<script>
         //alert("hi")
         function onPositionUpdate(position) {
             var lat = position.coords.latitude;
@@ -21,12 +21,12 @@
             else
                 alert("navigator.geolocation is not available");
         }
-    </script>
+    </script>-->
 </head>
 <body>
     <p class="mobile" id="demo"></p>
-    <button type="button" onclick="myFunction()" class="mobile">Get lat/lng.</button>
-    <p>&nbsp;</p>
+    <!--<button type="button" onclick="myFunction()" class="mobile">Get lat/lng.</button>
+    <p>&nbsp;</p>-->
     <form id="form1" runat="server">
         <div>
             <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Calculate" Font-Size="XX-Large"/>
