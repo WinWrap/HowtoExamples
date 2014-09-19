@@ -15,7 +15,7 @@ namespace WebRole1
             {
                 basicNoUIObj.Secret = new Guid(Utils.GetPatternString("wwwr140916b", "Guid[(]\"(.*)\"[)]"));
                 basicNoUIObj.Initialize();
-                Button1.Text = basicNoUIObj.Evaluate("2+3");
+                Button1.Text = basicNoUIObj.Evaluate("4+3");
             }
         }
 
