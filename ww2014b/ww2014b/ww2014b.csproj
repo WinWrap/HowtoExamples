@@ -78,7 +78,7 @@
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Polar Engineering\WinWrap Basic\Certificates\Application-3dc6c93a.htm">
       <Link>App_Data\WinWrapBasic10\Application-3dc6c93a.htm</Link>
     </Content>
-    <Content Include="..\..\..\..\GitHub\Working-business\HowtoExamples\ww2014b-strings.txt">
+    <Content Include="..\..\..\Working-business\config\ww2014b-strings.txt">
       <Link>App_Data\WinWrapBasic10\ww2014b-strings.txt</Link>
     </Content>
     <Content Include="App_Data\Macros\AClass.bas" />
