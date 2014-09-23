@@ -15,8 +15,8 @@
     <AzureEnableProfiling>False</AzureEnableProfiling>
     <AzureServiceConfiguration>Cloud</AzureServiceConfiguration>
     <AzureSolutionConfiguration>Release</AzureSolutionConfiguration>
-    <AzureStorageAccountLabel>wwwr140916b</AzureStorageAccountLabel>
-    <AzureStorageAccountName>wwwr140916b</AzureStorageAccountName>
+    <AzureStorageAccountLabel>portalvhdsqfdqlzn6mtdsc</AzureStorageAccountLabel>
+    <AzureStorageAccountName>portalvhdsqfdqlzn6mtdsc</AzureStorageAccountName>
     <AzureAppendTimestampToDeploymentLabel>True</AzureAppendTimestampToDeploymentLabel>
   </PropertyGroup>
 </Project>

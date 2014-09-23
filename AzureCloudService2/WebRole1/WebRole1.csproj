@@ -117,9 +117,9 @@
     <Reference Include="Microsoft.AspNet.FriendlyUrls">
       <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
     </Reference>
-    <Reference Include="ww10_asp, Version=10.25.0.42, Culture=neutral, PublicKeyToken=d08a0738ecd16506, processorArchitecture=MSIL">
+    <Reference Include="ww10_azw, Version=10.30.0.11, Culture=neutral, PublicKeyToken=d08a0738ecd16506, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Polar Engineering\WinWrap Basic v10 - For ASP.NET 4.0\REDIST\ww10_asp.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Polar Engineering\WinWrap Basic v10 - For Azure Websites 4.0\REDIST\ww10_azw.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -173,10 +173,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Polar Engineering\WinWrap Basic v10 - For ASP.NET 4.0\REDIST\ww10_32w.dll">
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Polar Engineering\WinWrap Basic v10 - For Azure Websites 4.0\REDIST\ww10_32w.dll">
       <Link>App_Data\WinWrapBasic10\ww10_32w.dll</Link>
     </Content>
-    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Polar Engineering\WinWrap Basic v10 - For ASP.NET 4.0\REDIST\ww10_64.dll">
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Polar Engineering\WinWrap Basic v10 - For Azure Websites 4.0\REDIST\ww10_64.dll">
       <Link>App_Data\WinWrapBasic10\ww10_64.dll</Link>
     </Content>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Polar Engineering\WinWrap Basic\Certificates\Application-620bc2e5.htm">
