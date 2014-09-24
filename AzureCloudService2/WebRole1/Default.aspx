@@ -8,6 +8,8 @@
         <p><a href="http://www.asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
         <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" /><br />
         <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+        <br />
+        <asp:TextBox ID="TextBox1" runat="server" Height="305px" TextMode="MultiLine" Width="706px"></asp:TextBox>
     </div>
 
     <div class="row">
