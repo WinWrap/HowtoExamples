@@ -53,7 +53,7 @@ namespace WindowsFormsTest
             WebClient client = new WebClient();
             string url = "http://ww-ws-test.azurewebsites.net?x=" + Thread.CurrentThread.ManagedThreadId;
             string downloadString = client.DownloadString(url);
-            bool success = downloadString.Contains("DateTime.Now");
+            bool success = downloadString.Contains(@"""arg x=""" + Thread.CurrentThread.ManagedThreadId);
             BeginInvoke(new UpdateLabelDelegate(UpdateLabel), success);
         }
     }
