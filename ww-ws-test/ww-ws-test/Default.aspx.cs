@@ -16,9 +16,8 @@ namespace ww_ws_test
             {
                 basicNoUIObj.Secret = new Guid(Utils.GetPatternString("ww-ws-test", "Guid[(]\"(.*)\"[)]"));
                 basicNoUIObj.Initialize();
-                string sx = "x=" + (Request["x"] ?? "null");
-                string s = "arg x=" + Request["x"].ToString();
-                Label1.Text = basicNoUIObj.Evaluate(@"""System.DateTime.Now.ToString()""");
+                string sx = "arg x=" + (Request["x"] ?? "null");
+                Label1.Text = basicNoUIObj.Evaluate("sx");
             }
         }
 
