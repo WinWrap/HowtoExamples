@@ -82,8 +82,24 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="ww10_azw, Version=10.25.0.42, Culture=neutral, PublicKeyToken=d08a0738ecd16506, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Polar Engineering\WinWrap Basic v10 - For Azure Websites 4.0\REDIST\ww10_azw.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Polar Engineering\WinWrap Basic v10 - For Azure Websites 4.0\REDIST\ww10_32w.dll">
+      <Link>App_Data\WinWrapBasic10\ww10_32w.dll</Link>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Polar Engineering\WinWrap Basic v10 - For Azure Websites 4.0\REDIST\ww10_64.dll">
+      <Link>App_Data\WinWrapBasic10\ww10_64.dll</Link>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Polar Engineering\WinWrap Basic\Certificates\Application-84c20274.htm">
+      <Link>App_Data\WinWrapBasic10\Application-84c20274.htm</Link>
+    </Content>
+    <Content Include="..\..\..\Working-business\config\wwxwrxtest-strings.txt">
+      <Link>App_Data\WinWrapBasic10\wwxwrxtest-strings.txt</Link>
+    </Content>
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace WebRole1
 {
@@ -16,7 +11,12 @@ namespace WebRole1
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            Button1.Text = DateTime.Now.ToString();
+            //Button1.Text = DateTime.Now.ToString();
+            using (var basicNoUIObj = new WinWrap.Basic.BasicNoUIObj())
+            {
+                basicNoUIObj.Initialize();
+                Button1.Text = basicNoUIObj.Evaluate("4+3");
+            }
         }
     }
 }
