@@ -19,13 +19,17 @@ namespace WindowsFormsTest
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Thread[] threads = new Thread[10];
-            for (int i = 0; i < 10; i++)
+            button1.Enabled = false;
+
+            Thread[] threads = new Thread[100];
+            for (int i = 0; i < threads.Length; i++)
             {
                 threads[i] = new Thread(WorkerThreadFunction);
             }
 
-            for (int i = 0; i < 10; i++)
+            button1.Enabled = true;
+
+            for (int i = 0; i < threads.Length; i++)
             {
                 threads[i].Start();
             }
@@ -47,7 +51,7 @@ namespace WindowsFormsTest
         public void WorkerThreadFunction()
         {
             WebClient client = new WebClient();
-            string url = "http://ww-ws-test.azurewebsites.net?x=" + label1.Text;
+            string url = "http://ww-ws-test.azurewebsites.net?x=" + Thread.CurrentThread.ManagedThreadId;
             string downloadString = client.DownloadString(url);
             bool success = downloadString.Contains("DateTime.Now");
             BeginInvoke(new UpdateLabelDelegate(UpdateLabel), success);
