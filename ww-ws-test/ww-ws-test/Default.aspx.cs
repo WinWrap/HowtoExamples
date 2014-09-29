@@ -12,6 +12,12 @@ namespace ww_ws_test
         protected void Page_Load(object sender, EventArgs e)
         {
             Label1.Text = System.DateTime.Now.ToString();
+            using (var basicNoUIObj = new WinWrap.Basic.BasicNoUIObj())
+            {
+                basicNoUIObj.Secret = new Guid(Utils.GetPatternString("ww-ws-test", "Guid[(]\"(.*)\"[)]"));
+                basicNoUIObj.Initialize();
+                Label1.Text = basicNoUIObj.Evaluate(@"""System.DateTime.Now.ToString()""");
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
