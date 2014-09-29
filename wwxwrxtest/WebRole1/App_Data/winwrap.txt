@@ -1,0 +1,76 @@
+9/29/2014 12:17:13 PM [10] Creating BasicNoUIObj
+9/29/2014 12:17:13 PM [10] Turn on BasicNoUIObj tracing
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: |\ Trace
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: | | -> categories=(&Hff) Action Query ActionEvent QueryEvent Internal Execution
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: | | *Type="WinWrap.Basic.BasicNoUIObj"
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: | | *Assembly="ww10_azw, Version=10.25.0.42, Culture=neutral, PublicKeyToken=d08a0738ecd16506"
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: | | *NetUtilAssembly="ww10_hlp, Version=10.25.0.1, Culture=neutral, PublicKeyToken=116d57131d5afc39"
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: | | *DllVersion="10.25.042/64W{1600} - 9/18/2014 9:17:36 PM"
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: | | *ThreadId=10
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: |/
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: |\ Evaluate
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: | | -> expression="4+3"
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: | |\ *Evaluate [Get]("")
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: | | | -> rhs=4+3
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: | | | -> depth=0
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: | | | <- Result=7%
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: | |/
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: | | <- Result="7%"
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: |/
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: |\ Dispose
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: | |\ Shutdown
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: | | |\ *Shutdown("")
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: | | | |\ *Command("")
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: | | | | | -> command=-1
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.1: | | | | | -> execactive()=0
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | | | | -> running()=0
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | | | | -> stepping()=0
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | | | | <- status=0
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | | |/
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | | | <- Result=True
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | |/
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | | <- Result=0
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | |/
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | |\ Disconnect
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | | -> ComObjectCount=1
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | |\ *Shutdown("")
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | | |\ *Command("")
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | | | | -> command=-1
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | | | | -> execactive()=0
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | | | | -> running()=0
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | | | | -> stepping()=0
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | | | | <- status=0
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | | |/
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | | | <- Result=True
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | |/
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | |\ OnDisconnecting [Event]
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | |/
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | |\ *Disconnect("")
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | | |\ *RemoveReferences("")
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | | |/
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.2: | | | |\ *RemoveExtensions("")
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | | | ** Remove Extension 'Err.'
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | | | ** Remove Extension 'WWB.'
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | | | ** Remove Extension ''
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | | | ** Remove DataType 'Object'
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | | | ** Remove DataType 'VbVarType'
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | | | ** Remove DataType 'VbMsgBoxStyle'
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | | | ** Remove DataType 'VbMsgBoxResult'
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | | | ** Remove DataType 'VbAppWinStyle'
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | | | ** Remove DataType 'VbPopupStyle'
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | | | ** Remove DataType 'VbFileAttribute'
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | | | ** Remove DataType 'VbDayOfWeek'
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | | | ** Remove DataType 'VbFirstWeekOfYear'
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | | | ** Remove DataType 'VbStrConv'
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | | | ** Remove DataType 'VbCallType'
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | | | ** Remove DataType 'VbCompareMethod'
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | | | ** Remove DataType 'VbColors'
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | | | ** Remove DataType 'VbTristate'
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | | | ** Remove DataType 'OpenMode'
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | | | ** Remove DataType 'OpenShare'
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | | | ** Remove DataType 'OpenAccess'
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | | | ** Remove DataType 'ErrObject'
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | |/
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | |/
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | | | <- Result=True
+9/29/2014 12:17:13 PM [10] *WW_Basic(1) 0000.3: | |/

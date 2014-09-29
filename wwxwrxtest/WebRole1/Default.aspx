@@ -12,6 +12,8 @@
     
         <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" Width="269px" />
     
+        <br />
+        <asp:TextBox ID="TextBox1" runat="server" Height="305px" TextMode="MultiLine" Width="706px"></asp:TextBox>
     </div>
     </form>
 </body>
