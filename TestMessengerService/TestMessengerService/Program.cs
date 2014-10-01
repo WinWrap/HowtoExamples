@@ -19,7 +19,7 @@ namespace TestMessengerService
 
             List<Thread> threads = new List<Thread>();
 
-            for (int i = 0; i < 10; ++i)
+            for (int i = 0; i < 100; ++i)
             {
                 Thread thread = new Thread(SendMessageThread);
                 thread.Start();
@@ -48,7 +48,9 @@ namespace TestMessengerService
             string name = "Tom" + Thread.CurrentThread.ManagedThreadId;
             string s = client.SendMessage(name);
             if (!s.Contains(name))
-                Console.WriteLine("Failure: ThreadId=" + Thread.CurrentThread.ManagedThreadId);
+                Console.WriteLine("\nFailure: ThreadId=" + Thread.CurrentThread.ManagedThreadId);
+            else
+                Console.Write(".");
         }
     }
 }
