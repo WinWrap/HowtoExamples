@@ -14,7 +14,7 @@ namespace WebRole1
 {
     public partial class Default : System.Web.UI.Page
     {
-        string winwrapTraceFileName = AppDomain.CurrentDomain.GetData("DataDirectory") + @"\winwrap.txt";
+        static string winwrapTraceFileName = AppDomain.CurrentDomain.GetData("DataDirectory") + @"\winwrap.txt";
         static object lock_ = new object();
 
         [System.Diagnostics.ConditionalAttribute("DEBUG")]
@@ -27,6 +27,20 @@ namespace WebRole1
                     sw.WriteLine(DateTime.UtcNow.ToString() + " [" + System.Threading.Thread.CurrentThread.ManagedThreadId + "] " + text);
                 }
             }
+        }
+
+        public string ReadLog()
+        {
+#if DEBUG
+            string text = string.Format("Contents of {0}:\r\n", winwrapTraceFileName);
+            if (!System.IO.File.Exists(winwrapTraceFileName))
+                text += "(no file)";
+            else
+                text += System.IO.File.ReadAllText(winwrapTraceFileName);
+            return text;
+#else
+            return "(production release)";
+#endif
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -58,7 +72,6 @@ namespace WebRole1
 
                 Button1.Text = basicNoUIObj.Evaluate("4+3");
             }
-            TextBox1.Text = System.IO.File.ReadAllText(winwrapTraceFileName);
         }
 
         protected void Button1_Click(object sender, EventArgs e)

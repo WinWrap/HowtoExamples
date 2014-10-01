@@ -4,16 +4,15 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Version 10</title>
 </head>
 <body>
     <form id="form1" runat="server">
     <div>
-    
         <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" Width="269px" />
-    
+        <a href="?">Refresh</a> <a href="?ResetTrace=yes">Reset</a>
         <br />
-        <asp:TextBox ID="TextBox1" runat="server" Height="305px" TextMode="MultiLine" Width="706px"></asp:TextBox>
+        <pre><%=Server.HtmlEncode(ReadLog())%></pre>
     </div>
     </form>
 </body>

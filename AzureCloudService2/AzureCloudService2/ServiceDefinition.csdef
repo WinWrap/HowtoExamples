@@ -16,5 +16,7 @@
       <Import moduleName="RemoteAccess" />
       <Import moduleName="RemoteForwarder" />
     </Imports>
+    <LocalResources>
+    </LocalResources>
   </WebRole>
 </ServiceDefinition>
