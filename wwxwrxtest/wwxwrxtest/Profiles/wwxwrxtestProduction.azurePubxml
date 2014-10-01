@@ -18,5 +18,7 @@
     <AzureStorageAccountLabel>wwxwrxtest</AzureStorageAccountLabel>
     <AzureStorageAccountName>wwxwrxtest</AzureStorageAccountName>
     <AzureAppendTimestampToDeploymentLabel>True</AzureAppendTimestampToDeploymentLabel>
+    <EnableRemoteDebugger>False</EnableRemoteDebugger>
+    <RemoteDebuggerConnectorCertificateThumbprint>44770BA4D193102650D9364B2A3F3A2457CC65B4</RemoteDebuggerConnectorCertificateThumbprint>
   </PropertyGroup>
 </Project>

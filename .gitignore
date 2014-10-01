@@ -155,3 +155,4 @@ $RECYCLE.BIN/
 # Mac desktop service store files
 .DS_Store
 AzureCloudService2/WebRole1/App_Data/winwrap.txt
+wwxwrxtest/WebRole1/App_Data/winwrap.txt
