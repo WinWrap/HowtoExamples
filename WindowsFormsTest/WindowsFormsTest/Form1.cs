@@ -21,7 +21,7 @@ namespace WindowsFormsTest
         {
             button1.Enabled = false;
 
-            Thread[] threads = new Thread[100];
+            Thread[] threads = new Thread[1000];
             for (int i = 0; i < threads.Length; i++)
             {
                 threads[i] = new Thread(WorkerThreadFunction);
