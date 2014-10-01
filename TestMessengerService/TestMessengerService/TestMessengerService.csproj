@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\WCFInWebRole\WebRole1\IMessengerService.cs">
+    <Compile Include="..\..\wwxwrxtest\WebRole1\IMessengerService.cs">
       <Link>IMessengerService.cs</Link>
     </Compile>
     <Compile Include="MessengerService.cs" />
