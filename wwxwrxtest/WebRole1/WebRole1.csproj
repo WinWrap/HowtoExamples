@@ -105,6 +105,9 @@
     </Content>
     <Content Include="packages.config" />
     <Content Include="MessengerService.svc" />
+    <Content Include="ConfigureIIS.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

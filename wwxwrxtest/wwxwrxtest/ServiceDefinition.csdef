@@ -14,7 +14,8 @@
     <Imports>
       <Import moduleName="Diagnostics" />
     </Imports>
-    <LocalResources>
-    </LocalResources>
+    <Startup>
+      <Task commandLine="ConfigureIIS.cmd" executionContext="elevated" taskType="simple" />
+    </Startup>
   </WebRole>
 </ServiceDefinition>
