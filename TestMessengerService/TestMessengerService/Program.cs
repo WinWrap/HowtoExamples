@@ -19,7 +19,7 @@ namespace TestMessengerService
 
             List<Thread> threads = new List<Thread>();
 
-            for (int i = 0; i < 100; ++i)
+            for (int i = 0; i < 10; ++i)
             {
                 Thread thread = new Thread(SendMessageThread);
                 thread.Start();
@@ -46,11 +46,45 @@ namespace TestMessengerService
             // wait for synchronized start
             ewh.WaitOne();
             string name = "Tom" + Thread.CurrentThread.ManagedThreadId;
-            string s = client.SendMessage(name);
-            if (!s.Contains(name))
-                Console.WriteLine("\nFailure: ThreadId=" + Thread.CurrentThread.ManagedThreadId);
-            else
+            string s = null;
+            using (WaitForSendMessageResult wfsmr = new WaitForSendMessageResult())
+            {
+                wfsmr.Start(name);
+                s = wfsmr.WaitForResult();
+            }
+
+            if (s.Contains(name))
                 Console.Write(".");
+            else
+                Console.WriteLine("\nFailure: ThreadId=" + Thread.CurrentThread.ManagedThreadId);
+        }
+
+        class WaitForSendMessageResult : IDisposable
+        {
+            IAsyncResult ar_;
+            EventWaitHandle ewh_ = new EventWaitHandle(false, EventResetMode.ManualReset);
+
+            public void Start(string name)
+            {
+                ar_ = client.BeginSendMessage(name, Callback, this);
+            }
+
+            void Callback(IAsyncResult ar)
+            {
+                ewh_.Set();
+            }
+
+            public string WaitForResult()
+            {
+                ewh_.WaitOne();
+                return client.EndSendMessage(ar_);
+            }
+
+            public void Dispose()
+            {
+                ewh_.Dispose();
+                ewh_ = null;
+            }
         }
     }
 }
