@@ -55,6 +55,10 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="ww10_azw, Version=10.30.0.12, Culture=neutral, PublicKeyToken=d08a0738ecd16506, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Polar Engineering\WinWrap Basic v10 - For Azure Websites 4.0\REDIST\ww10_azw.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\ww-ws-objmod.pubxml" />
@@ -66,6 +70,18 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Polar Engineering\WinWrap Basic v10 - For Azure Websites 4.0\REDIST\ww10_32w.dll">
+      <Link>App_Data\WinWrapBasic10\ww10_32w.dll</Link>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Polar Engineering\WinWrap Basic v10 - For Azure Websites 4.0\REDIST\ww10_64.dll">
+      <Link>App_Data\WinWrapBasic10\ww10_64.dll</Link>
+    </Content>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Polar Engineering\WinWrap Basic\Certificates\Application-b37a4137.htm">
+      <Link>App_Data\WinWrapBasic10\Application-b37a4137.htm</Link>
+    </Content>
+    <Content Include="..\..\..\Working-business\config\ww-ws-objmod-strings.txt">
+      <Link>App_Data\WinWrapBasic10\ww-ws-objmod-strings.txt</Link>
+    </Content>
     <Content Include="Default.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -78,7 +94,9 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
