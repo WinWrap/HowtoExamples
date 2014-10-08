@@ -11,45 +11,57 @@ namespace ww_ws_objmod
 {
     public partial class Default : System.Web.UI.Page, IAppModel
     {
-        public AClass TheAClass { get; private set; }
+        public ClientImage ClientImage { get; private set; }
+        public Bitmap Bitmap_;
 
         private bool timedout_;
         private DateTime timelimit_;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            TheAClass = new AClass();
-            ScriptingLanguage.SetAppModel(this);
-            WinWrapRunFile();
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            int w = Convert.ToInt32(Width1.Value);
-            int h = Convert.ToInt32(Height1.Value);
-            int t = Convert.ToInt32(Top1.Value);
-            w -= 20;
-            h -= 100;
-            Bitmap bmp = new Bitmap(w, h);
-            Button1.Text = DateTime.Now.ToString();
-            Pen redPen = new Pen(Color.Red, 3);
+            //Button1.Text = DateTime.Now.ToString();
+            CreateImage();
+        }
 
-            int x1 = 0;
-            int y1 = 0;
-            int x2 = w-1;
-            int y2 = h-1;
-            using (var graphics = Graphics.FromImage(bmp))
-            {
-                graphics.DrawLine(redPen, x1, y1, x2, y2);
-            }
+        private void CreateImage()
+        {
+            ClientImage = new ClientImage();
+            ScriptingLanguage.SetAppModel(this);
+            int t = Convert.ToInt32(Top1.Value);
+            t = 80; // real button height
+            int w = Convert.ToInt32(Width1.Value) - 30;
+            int h = (Convert.ToInt32(Height1.Value) - t - 30) * 93 / 100;
+            Bitmap_ = new Bitmap(w, h);
+            WinWrapRunFile();
+            Image2.ImageUrl = ImageString(w, h);
+        }
+
+        private string ImageString(int w, int h)
+        {
+            string base64String = "";
+            //Bitmap bmp = new Bitmap(w, h);
+            Pen redPen = new Pen(Color.Red, 3);
+            DrawLine(Bitmap_, redPen, 0, 0, w - 1, h - 1);
             using (MemoryStream memoryStream = new MemoryStream())
             {
-                bmp.Save(memoryStream, ImageFormat.Png);
+                Bitmap_.Save(memoryStream, ImageFormat.Png);
                 Byte[] bytes = new Byte[memoryStream.Length];
                 memoryStream.Position = 0;
                 memoryStream.Read(bytes, 0, (int)bytes.Length);
-                string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
-                Image2.ImageUrl = "data:image/png;base64," + base64String;
+                base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+            }
+            return "data:image/png;base64," + base64String;
+        }
+
+        private void DrawLine(Bitmap bmp, Pen pen, int x1, int y1, int x2, int y2)
+        {
+            using (var graphics = Graphics.FromImage(bmp))
+            {
+                graphics.DrawLine(pen, x1, y1, x2, y2);
             }
         }
 
@@ -64,7 +76,7 @@ namespace ww_ws_objmod
                 basicNoUIObj.Secret = new Guid(Utils.GetPatternString("ww-ws-objmod", "Guid[(]\"(.*)\"[)]"));
                 basicNoUIObj.Initialize();
                 basicNoUIObj.AddScriptableObjectModel(typeof(ScriptingLanguage));
-                Button1.Text = basicNoUIObj.Evaluate("2+3");
+                //Button1.Text = basicNoUIObj.Evaluate("2+3");
                 string path = Utils.MacroPath("Macro1.bas");
                 basicNoUIObj.RunFile(string.Format(@"""{0}""", path));
             }
@@ -91,6 +103,7 @@ namespace ww_ws_objmod
         {
             WinWrap.Basic.BasicNoUIObj basicNoUIObj = sender as WinWrap.Basic.BasicNoUIObj;
             TextBox1.Text = Utils.FormatError(basicNoUIObj.Error);
+            TextBox1.Visible = true;
             /*Session["Error"] = Utils.FormatError(basicNoUIObj.Error);
             Response.Redirect("/LogPage.aspx");
             //Server.Transfer("LogPage.aspx", true);*/
@@ -112,12 +125,16 @@ namespace ww_ws_objmod
 
         public int PictureWidth { get { return 200; } }
 
-        public void EraseLines()
+        public void EraseLines(string s)
         {
-            string s = "EraseLines asdf";
+            //string s = "EraseLines asdf";
             Button1.Text = s;
         }
 
+        /*public void DrawLine(string s)
+        {
+            Button1.Text = s;
+        }*/
         /*public void ErrorAppend(string serror)
         {
             Session["Error"] = Session["Error"].ToString() + Environment.NewLine + serror;

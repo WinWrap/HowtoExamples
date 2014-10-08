@@ -17,8 +17,10 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" Width="468px" Font-Size="XX-Large" Height="84px" /><br />
-            <asp:Image ID="Image2" runat="server" /><br />
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Evaluate" Width="500px" Font-Size="XX-Large" Height="80px" /><br />
+            <p>
+                <asp:Image ID="Image2" runat="server" />
+            </p>
             <asp:TextBox ID="TextBox1" runat="server" Height="310px" TextMode="MultiLine" Width="100%" Visible="False"></asp:TextBox><br />
             <asp:HiddenField ID="Width1" runat="server" />
             <asp:HiddenField ID="Top1" runat="server" />

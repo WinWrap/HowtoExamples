@@ -13,16 +13,22 @@ namespace ww_ws_objmod
         }
 
         [Scriptable]
-        public static AClass TheAClass { get { return AppModel.TheAClass; } }
+        public static ClientImage ClientImage { get { return AppModel.ClientImage; } }
 
         [Scriptable]
         public static int PictureWidth { get { return AppModel.PictureWidth; } }
 
         [Scriptable]
-        public static void EraseLines()
+        public static void EraseLines(string s)
         {
-            AppModel.EraseLines();
+            AppModel.EraseLines(s);
         }
+
+        /*[Scriptable]
+        public static void DrawLine(string s)
+        {
+            AppModel.DrawLine(s);
+        }*/
 
         /*[Scriptable]
         public static void ErrorAppend(string serror)

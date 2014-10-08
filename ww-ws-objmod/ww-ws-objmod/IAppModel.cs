@@ -13,8 +13,9 @@ namespace ww_ws_objmod
     public interface IAppModel
     {
         int PictureWidth { get; }
-        void EraseLines();
+        void EraseLines(string s);
+        //void DrawLine(string s);
         //void ErrorAppend(string serror);
-        AClass TheAClass { get; }
+        ClientImage ClientImage { get; }
     }
 }

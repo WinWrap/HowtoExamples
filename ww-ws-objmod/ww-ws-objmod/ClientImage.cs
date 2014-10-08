@@ -3,7 +3,7 @@
 namespace ww_ws_objmod
 {
     [Scriptable]
-    public class AClass
+    public class ClientImage
     {
         [Scriptable]
         public event Action Started;
@@ -12,6 +12,12 @@ namespace ww_ws_objmod
         {
             if (Started != null)
                 Started();
+        }
+
+        [Scriptable]
+        public string DrawLine()
+        {
+            return "asdf";
         }
     }
 }

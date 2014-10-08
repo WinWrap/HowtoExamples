@@ -5,5 +5,7 @@ Imports System
 Sub Main()
     'x()
     'Dim w As Integer = PictureWidth
-    EraseLines()
+    'EraseLines()
+    Dim s As String = ClientImage.DrawLine()
+    'EraseLines(s)
 End Sub
