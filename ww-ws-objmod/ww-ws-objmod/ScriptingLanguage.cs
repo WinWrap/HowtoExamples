@@ -16,24 +16,9 @@ namespace ww_ws_objmod
         public static ClientImage ClientImage { get { return AppModel.ClientImage; } }
 
         [Scriptable]
-        public static int PictureWidth { get { return AppModel.PictureWidth; } }
-
-        [Scriptable]
-        public static void EraseLines(string s)
+        public static void Trace(string msg)
         {
-            AppModel.EraseLines(s);
+            AppModel.Trace(msg);
         }
-
-        /*[Scriptable]
-        public static void DrawLine(string s)
-        {
-            AppModel.DrawLine(s);
-        }*/
-
-        /*[Scriptable]
-        public static void ErrorAppend(string serror)
-        {
-            AppModel.ErrorAppend(serror);
-        }*/
     }
 }
