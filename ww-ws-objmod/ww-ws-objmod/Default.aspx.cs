@@ -13,6 +13,7 @@ namespace ww_ws_objmod
     {
         public ClientImage ClientImage { get; private set; }
         public Bitmap Bitmap_;
+        string Base64String_ = "";
 
         private bool timedout_;
         private DateTime timelimit_;
@@ -25,44 +26,39 @@ namespace ww_ws_objmod
         {
             //Button1.Text = DateTime.Now.ToString();
             CreateImage();
+            //Image2.ImageUrl = Base64String_;
+            Image2.ImageUrl = ClientImage.Base64String_;
         }
 
         private void CreateImage()
         {
-            ClientImage = new ClientImage();
-            ScriptingLanguage.SetAppModel(this);
             int t = Convert.ToInt32(Top1.Value);
             t = 80; // real button height
             int w = Convert.ToInt32(Width1.Value) - 30;
             int h = (Convert.ToInt32(Height1.Value) - t - 30) * 93 / 100;
             Bitmap_ = new Bitmap(w, h);
+            ClientImage = new ClientImage(Bitmap_);
+            ScriptingLanguage.SetAppModel(this);
             WinWrapRunFile();
-            Image2.ImageUrl = ImageString(w, h);
+            //DrawLine(0, 0, w - 1, h - 1);
         }
 
-        private string ImageString(int w, int h)
+        private void DrawLine(int x1, int y1, int x2, int y2)
         {
-            string base64String = "";
-            //Bitmap bmp = new Bitmap(w, h);
             Pen redPen = new Pen(Color.Red, 3);
-            DrawLine(Bitmap_, redPen, 0, 0, w - 1, h - 1);
+            using (var graphics = Graphics.FromImage(Bitmap_))
+            {
+                graphics.DrawLine(redPen, x1, y1, x2, y2);
+            }
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 Bitmap_.Save(memoryStream, ImageFormat.Png);
                 Byte[] bytes = new Byte[memoryStream.Length];
                 memoryStream.Position = 0;
                 memoryStream.Read(bytes, 0, (int)bytes.Length);
-                base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+                Base64String_ = Convert.ToBase64String(bytes, 0, bytes.Length);
             }
-            return "data:image/png;base64," + base64String;
-        }
-
-        private void DrawLine(Bitmap bmp, Pen pen, int x1, int y1, int x2, int y2)
-        {
-            using (var graphics = Graphics.FromImage(bmp))
-            {
-                graphics.DrawLine(pen, x1, y1, x2, y2);
-            }
+            Base64String_ = "data:image/png;base64," + Base64String_;
         }
 
         private void WinWrapRunFile()
