@@ -13,4 +13,14 @@ Sub Main()
     'ClientImage.Gradient()
     'ClientImage.FillPolygon()
     'ClientImage.FillTriangle()
+    Dim y As New Triangle()
+    Dim s As String
+    s = y.x
+    Trace(s)
 End Sub
+
+Public Class Triangle
+    Public Function x() As String
+        Return "xxx"
+    End Function
+End Class
