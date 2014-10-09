@@ -17,23 +17,18 @@ namespace TestMessengerService
             client = new MessengerServiceClient();
             // Use the 'client' variable to call operations on the service.
 
-            List<Thread> threads = new List<Thread>();
+            List<WaitForSendMessageResult> waits = new List<WaitForSendMessageResult>();
+            for (int i = 0; i < 10; ++i)
+                waits.Add(new WaitForSendMessageResult("Tom" + i));
 
-            for (int i = 0; i < 100; ++i)
-            {
-                Thread thread = new Thread(SendMessageThread);
-                thread.Start();
-                threads.Add(thread);
-            }
+            // start all waits
+            Console.WriteLine("Start all requests...");
+            waits.All(wait => { wait.Start(); return true; });
 
-            Console.WriteLine("Start all threads...");
+            while (!waits.All(wait => wait.Done))
+                Thread.Sleep(100);
 
-            // allow all threads to commence
-            ewh.Set();
-
-            // wait for all threads to finish
-            threads.All(thread => { thread.Join(); return true; });
-
+            waits.All(wait =>)
             Console.WriteLine("Finished.");
             Console.Write("Press any key to continue...");
             Console.ReadKey();
@@ -61,12 +56,27 @@ namespace TestMessengerService
 
         class WaitForSendMessageResult : IDisposable
         {
+            EventWaitHandle ewh_;
             IAsyncResult ar_;
-            EventWaitHandle ewh_ = new EventWaitHandle(false, EventResetMode.ManualReset);
 
-            public void Start(string name)
+            public enum WaitState { Idle, Started, Done };
+            public string Name { get; private set; }
+            public WaitState State { get; private set; }
+
+            public WaitForSendMessageResult(string name)
             {
-                ar_ = client.BeginSendMessage(name, Callback, this);
+                Name = name;
+                State = WaitState.Idle;
+            }
+
+            public void Start()
+            {
+                if (State == WaitState.Started)
+                    throw new Exception("Already started");
+
+                State = WaitState.Started;
+                ewh_ = new EventWaitHandle(false, EventResetMode.ManualReset);
+                ar_ = client.BeginSendMessage(Name, Callback, this);
             }
 
             void Callback(IAsyncResult ar)
@@ -76,14 +86,25 @@ namespace TestMessengerService
 
             public string WaitForResult()
             {
+                if (State != WaitState.Started)
+                    throw new Exception("Not started");
+
                 ewh_.WaitOne();
-                return client.EndSendMessage(ar_);
+                string result = client.EndSendMessage(ar_);
+                State = WaitState.Done;
+                return result;
             }
 
             public void Dispose()
             {
-                ewh_.Dispose();
-                ewh_ = null;
+                State = WaitState.Idle;
+                if (ewh_ != null)
+                {
+                    ewh_.Dispose();
+                    ewh_ = null;
+                }
+
+                ar_ = null;
             }
         }
     }
