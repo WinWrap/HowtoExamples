@@ -329,7 +329,12 @@
     <Compile Include="ScriptingLanguage.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\TryVB\TryVB.vbproj">
+      <Project>{efec07e0-fc34-4eae-9c07-ecd1eee53452}</Project>
+      <Name>TryVB</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

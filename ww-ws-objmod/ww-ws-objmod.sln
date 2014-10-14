@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configura
 		PublishScripts\Configurations\ww-ws-objmod-WAWS-dev.json = PublishScripts\Configurations\ww-ws-objmod-WAWS-dev.json
 	EndProjectSection
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TryVB", "TryVB\TryVB.vbproj", "{EFEC07E0-FC34-4EAE-9C07-ECD1EEE53452}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{BD3E5E06-F2C8-4375-AA4E-D2FE9A6CD644}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD3E5E06-F2C8-4375-AA4E-D2FE9A6CD644}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD3E5E06-F2C8-4375-AA4E-D2FE9A6CD644}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFEC07E0-FC34-4EAE-9C07-ECD1EEE53452}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFEC07E0-FC34-4EAE-9C07-ECD1EEE53452}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFEC07E0-FC34-4EAE-9C07-ECD1EEE53452}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFEC07E0-FC34-4EAE-9C07-ECD1EEE53452}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

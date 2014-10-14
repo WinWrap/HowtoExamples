@@ -1,22 +1,4 @@
-﻿'#Language "WWB.NET"
-
-Imports System
-Imports System.Drawing
-Imports System.Collections.Generic
-
-Sub Main()
-    ClientImage.DrawLine(20, 30, 100, 200)
-    Dim t As New Triangle()
-    t.MakeIsosceles()
-    Dim s As String = t.Description()
-    AppTrace(s)
-    Dim d As Double = t.TheLawOfCosines(10, 10, 10)
-    AppTrace(d.ToString())
-    Dim a As Double = d * 180 / Math.PI()
-    AppTrace(a.ToString())
-End Sub
-
-Imports System.Collections.Generic
+﻿Imports System.Collections.Generic
 
 ' http://www.mathsisfun.com/algebra/trig-solving-triangles.html
 

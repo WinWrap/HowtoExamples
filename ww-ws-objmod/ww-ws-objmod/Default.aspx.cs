@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
-using System.Drawing.Imaging; 
 
 /*
  * http://ww-ws-objmod.azurewebsites.net/
+ * 
+ * array with emptys
+ * named arguments
+ * no auto-implemented property
+ * use of: Public SideB As Decimal => no such property or method.
+ * 
  */
 
 namespace ww_ws_objmod
@@ -12,13 +18,18 @@ namespace ww_ws_objmod
     public partial class Default : System.Web.UI.Page, IAppModel
     {
         public ClientImage ClientImage { get; private set; }
-        //public Bitmap Bitmap_;
 
         private bool timedout_;
         private DateTime timelimit_;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            TryVB.Triangle triangle = new TryVB.Triangle();
+            triangle.MakeIsosceles();
+            double x = triangle.Parts[0].Side;
+            string s = triangle.Description();
+            double a = triangle.TheLawOfCosines(10, 10, 10);
+            double d = a * 180 / Math.PI;
             ScriptingLanguage.SetAppModel(this);
         }
 
@@ -52,18 +63,25 @@ namespace ww_ws_objmod
 
         private void WinWrapRunFile()
         {
-            using (var basicNoUIObj = new WinWrap.Basic.BasicNoUIObj())
+            try
             {
-                basicNoUIObj.Begin += basicNoUIObj_Begin;
-                basicNoUIObj.DoEvents += basicNoUIObj_DoEvents;
-                basicNoUIObj.ErrorAlert += basicNoUIObj_ErrorAlert;
-                basicNoUIObj.Pause_ += basicNoUIObj_Pause_;
-                basicNoUIObj.Secret = new Guid(Utils.GetPatternString("ww-ws-objmod", "Guid[(]\"(.*)\"[)]"));
-                basicNoUIObj.Initialize();
-                basicNoUIObj.AddScriptableObjectModel(typeof(ScriptingLanguage));
-                //Button1.Text = basicNoUIObj.Evaluate("2+3");
-                string path = Utils.MacroPath("Macro1.bas");
-                basicNoUIObj.RunFile(string.Format(@"""{0}""", path));
+                using (var basicNoUIObj = new WinWrap.Basic.BasicNoUIObj())
+                {
+                    basicNoUIObj.Begin += basicNoUIObj_Begin;
+                    basicNoUIObj.DoEvents += basicNoUIObj_DoEvents;
+                    basicNoUIObj.ErrorAlert += basicNoUIObj_ErrorAlert;
+                    basicNoUIObj.Pause_ += basicNoUIObj_Pause_;
+                    basicNoUIObj.Secret = new Guid(Utils.GetPatternString("ww-ws-objmod", "Guid[(]\"(.*)\"[)]"));
+                    basicNoUIObj.Initialize();
+                    basicNoUIObj.AddScriptableObjectModel(typeof(ScriptingLanguage));
+                    //Button1.Text = basicNoUIObj.Evaluate("2+3");
+                    string path = Utils.MacroPath("Macro1.bas");
+                    basicNoUIObj.RunFile(string.Format(@"""{0}""", path));
+                }
+            }
+            catch (Exception e)
+            {
+                string s = e.Message;
             }
         }
 
@@ -109,7 +127,7 @@ namespace ww_ws_objmod
 
         #region IAppModel
 
-        public void Trace(string msg)
+        public void AppTrace(string msg)
         {
             TextBox1.Text = msg + Environment.NewLine + TextBox1.Text;
             TextBox1.Visible = true;

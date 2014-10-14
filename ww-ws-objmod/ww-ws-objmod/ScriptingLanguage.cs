@@ -16,9 +16,9 @@ namespace ww_ws_objmod
         public static ClientImage ClientImage { get { return AppModel.ClientImage; } }
 
         [Scriptable]
-        public static void Trace(string msg)
+        public static void AppTrace(string msg)
         {
-            AppModel.Trace(msg);
+            AppModel.AppTrace(msg);
         }
     }
 }

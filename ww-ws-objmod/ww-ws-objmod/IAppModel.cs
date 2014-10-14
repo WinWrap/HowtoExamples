@@ -12,7 +12,7 @@ namespace ww_ws_objmod
 {
     public interface IAppModel
     {
-        void Trace(string msg);
+        void AppTrace(string msg);
         ClientImage ClientImage { get; }
     }
 }
