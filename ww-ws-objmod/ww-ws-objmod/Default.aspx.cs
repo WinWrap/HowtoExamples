@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Collections.Generic;
 
 /*
  * http://ww-ws-objmod.azurewebsites.net/
@@ -26,10 +27,13 @@ namespace ww_ws_objmod
         {
             TryVB.Triangle triangle = new TryVB.Triangle();
             triangle.MakeIsosceles();
+            triangle.DoSort();
             double x = triangle.Parts[0].Side;
             string s = triangle.Description();
             double a = triangle.TheLawOfCosines(10, 10, 10);
             double d = a * 180 / Math.PI;
+            int i = triangle.Sides;
+            int j = triangle.Angles;
             ScriptingLanguage.SetAppModel(this);
         }
 
@@ -126,6 +130,26 @@ namespace ww_ws_objmod
         }
 
         #region IAppModel
+
+        public List<object> AppSortSides(List<object> list)
+        {
+            list.Sort((i1, i2) => {
+                dynamic x = i1;
+                dynamic y = i2;
+                return x.Side.CompareTo(y.Side);
+            });
+            return list;
+        }
+
+        public List<object> AppSortAngles(List<object> list)
+        {
+            list.Sort((i1, i2) => {
+                dynamic x = i1;
+                dynamic y = i2;
+                return x.Angle.CompareTo(y.Angle);
+            });
+            return list;
+        }
 
         public void AppTrace(string msg)
         {

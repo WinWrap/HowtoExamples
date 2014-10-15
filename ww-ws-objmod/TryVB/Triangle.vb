@@ -27,7 +27,18 @@ Public Class TrianglePart
     End Property
 End Class
 
+Public Class TrianglePartComparer
+    Implements IComparer(Of TrianglePart)
+    Public Function Compare(x As TrianglePart, y As TrianglePart) As Integer Implements IComparer(Of TrianglePart).Compare
+        Return x.Side.CompareTo(y.Side)
+    End Function
+End Class
+
 Public Class Triangle
+    Public Sub DoSort()
+        Dim tc As New TrianglePartComparer
+        Parts.Sort(tc)
+    End Sub
     Private Parts_ As List(Of TrianglePart)
     Property Parts As List(Of TrianglePart)
         Get
@@ -36,6 +47,24 @@ Public Class Triangle
         Set(value As List(Of TrianglePart))
             Parts_ = value
         End Set
+    End Property
+    Public ReadOnly Property Sides() As Integer
+        Get
+            Dim cnt As Integer = 0
+            For Each part As TrianglePart In Parts
+                If part.Side <> Nothing Then cnt = cnt + 1
+            Next
+            Return cnt
+        End Get
+    End Property
+    Public ReadOnly Property Angles() As Integer
+        Get
+            Dim cnt As Integer = 0
+            For Each part As TrianglePart In Parts
+                If part.Angle <> Nothing Then cnt = cnt + 1
+            Next
+            Return cnt
+        End Get
     End Property
     Public Sub New()
         Parts = New List(Of TrianglePart)
@@ -59,13 +88,10 @@ Public Class Triangle
 
     End Sub
     Public Sub MakeIsosceles()
-        Dim x As New List(Of TrianglePart)
-        'x.Add(New TrianglePart(10, 8))
-        x.Add(New TrianglePart(10))
-        x.Add(New TrianglePart(10, 8))
-        'x.Add(New TrianglePart(Nothing, 8))
-        x.Add(New TrianglePart(aangle:=8))
-        Parts = x
+        Parts = New List(Of TrianglePart)
+        Parts.Add(New TrianglePart(12))
+        Parts.Add(New TrianglePart(aangle:=8))
+        Parts.Add(New TrianglePart(10, 8))
     End Sub
     Public Function Description() As String
         Dim s As String = ""

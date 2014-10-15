@@ -8,6 +8,13 @@ Sub Main()
     ClientImage.DrawLine(20, 30, 100, 200)
     Dim t As New Triangle()
     t.MakeIsosceles()
+    't.DoSort()
+    'Dim tc As New TrianglePartComparer
+    't.Parts = DoSort(t.Parts, tc)
+    't.Parts = SortSides(t.Parts)
+    t.SortSides()
+    t.SortAngles()
+    't.Parts = SortAngles(t.Parts)
     Dim s As String = t.Description()
     AppTrace(s)
     Dim d As Double = t.TheLawOfCosines(10, 10, 10)
@@ -55,15 +62,39 @@ Public Class Triangle
             Parts_ = value
         End Set
     End Property
+    Public ReadOnly Property Sides() As Integer
+        Get
+            Dim cnt As Integer = 0
+            For Each part As TrianglePart In Parts
+                If part.Side <> Nothing Then cnt = cnt + 1
+            Next
+            Return cnt
+        End Get
+    End Property
+    Public ReadOnly Property Angles() As Integer
+        Get
+            Dim cnt As Integer = 0
+            For Each part As TrianglePart In Parts
+                If part.Angle <> Nothing Then cnt = cnt + 1
+            Next
+            Return cnt
+        End Get
+    End Property
     Public Sub New()
         Parts = New List(Of TrianglePart)
     End Sub
-    Public Sub Calculate()
-        ' SSS
-
+    Public Sub Solve()
+        If Sides = 3 And Angles = 3 Then Return
+        If Sides = 3 Then SSS()
     End Sub
     Private Sub SSS()
-
+        SortAngles()
+    End Sub
+    Public Sub SortSides()
+        Parts = AppSortSides(Parts)
+    End Sub
+    Public Sub SortAngles()
+        Parts = AppSortAngles(Parts)
     End Sub
     Public Function TheLawOfCosines(sidea As Double, sideb As Double, sidec As Double) As Double
         Dim anglec As Double
@@ -77,13 +108,10 @@ Public Class Triangle
 
     End Sub
     Public Sub MakeIsosceles()
-        Dim x As New List(Of TrianglePart)
-        'x.Add(New TrianglePart(10, 8))
-        x.Add(New TrianglePart(10))
-        x.Add(New TrianglePart(10, 8))
-        'x.Add(New TrianglePart(Nothing, 8))
-        x.Add(New TrianglePart(aangle:=8))
-        Parts = x
+        Parts = New List(Of TrianglePart)
+        Parts.Add(New TrianglePart(12))
+        Parts.Add(New TrianglePart(aangle:=8))
+        Parts.Add(New TrianglePart(10, 8))
     End Sub
     Public Function Description() As String
         Dim s As String = ""

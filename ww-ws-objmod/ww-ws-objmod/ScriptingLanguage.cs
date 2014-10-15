@@ -1,4 +1,5 @@
-﻿
+﻿using System.Collections.Generic;
+
 namespace ww_ws_objmod
 {
     [Scriptable]
@@ -19,6 +20,18 @@ namespace ww_ws_objmod
         public static void AppTrace(string msg)
         {
             AppModel.AppTrace(msg);
+        }
+
+        [Scriptable]
+        public static List<object> AppSortSides(List<object> list)
+        {
+            return AppModel.AppSortSides(list);
+        }
+
+        [Scriptable]
+        public static List<object> AppSortAngles(List<object> list)
+        {
+            return AppModel.AppSortAngles(list);
         }
     }
 }

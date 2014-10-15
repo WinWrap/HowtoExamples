@@ -7,11 +7,14 @@
 //
 // </copyright>
 //------------------------------------------------------------------------------
+using System.Collections.Generic;
 
 namespace ww_ws_objmod
 {
     public interface IAppModel
     {
+        List<object> AppSortSides(List<object> list);
+        List<object> AppSortAngles(List<object> list);
         void AppTrace(string msg);
         ClientImage ClientImage { get; }
     }
