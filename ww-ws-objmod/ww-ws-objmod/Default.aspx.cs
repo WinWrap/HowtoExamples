@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Collections.Generic;
+using TryVB;
 
 /*
  * http://ww-ws-objmod.azurewebsites.net/
@@ -25,15 +26,10 @@ namespace ww_ws_objmod
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            TryVB.Triangle triangle = new TryVB.Triangle();
-            triangle.MakeIsosceles();
-            triangle.DoSort();
-            double x = triangle.Parts[0].Side;
-            string s = triangle.Description();
-            double a = triangle.TheLawOfCosines(10, 10, 10);
-            double d = a * 180 / Math.PI;
-            int i = triangle.Sides;
-            int j = triangle.Angles;
+            //TryVB.Triangle triangle = new TryVB.Triangle();
+            List<double> l = new List<double>() { 10, 10, 10 };
+            CosineRule cr = new CosineRule(TryVB.CosineRule.xKnown.SSS, l);
+            string s = cr.ToString();
             ScriptingLanguage.SetAppModel(this);
         }
 
