@@ -28,8 +28,9 @@ namespace ww_ws_objmod
         {
             //TryVB.Triangle triangle = new TryVB.Triangle();
             List<double> l = new List<double>() { 10, 10, 10 };
-            CosineRule cr = new CosineRule(TryVB.CosineRule.xKnown.SSS, l);
-            string s = cr.ToString();
+            CosineRule cr = new CosineRule();
+            string s = cr.xToString();
+            double d = cr.Solve();
             ScriptingLanguage.SetAppModel(this);
         }
 

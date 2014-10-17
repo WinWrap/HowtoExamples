@@ -7,12 +7,10 @@ Imports System.Collections.Generic
 Sub Main()
     AppTrace(System.DateTime.Now.ToString())
     ClientImage.DrawLine(20, 30, 100, 200)
-    'Dim t As New Triangle()
-    't.Parts.Add(New TrianglePart(10, 1.0471975511966))
-    'AppTrace(t.ToString())
-    Dim l As New List(Of Double)(New Double() {10, 10, 10})
-    Dim cr As New CosineRule(Known.SSS, l)
-    'AppTrace(CosineRule.SideA.ToString())
+    Dim cr As New CosineRule()
+    Dim s As String = cr.xToString()
+    Dim d As Double = cr.Solve()
+    AppTrace(d.ToString())
 End Sub
 
 Public Class Triangle
@@ -138,17 +136,40 @@ Public Class xCosineRule ' Static xxx
     End Function
 End Class
 
-Public Enum Known
+Public Enum CosineRuleEnum
     SAS
     SSA
     SSS
 End Enum
-
 Public Class CosineRule
-    Public Known As Known
-    Public Pieces As List(Of Double)
-    Public Sub New(aKnown As Known, aPieces As List(Of Double))
-        Known = aKnown
-        Pieces = aPieces
+    Private Rule As CosineRuleEnum
+    Private Sides As List(Of Double)
+    Public Sub New(Optional aRule As CosineRuleEnum = CosineRuleEnum.SSS, Optional aSides As List(Of Double) = Nothing)
+        Rule = aRule
+        Sides = If(aSides IsNot Nothing, aSides, New List(Of Double)(New Double() {10, 10, 10}))
     End Sub
+    Public Function Solve() As Double
+        Dim result As Double
+        Select Case Rule
+            Case CosineRuleEnum.SSS
+                result = SolveSSS()
+            Case Else
+                ' throw error
+                ' if angle > pi / 180
+                result = 0
+        End Select
+        Return result
+    End Function
+    Public Function SolveSSS() As Double
+        Return Math.Acos((Math.Pow(Sides(0), 2) + Math.Pow(Sides(1), 2) - Math.Pow(Sides(2), 2)) / (2 * Sides(0) * Sides(1)))
+    End Function
+    Public Function xToString() As String
+        Dim sSides As String = ""
+        For Each side As Double In Sides
+            sSides = sSides & IIf(String.IsNullOrEmpty(sSides), "", ", ") & side.ToString()
+        Next
+        Dim result As String = String.Format("{0}: {1}", Rule.ToString(), sSides)
+        Return result
+    End Function
 End Class
+
