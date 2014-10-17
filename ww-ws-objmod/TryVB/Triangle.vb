@@ -5,15 +5,15 @@
 
 Public Enum CosineRuleEnum
     SAS
-    SSA
     SSS
 End Enum
 Public Class CosineRule
     Private Rule As CosineRuleEnum
-    Private Sides As List(Of Double)
-    Public Sub New(Optional aRule As CosineRuleEnum = CosineRuleEnum.SAS, Optional aSides As List(Of Double) = Nothing)
+    Private Datums As List(Of Double)
+    Public Sub New(Optional aRule As CosineRuleEnum = CosineRuleEnum.SSS, Optional aDatums As List(Of Double) = Nothing)
         Rule = aRule
-        Sides = If(aSides IsNot Nothing, aSides, New List(Of Double)(New Double() {10, 1.0471975511966, 10}))
+        Datums = If(aDatums IsNot Nothing, aDatums, New List(Of Double)(New Double() {10, 10, 10}))
+        'Datums = If(aDatums IsNot Nothing, aDatums, New List(Of Double)(New Double() {10, 1.0471975511966, 10}))
     End Sub
     Public Function Solve() As Double
         Dim result As Double
@@ -22,8 +22,6 @@ Public Class CosineRule
                 result = SolveSSS()
             Case CosineRuleEnum.SAS
                 result = SolveSAS()
-            Case CosineRuleEnum.SSA
-                result = SolveSSA()
             Case Else
                 ' throw error
                 ' if angle > pi / 180
@@ -35,17 +33,20 @@ Public Class CosineRule
         Return result
     End Function
     Public Function SolveSAS() As Double
-        Return 1
-    End Function
-    Public Function SolveSSA() As Double
-        Return 1
+        Dim sidea As Double = Datums(0)
+        Dim sideb As Double = Datums(2)
+        Dim anglec As Double = Datums(1)
+        Return Math.Sqrt(Math.Pow(sidea, 2) + Math.Pow(sideb, 2) - 2 * sidea * sideb * Math.Cos(anglec))
     End Function
     Public Function SolveSSS() As Double
-        Return Math.Acos((Math.Pow(Sides(0), 2) + Math.Pow(Sides(1), 2) - Math.Pow(Sides(2), 2)) / (2 * Sides(0) * Sides(1)))
+        Dim sidea As Double = Datums(0)
+        Dim sideb As Double = Datums(1)
+        Dim sidec As Double = Datums(2)
+        Return Math.Acos((Math.Pow(sidea, 2) + Math.Pow(sideb, 2) - Math.Pow(sidec, 2)) / (2 * sidea * sideb))
     End Function
     Public Function xToString() As String
         Dim sSides As String = ""
-        For Each side As Double In Sides
+        For Each side As Double In Datums
             sSides = sSides & IIf(String.IsNullOrEmpty(sSides), "", ", ") & side.ToString()
         Next
         Dim result As String = String.Format("{0}: {1}", Rule.ToString(), sSides)

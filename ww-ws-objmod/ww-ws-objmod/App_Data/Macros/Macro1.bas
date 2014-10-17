@@ -4,13 +4,16 @@ Imports System
 Imports System.Drawing
 Imports System.Collections.Generic
 
-Sub Main()
+Sub Main() ' test1, 2, etc
     AppTrace(System.DateTime.Now.ToString())
     ClientImage.DrawLine(20, 30, 100, 200)
-    Dim cr As New CosineRule()
-    Dim s As String = cr.xToString()
-    Dim d As Double = cr.Solve()
-    AppTrace(d.ToString())
+    Dim t As New Triangle()
+    t.Parts.Add(New TrianglePart(Nothing, Nothing))
+    t.Parts.Add(New TrianglePart(Nothing, 1.0471975511966))
+    t.Parts.Add(New TrianglePart(10, aangle:=1.0471975511966))
+    't.Parts.Add(New TrianglePart())
+    t.Solve()
+    AppTrace(t.ToString())
 End Sub
 
 Public Class Triangle
@@ -22,52 +25,66 @@ Public Class Triangle
     End Sub
     Public Function Solve() As Boolean
         If Solved Then Return True
-        If Sides = 3 Then Return SSS()
-        If Angles = 2 Then Return AA()
-        If Sides = 2 And Angles = 1 Then Return SAS
+        If Sides = 3 Then SSS()
+        If Angles = 2 Then AA()
+        If IsAAS() Then AAS()
+        If IsSAS() Then SAS()
+        If IsSSA() Then SSA()
+        Return Solve()
     End Function
-    Private Function SAS() As Boolean
-        ' Angle between
+    Private Function IsAAS() As Boolean
+        If Angles < 2 Then Return False
+        If Sides < 1 Then Return False ' invalid xxx
+        SortAngles()
         SortSides()
-        'Parts(0).Side = TheLawOfConsinesSAS(Parts(0).Angle, Parts(1).Side, Parts(2).Side)
-        Return Solve()
+        Return (Parts(1).Side = Nothing)
     End Function
-    Private Function AA() As Boolean
+    Private Sub AAS()
+        'AppTrace("AAS")
+        SortSides()
+        SortAngles() ' 2-way sort ? xxx
+        Parts(1).Side = Parts(2).Side * Math.Sin(Parts(1).Angle) / Math.Sin(Parts(2).Angle)
+    End Sub
+    Private Function IsSAS() As Boolean
+        'AppTrace("IsSAS")
+        If Sides <> 2 Then Return False
+        SortSides()
+        Return (Parts(0).Angle <> Nothing)
+    End Function
+    Private Function IsSSA() As Boolean
+        If Sides <> 2 Then Return False
         SortAngles()
-        Parts(0).Angle = AnglesOfaTriangle(Parts(1).Angle, Parts(2).Angle)
-        Return Solve()
+        Return (Parts(2).Side <> Nothing)
     End Function
-    Public Function TheLawOfCosinesSAS(anglea As Double, sideb As Double, sidec As Double) As Double
-        Dim a As Double = sideb
-        Dim b As Double = sidec
-        Dim anglec As Double = anglea
-        Return Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2) - 2 * a * b * Math.Cos(anglec))
-    End Function
-    Public Function TheLawOfCosinesSSS(sidea As Double, sideb As Double, sidec As Double) As Double
-        Dim anglec As Double
-        anglec = Math.Acos((Math.Pow(sidea, 2) + Math.Pow(sideb, 2) - Math.Pow(sidec, 2)) / (2 * sidea * sideb))
-        Return anglec
-    End Function
-    Private Function AnglesOfaTriangle(angleb As Double, anglec As Double) As Double
-        Return Math.PI - angleb - anglec
-    End Function
-    Public Function xTheLawOfCosines(sidea As Double, sideb As Double, sidec As Double) As Double
-        Dim anglec As Double
-        anglec = Math.Acos((Math.Pow(sidea, 2) + Math.Pow(sideb, 2) - Math.Pow(sidec, 2)) / (2 * sidea * sideb))
-        Return anglec
-    End Function
-    Private Function SSS() As Boolean
+    Private Sub SSA()
+        'AppTrace("SSA")
+        SortSides()
+        SortAngles() ' 2-way sort ? xxx
+        Parts(1).Angle = Math.ASin(Math.Sin(Parts(2).Angle) * Parts(1).Side / Parts(2).Side)
+    End Sub
+    Private Sub SAS()
+        'AppTrace("SAS")
+        SortSides()
+        Dim cr As New CosineRule(CosineRuleEnum.SAS, New List(Of Double)(New Double() {Parts(1).Side, Parts(0).Angle, Parts(2).Side}))
+        Parts(0).Side = cr.Solve()
+    End Sub
+    Private Sub AA()
         SortAngles()
-        Parts(0).Angle = TheLawOfCosinesSSS(Parts(0).Side, Parts(1).Side, Parts(2).Side)
-        Return Solve()
-    End Function
+        Parts(0).Angle = Math.PI - Parts(1).Angle - Parts(2).Angle
+    End Sub
+    Private Sub SSS()
+        SortAngles()
+        Dim cr As New CosineRule(CosineRuleEnum.SSS, New List(Of Double)(New Double() {Parts(0).Side, Parts(1).Side, Parts(2).Side}))
+        Parts(0).Angle = cr.Solve()
+    End Sub
     Public Sub SortSides()
         Parts = AppSortSides(Parts)
     End Sub
     Public Sub SortAngles()
         Parts = AppSortAngles(Parts)
     End Sub
-    Private ReadOnly Property Solved() As Boolean
+    'Private ReadOnly Property Solved() As Boolean
+    Public ReadOnly Property Solved() As Boolean
         Get
             Return (Sides >= 3) And (Angles >= 3)
         End Get
@@ -98,7 +115,7 @@ Public Class Triangle
         Next
         Return s
     End Function
-    Private Function PieceDescription(piece As Decimal) As String
+    Private Function PieceDescription(piece As Double) As String
         If piece = Nothing Then
             Return "Nothing"
         Else
@@ -116,60 +133,53 @@ Public Class TrianglePart
     End Sub
 End Class
 
-Public Class xCosineRule ' Static xxx
-    Public SideA As Double
-    Public SideB As Double
-    Public SideC As Double
-    Public AngleC As Double
-    Public Sub New()
-        SideA = Nothing
-        SideB = Nothing
-        SideC = Nothing
-        AngleC = Nothing
-    End Sub
-    Public Function SolveSideC() As Double
-        Return Math.Sqrt(Math.Pow(SideA, 2) + Math.Pow(SideB, 2) - 2 * SideA * SideB * Math.Cos(AngleC))
-    End Function
-    Public Function SolveAngleC() As Double
-        'anglec = Math.Acos((Math.Pow(sidea, 2) + Math.Pow(sideb, 2) - Math.Pow(sidec, 2)) / (2 * sidea * sideb))
-        Return Math.Acos((Math.Pow(SideA, 2) + Math.Pow(SideB, 2) - Math.Pow(SideC, 2)) / (2 * SideA * SideB))
-    End Function
-End Class
-
 Public Enum CosineRuleEnum
     SAS
-    SSA
     SSS
 End Enum
 Public Class CosineRule
     Private Rule As CosineRuleEnum
-    Private Sides As List(Of Double)
-    Public Sub New(Optional aRule As CosineRuleEnum = CosineRuleEnum.SSS, Optional aSides As List(Of Double) = Nothing)
+    Private Datums As List(Of Double)
+    Public Sub New(Optional aRule As CosineRuleEnum = CosineRuleEnum.SSS, Optional aDatums As List(Of Double) = Nothing)
         Rule = aRule
-        Sides = If(aSides IsNot Nothing, aSides, New List(Of Double)(New Double() {10, 10, 10}))
+        Datums = If(aDatums IsNot Nothing, aDatums, New List(Of Double)(New Double() {10, 10, 10}))
+        'Datums = If(aDatums IsNot Nothing, aDatums, New List(Of Double)(New Double() {10, 1.0471975511966, 10}))
     End Sub
     Public Function Solve() As Double
         Dim result As Double
         Select Case Rule
             Case CosineRuleEnum.SSS
                 result = SolveSSS()
+            Case CosineRuleEnum.SAS
+                result = SolveSAS()
             Case Else
                 ' throw error
                 ' if angle > pi / 180
                 result = 0
         End Select
+        'If Double.IsNaN(result.NaN) Then
+        'Return -1
+        'End If
         Return result
     End Function
+    Public Function SolveSAS() As Double
+        Dim sidea As Double = Datums(0)
+        Dim sideb As Double = Datums(2)
+        Dim anglec As Double = Datums(1)
+        Return Math.Sqrt(Math.Pow(sidea, 2) + Math.Pow(sideb, 2) - 2 * sidea * sideb * Math.Cos(anglec))
+    End Function
     Public Function SolveSSS() As Double
-        Return Math.Acos((Math.Pow(Sides(0), 2) + Math.Pow(Sides(1), 2) - Math.Pow(Sides(2), 2)) / (2 * Sides(0) * Sides(1)))
+        Dim sidea As Double = Datums(0)
+        Dim sideb As Double = Datums(1)
+        Dim sidec As Double = Datums(2)
+        Return Math.Acos((Math.Pow(sidea, 2) + Math.Pow(sideb, 2) - Math.Pow(sidec, 2)) / (2 * sidea * sideb))
     End Function
     Public Function xToString() As String
         Dim sSides As String = ""
-        For Each side As Double In Sides
+        For Each side As Double In Datums
             sSides = sSides & IIf(String.IsNullOrEmpty(sSides), "", ", ") & side.ToString()
         Next
         Dim result As String = String.Format("{0}: {1}", Rule.ToString(), sSides)
         Return result
     End Function
 End Class
-
