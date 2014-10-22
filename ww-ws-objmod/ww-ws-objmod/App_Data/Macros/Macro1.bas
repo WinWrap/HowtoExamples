@@ -8,13 +8,27 @@ Sub Main() ' test1, 2, etc
     AppTrace(System.DateTime.Now.ToString())
     ClientImage.DrawLine(20, 30, 100, 200)
     Dim t As New Triangle()
-    t.Parts.Add(New TrianglePart(Nothing, Nothing))
-    t.Parts.Add(New TrianglePart(Nothing, 1.0471975511966))
     t.Parts.Add(New TrianglePart(10, aangle:=1.0471975511966))
+    t.Parts.Add(New TrianglePart(Nothing, 1.0471975511966))
+    t.Parts.Add(New TrianglePart(Nothing, Nothing))
     't.Parts.Add(New TrianglePart())
     t.Solve()
     AppTrace(t.ToString())
 End Sub
+
+Public Class TrianglePartSideComparer
+    Implements IComparer(Of TrianglePart)
+    Public Function Compare(x As TrianglePart, y As TrianglePart) As Integer Implements IComparer(Of TrianglePart).Compare
+        Return x.Side.CompareTo(y.Side)
+    End Function
+End Class
+
+Public Class TrianglePartAngleComparer
+    Implements IComparer(Of TrianglePart)
+    Public Function Compare(x As TrianglePart, y As TrianglePart) As Integer Implements IComparer(Of TrianglePart).Compare
+        Return x.Angle.CompareTo(y.Angle)
+    End Function
+End Class
 
 Public Class Triangle
     ' http://www.mathsisfun.com/algebra/trig-solving-triangles.html
@@ -78,10 +92,14 @@ Public Class Triangle
         Parts(0).Angle = cr.Solve()
     End Sub
     Public Sub SortSides()
-        Parts = AppSortSides(Parts)
+        'Parts = AppSortSides(Parts)
+        Dim tc As New TrianglePartSideComparer
+        Parts.Sort(tc)
     End Sub
     Public Sub SortAngles()
-        Parts = AppSortAngles(Parts)
+        'Parts = AppSortAngles(Parts)
+        Dim tc As New TrianglePartAngleComparer
+        Parts.Sort(tc)
     End Sub
     'Private ReadOnly Property Solved() As Boolean
     Public ReadOnly Property Solved() As Boolean

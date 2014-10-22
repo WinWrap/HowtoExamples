@@ -13,6 +13,8 @@ using TryVB;
  * no auto-implemented property
  * use of: Public SideB As Decimal => no such property or method.
  * 
+ * remove apphost sorts
+ * check if new dll downloaded
  */
 
 namespace ww_ws_objmod
