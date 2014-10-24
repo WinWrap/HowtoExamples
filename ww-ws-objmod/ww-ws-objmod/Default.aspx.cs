@@ -29,10 +29,12 @@ namespace ww_ws_objmod
         protected void Page_Load(object sender, EventArgs e)
         {
             //TryVB.Triangle triangle = new TryVB.Triangle();
-            List<double> l = new List<double>() { 10, 10, 10 };
+            /*List<double> l = new List<double>() { 10, 10, 10 };
             CosineRule cr = new CosineRule();
             string s = cr.xToString();
-            double d = cr.Solve();
+            double d = cr.Solve();*/
+            /*var x = new TryVB.NaNTests();
+            x.RunTests();*/
             ScriptingLanguage.SetAppModel(this);
         }
 
