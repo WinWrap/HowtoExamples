@@ -28,7 +28,6 @@ namespace ww_ws_objmod
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //TryVB.Triangle triangle = new TryVB.Triangle();
             /*List<double> l = new List<double>() { 10, 10, 10 };
             CosineRule cr = new CosineRule();
             string s = cr.xToString();
@@ -36,6 +35,16 @@ namespace ww_ws_objmod
             /*var x = new TryVB.NaNTests();
             x.RunTests();*/
             ScriptingLanguage.SetAppModel(this);
+            TryVB.Triangle triangle = new TryVB.Triangle();
+            triangle.Parts.Add(new TryVB.TrianglePart(10, aangle: 1.0471975511966));
+            triangle.Parts.Add(new TryVB.TrianglePart(0, 1.0471975511966));
+            triangle.Parts.Add(new TryVB.TrianglePart(0, 0));
+            triangle.Solve();
+            string s = triangle.MakeString();
+    /*triangle.Parts.Add(New TrianglePart(10, aangle:=1.0471975511966));
+    triangle.Parts.Add(New TrianglePart(Nothing, 1.0471975511966));
+    triangle.Parts.Add(New TrianglePart(Nothing, Nothing));
+    triangle.Solve();*/
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -134,7 +143,8 @@ namespace ww_ws_objmod
 
         public List<object> AppSortSides(List<object> list)
         {
-            list.Sort((i1, i2) => {
+            list.Sort((i1, i2) =>
+            {
                 dynamic x = i1;
                 dynamic y = i2;
                 return x.Side.CompareTo(y.Side);
@@ -144,7 +154,8 @@ namespace ww_ws_objmod
 
         public List<object> AppSortAngles(List<object> list)
         {
-            list.Sort((i1, i2) => {
+            list.Sort((i1, i2) =>
+            {
                 dynamic x = i1;
                 dynamic y = i2;
                 return x.Angle.CompareTo(y.Angle);

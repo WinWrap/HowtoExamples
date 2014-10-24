@@ -9,11 +9,13 @@ Sub Main() ' test1, 2, etc
     ClientImage.DrawLine(20, 30, 100, 200)
     Dim t As New Triangle()
     t.Parts.Add(New TrianglePart(10, aangle:=1.0471975511966))
-    t.Parts.Add(New TrianglePart(Nothing, 1.0471975511966))
-    t.Parts.Add(New TrianglePart(Nothing, Nothing))
+    't.Parts.Add(New TrianglePart(Nothing, 1.0471975511966))
+    t.Parts.Add(New TrianglePart(0, 1.0471975511966))
+    't.Parts.Add(New TrianglePart(Nothing, Nothing))
+    t.Parts.Add(New TrianglePart(0, 0))
     't.Parts.Add(New TrianglePart())
     t.Solve()
-    AppTrace(t.ToString())
+    AppTrace(t.MakeString())
 End Sub
 
 Public Class TrianglePartSideComparer
@@ -51,7 +53,8 @@ Public Class Triangle
         If Sides < 1 Then Return False ' invalid xxx
         SortAngles()
         SortSides()
-        Return (Parts(1).Side = Nothing)
+        'Return (Parts(1).Side = Nothing)
+        Return (Parts(1).Side = 0)
     End Function
     Private Sub AAS()
         'AppTrace("AAS")
@@ -63,12 +66,14 @@ Public Class Triangle
         'AppTrace("IsSAS")
         If Sides <> 2 Then Return False
         SortSides()
-        Return (Parts(0).Angle <> Nothing)
+        'Return (Parts(0).Angle <> Nothing)
+        Return (Parts(0).Angle <> 0)
     End Function
     Private Function IsSSA() As Boolean
         If Sides <> 2 Then Return False
         SortAngles()
-        Return (Parts(2).Side <> Nothing)
+        'Return (Parts(2).Side <> Nothing)
+        Return (Parts(2).Side <> 0)
     End Function
     Private Sub SSA()
         'AppTrace("SSA")
@@ -111,7 +116,8 @@ Public Class Triangle
         Get
             Dim cnt As Integer = 0
             For Each part As TrianglePart In Parts
-                If part.Side <> Nothing Then cnt = cnt + 1
+                'If part.Side <> Nothing Then cnt = cnt + 1
+                If part.Side <> 0 Then cnt = cnt + 1
             Next
             Return cnt
         End Get
@@ -120,12 +126,13 @@ Public Class Triangle
         Get
             Dim cnt As Integer = 0
             For Each part As TrianglePart In Parts
-                If part.Angle <> Nothing Then cnt = cnt + 1
+                'If part.Angle <> Nothing Then cnt = cnt + 1
+                If part.Angle <> 0 Then cnt = cnt + 1
             Next
             Return cnt
         End Get
     End Property
-    Public Function ToString() As String
+    Public Function MakeString() As String
         Dim s As String = ""
         For Each part As TrianglePart In Parts
             Dim sPart As String = "(Side=" & PieceDescription(piece:=part.Side) & ", Angle=" & PieceDescription(part.Angle) & ")"
@@ -134,8 +141,10 @@ Public Class Triangle
         Return s
     End Function
     Private Function PieceDescription(piece As Double) As String
-        If piece = Nothing Then
-            Return "Nothing"
+        'If piece = Nothing Then
+        If piece = 0 Then
+            'Return "Nothing"
+            Return "0(Empty)"
         Else
             Return piece.ToString()
         End If
@@ -145,7 +154,7 @@ End Class
 Public Class TrianglePart
     Public Side As Double
     Public Angle As Double
-    Public Sub New(Optional aside As Double = Nothing, Optional aangle As Double = Nothing)
+    Public Sub New(Optional aside As Double = 0, Optional aangle As Double = 0)
         Side = aside
         Angle = aangle
     End Sub
