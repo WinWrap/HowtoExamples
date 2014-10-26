@@ -60,7 +60,7 @@ namespace ww_ws_objmod
                 Image2.ImageUrl = CreateImageUrl(ClientImage.Bitmap);
             }
         }
-
+        // move xxx
         private string CreateImageUrl(Bitmap bitmap)
         {
             string base64String = "";

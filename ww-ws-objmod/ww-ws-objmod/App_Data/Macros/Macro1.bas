@@ -5,17 +5,16 @@ Imports System.Drawing
 Imports System.Collections.Generic
 
 Sub Main() ' test1, 2, etc
-    AppTrace(System.DateTime.Now.ToString())
+    'AppTrace(System.DateTime.Now.ToString())
     ClientImage.DrawLine(20, 30, 100, 200)
     Dim t As New Triangle()
     t.Parts.Add(New TrianglePart(10, aangle:=1.0471975511966))
-    't.Parts.Add(New TrianglePart(Nothing, 1.0471975511966))
     t.Parts.Add(New TrianglePart(0, 1.0471975511966))
     't.Parts.Add(New TrianglePart(Nothing, Nothing))
     t.Parts.Add(New TrianglePart(0, 0))
     't.Parts.Add(New TrianglePart())
     t.Solve()
-    AppTrace(t.MakeString())
+    'AppTrace(t.MakeString())
 End Sub
 
 Public Class TrianglePartSideComparer
