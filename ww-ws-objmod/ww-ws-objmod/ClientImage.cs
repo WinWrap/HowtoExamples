@@ -9,11 +9,25 @@ namespace ww_ws_objmod
     [Scriptable]
     public class ClientImage
     {
-        public Bitmap Bitmap { get; private set; }
+        private Bitmap Bitmap { get; set; }
 
         public ClientImage(int width, int height)
         {
             Bitmap = new Bitmap(width, height);
+        }
+
+        public string ImageUrl()
+        {
+            string base64String = "";
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                Bitmap.Save(memoryStream, ImageFormat.Png);
+                Byte[] bytes = new Byte[memoryStream.Length];
+                memoryStream.Position = 0;
+                memoryStream.Read(bytes, 0, (int)bytes.Length);
+                base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+            }
+            return "data:image/png;base64," + base64String;
         }
 
         [Scriptable]

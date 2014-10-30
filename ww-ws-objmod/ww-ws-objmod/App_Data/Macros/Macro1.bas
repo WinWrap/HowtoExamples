@@ -6,6 +6,7 @@ Imports System.Collections.Generic
 
 Sub Main() ' test1, 2, etc
     'AppTrace(System.DateTime.Now.ToString())
+    'Dim pn As New Pen(Brushes.DeepSkyBlue)
     ClientImage.DrawLine(20, 30, 100, 200)
     Dim t As New Triangle()
     t.Parts.Add(New TrianglePart(10, aangle:=1.0471975511966))

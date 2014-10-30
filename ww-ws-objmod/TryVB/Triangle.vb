@@ -1,4 +1,5 @@
 ﻿Imports System.Collections.Generic
+Imports System.Drawing
 
 ' http://www.mathsisfun.com/algebra/trig-solving-triangles.html
 
@@ -22,6 +23,11 @@ Public Class Triangle
     Public Parts As List(Of TrianglePart)
     Public Sub New()
         Parts = New List(Of TrianglePart)
+    End Sub
+    Public Sub DrawLine()
+        Dim skyBluePen As New Pen(Brushes.DeepSkyBlue)
+        skyBluePen.Width = 8.0F
+        'Dim g As Graphics = Graphics.FromImage(Bitmap)
     End Sub
     Public Function Solve() As Boolean
         If Solved Then Return True

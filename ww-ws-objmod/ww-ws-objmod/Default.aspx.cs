@@ -57,11 +57,12 @@ namespace ww_ws_objmod
             WinWrapRunFile();
             if (TextBox1.Text.Length == 0) // xxx
             {
-                Image2.ImageUrl = CreateImageUrl(ClientImage.Bitmap);
+                //Image2.ImageUrl = CreateImageUrl(ClientImage.Bitmap);
+                Image2.ImageUrl = ClientImage.ImageUrl();
             }
         }
         // move xxx
-        private string CreateImageUrl(Bitmap bitmap)
+        private string xCreateImageUrl(Bitmap bitmap)
         {
             string base64String = "";
             using (MemoryStream memoryStream = new MemoryStream())
@@ -88,6 +89,7 @@ namespace ww_ws_objmod
                     basicNoUIObj.Secret = new Guid(Utils.GetPatternString("ww-ws-objmod", "Guid[(]\"(.*)\"[)]"));
                     basicNoUIObj.Initialize();
                     basicNoUIObj.AddScriptableObjectModel(typeof(ScriptingLanguage));
+                    //basicNoUIObj.AddReference(typeof(Pen).Assembly, "System.Drawing");
                     //Button1.Text = basicNoUIObj.Evaluate("2+3");
                     string path = Utils.MacroPath("Macro1.bas");
                     basicNoUIObj.RunFile(string.Format(@"""{0}""", path));
