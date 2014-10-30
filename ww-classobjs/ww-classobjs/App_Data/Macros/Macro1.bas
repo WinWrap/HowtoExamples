@@ -3,15 +3,16 @@
 Imports System
 Imports System.Collections.Generic
 
-Sub Main() ' test1, 2, etc
+Sub Main()
     AppTrace(System.DateTime.Now.ToString())
+    AppTrace("Solve for missing triangle sides and angles:")
     Dim t As New Triangle()
     t.Parts.Add(New TrianglePart(10, aangle:=1.0471975511966))
     t.Parts.Add(New TrianglePart(0, 1.0471975511966))
-    t.Parts.Add(New TrianglePart(0, 0))
-    't.Parts.Add(New TrianglePart())
+    t.Parts.Add(New TrianglePart())
+    AppTrace(String.Format("Initial: {0}", t.MakeString()))
     t.Solve()
-    AppTrace(t.MakeString())
+    AppTrace(String.Format("Solved: {0}", t.MakeString()))
 End Sub
 
 Public Class TrianglePartSideComparer
@@ -30,7 +31,6 @@ End Class
 
 Public Class Triangle
     ' http://www.mathsisfun.com/algebra/trig-solving-triangles.html
-    ' handle illegal combination of triangle parts xxx
     Public Parts As List(Of TrianglePart)
     Public Sub New()
         Parts = New List(Of TrianglePart)
@@ -46,39 +46,32 @@ Public Class Triangle
     End Function
     Private Function IsAAS() As Boolean
         If Angles < 2 Then Return False
-        If Sides < 1 Then Return False ' invalid xxx
+        If Sides < 1 Then Return False ' invalid
         SortAngles()
         SortSides()
-        'Return (Parts(1).Side = Nothing)
         Return (Parts(1).Side = 0)
     End Function
     Private Sub AAS()
-        'AppTrace("AAS")
         SortSides()
-        SortAngles() ' 2-way sort ? xxx
+        SortAngles() ' 2-way sort?
         Parts(1).Side = Parts(2).Side * Math.Sin(Parts(1).Angle) / Math.Sin(Parts(2).Angle)
     End Sub
     Private Function IsSAS() As Boolean
-        'AppTrace("IsSAS")
         If Sides <> 2 Then Return False
         SortSides()
-        'Return (Parts(0).Angle <> Nothing)
         Return (Parts(0).Angle <> 0)
     End Function
     Private Function IsSSA() As Boolean
         If Sides <> 2 Then Return False
         SortAngles()
-        'Return (Parts(2).Side <> Nothing)
         Return (Parts(2).Side <> 0)
     End Function
     Private Sub SSA()
-        'AppTrace("SSA")
         SortSides()
-        SortAngles() ' 2-way sort ? xxx
+        SortAngles()
         Parts(1).Angle = Math.ASin(Math.Sin(Parts(2).Angle) * Parts(1).Side / Parts(2).Side)
     End Sub
     Private Sub SAS()
-        'AppTrace("SAS")
         SortSides()
         Dim cr As New CosineRule(CosineRuleEnum.SAS, New List(Of Double)(New Double() {Parts(1).Side, Parts(0).Angle, Parts(2).Side}))
         Parts(0).Side = cr.Solve()
@@ -93,16 +86,13 @@ Public Class Triangle
         Parts(0).Angle = cr.Solve()
     End Sub
     Public Sub SortSides()
-        'Parts = AppSortSides(Parts)
         Dim tc As New TrianglePartSideComparer
         Parts.Sort(tc)
     End Sub
     Public Sub SortAngles()
-        'Parts = AppSortAngles(Parts)
         Dim tc As New TrianglePartAngleComparer
         Parts.Sort(tc)
     End Sub
-    'Private ReadOnly Property Solved() As Boolean
     Public ReadOnly Property Solved() As Boolean
         Get
             Return (Sides >= 3) And (Angles >= 3)
@@ -112,7 +102,6 @@ Public Class Triangle
         Get
             Dim cnt As Integer = 0
             For Each part As TrianglePart In Parts
-                'If part.Side <> Nothing Then cnt = cnt + 1
                 If part.Side <> 0 Then cnt = cnt + 1
             Next
             Return cnt
@@ -122,7 +111,6 @@ Public Class Triangle
         Get
             Dim cnt As Integer = 0
             For Each part As TrianglePart In Parts
-                'If part.Angle <> Nothing Then cnt = cnt + 1
                 If part.Angle <> 0 Then cnt = cnt + 1
             Next
             Return cnt
@@ -137,9 +125,7 @@ Public Class Triangle
         Return s
     End Function
     Private Function PieceDescription(piece As Double) As String
-        'If piece = Nothing Then
         If piece = 0 Then
-            'Return "Nothing"
             Return "0(Empty)"
         Else
             Return piece.ToString()
@@ -180,24 +166,21 @@ Public Class CosineRule
                 ' if angle > pi / 180
                 result = 0
         End Select
-        'If Double.IsNaN(result.NaN) Then
-        'Return -1
-        'End If
         Return result
     End Function
-    Public Function SolveSAS() As Double
+    Public Function SolveSAS() As Double ' side
         Dim sidea As Double = Datums(0)
         Dim sideb As Double = Datums(2)
         Dim anglec As Double = Datums(1)
         Return Math.Sqrt(Math.Pow(sidea, 2) + Math.Pow(sideb, 2) - 2 * sidea * sideb * Math.Cos(anglec))
     End Function
-    Public Function SolveSSS() As Double
+    Public Function SolveSSS() As Double ' angle
         Dim sidea As Double = Datums(0)
         Dim sideb As Double = Datums(1)
         Dim sidec As Double = Datums(2)
         Return Math.Acos((Math.Pow(sidea, 2) + Math.Pow(sideb, 2) - Math.Pow(sidec, 2)) / (2 * sidea * sideb))
     End Function
-    Public Function xToString() As String
+    Public Function MakeString() As String
         Dim sSides As String = ""
         For Each side As Double In Datums
             sSides = sSides & IIf(String.IsNullOrEmpty(sSides), "", ", ") & side.ToString()

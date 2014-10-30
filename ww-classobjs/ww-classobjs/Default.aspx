@@ -10,7 +10,7 @@
     <form id="form1" runat="server">
         <div>
 
-            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" Width="301px" /><br />
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Run Triangle Solver" Width="301px" /><br />
 
             <asp:TextBox ID="TextBox1" runat="server" Height="310px" TextMode="MultiLine" Width="100%" Visible="False"></asp:TextBox>
         </div>

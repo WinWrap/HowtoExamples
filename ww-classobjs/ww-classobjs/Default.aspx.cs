@@ -28,10 +28,6 @@ namespace ww_classobjs
             {
                 using (var basicNoUIObj = new WinWrap.Basic.BasicNoUIObj())
                 {
-                    /*basicNoUIObj.Begin += basicNoUIObj_Begin;
-                    basicNoUIObj.DoEvents += basicNoUIObj_DoEvents;
-                    basicNoUIObj.ErrorAlert += basicNoUIObj_ErrorAlert;
-                    basicNoUIObj.Pause_ += basicNoUIObj_Pause_;*/
                     basicNoUIObj.Begin += basicNoUIObj_Begin;
                     basicNoUIObj.DoEvents += basicNoUIObj_DoEvents;
                     basicNoUIObj.ErrorAlert += basicNoUIObj_ErrorAlert;
@@ -39,7 +35,7 @@ namespace ww_classobjs
                     basicNoUIObj.Secret = new Guid(Utils.GetPatternString("ww-classobjs", "Guid[(]\"(.*)\"[)]"));
                     basicNoUIObj.Initialize();
                     basicNoUIObj.AddScriptableObjectModel(typeof(ScriptingLanguage));
-                    Button1.Text = basicNoUIObj.Evaluate("2+3");
+                    //Button1.Text = basicNoUIObj.Evaluate("2+3");
                     string path = Utils.MacroPath("Macro1.bas");
                     basicNoUIObj.RunFile(string.Format(@"""{0}""", path));
                 }
@@ -57,7 +53,6 @@ namespace ww_classobjs
             {
                 TextBox1.Text = Utils.FormatTimeoutError(basicNoUIObj, timedout_);
                 TextBox1.Visible = true;
-                //Response.Redirect("/LogPage.aspx");
             }
             // Script execution has paused, terminate the script
             basicNoUIObj.Run = false;
@@ -89,7 +84,6 @@ namespace ww_classobjs
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            Button1.Text = DateTime.Now.ToString();
             RunWinWrap();
         }
 
@@ -97,7 +91,9 @@ namespace ww_classobjs
 
         public void AppTrace(string msg)
         {
-            TextBox1.Text = msg + Environment.NewLine + TextBox1.Text;
+            if (TextBox1.Text.Length != 0)
+                TextBox1.Text = TextBox1.Text + Environment.NewLine;
+            TextBox1.Text = TextBox1.Text + msg;
             TextBox1.Visible = true;
         }
 
