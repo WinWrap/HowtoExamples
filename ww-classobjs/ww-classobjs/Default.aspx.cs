@@ -21,7 +21,6 @@ namespace ww_classobjs
             ScriptingLanguage.SetAppModel(this);
         }
 
-
         private void RunWinWrap()
         {
             try
