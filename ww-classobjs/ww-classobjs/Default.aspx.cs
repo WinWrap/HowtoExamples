@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 /*
  * http://ww-classobjs.azurewebsites.net/
@@ -19,6 +14,12 @@ namespace ww_classobjs
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptingLanguage.SetAppModel(this);
+            var t = new VBdotNet.Triangle();
+            t.Parts.Add(new VBdotNet.TrianglePart(10, aangle: 1.0471975511966));
+            t.Parts.Add(new VBdotNet.TrianglePart(0, 1.0471975511966));
+            t.Parts.Add(new VBdotNet.TrianglePart());
+            t.Solve();
+            var s = t.MakeString();
         }
 
         private void RunWinWrap()
