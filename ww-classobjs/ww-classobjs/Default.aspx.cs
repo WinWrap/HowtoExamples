@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 /*
  * http://ww-classobjs.azurewebsites.net/
@@ -20,6 +21,7 @@ namespace ww_classobjs
             t.Parts.Add(new VBdotNet.TrianglePart());
             t.Solve();
             var s = t.MakeString();
+            Debug.Print(String.Format("Solved: {0}", t.MakeString()));
         }
 
         private void RunWinWrap()
