@@ -4,7 +4,7 @@
         'Return x.Side.CompareTo(y.Side)
         'If x.Side = y.Side Then Return x.Angle.CompareTo(y.Angle)
         'Return x.Side.CompareTo(y.Side)
-        Return IIf(x.Side = y.Side, x.Angle.CompareTo(y.Angle), x.Side.CompareTo(y.Side))
+        Return If(x.Side = y.Side, x.Angle.CompareTo(y.Angle), x.Side.CompareTo(y.Side))
         'If x.Side = y.Side Then Return x.Angle.CompareTo(y.Angle) Else Return x.Side.CompareTo(y.Side)
     End Function
 End Class
@@ -15,7 +15,7 @@ Public Class TrianglePartAngleComparer
         'Return x.Angle.CompareTo(y.Angle)
         'If x.Angle = y.Angle Then Return x.Side.CompareTo(y.Side)
         'Return x.Angle.CompareTo(y.Angle)
-        Return IIf(x.Angle = y.Angle, x.Side.CompareTo(y.Side), x.Angle.CompareTo(y.Angle))
+        Return If(x.Angle = y.Angle, x.Side.CompareTo(y.Side), x.Angle.CompareTo(y.Angle))
         'If x.Angle = y.Angle Then Return x.Side.CompareTo(y.Side) Else Return x.Angle.CompareTo(y.Angle)
     End Function
 End Class
