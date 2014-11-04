@@ -20,8 +20,10 @@ namespace ww_classobjs
             t.Parts.Add(new VBdotNet.TrianglePart(0, 1.0471975511966));
             t.Parts.Add(new VBdotNet.TrianglePart());
             t.Solve();
-            var s = t.MakeString();
-            Debug.Print(String.Format("Solved: {0}", t.MakeString()));
+            //var s = t.MakeString();
+            var s = t.ToString();
+            //Debug.Print(String.Format("Solved: {0}", t.MakeString()));
+            Debug.Print(String.Format("Solved: {0}", t.ToString()));
         }
 
         private void RunWinWrap()

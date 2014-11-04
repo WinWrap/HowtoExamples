@@ -10,9 +10,11 @@ Sub Main()
     t.Parts.Add(New TrianglePart(10, aangle:=1.0471975511966))
     t.Parts.Add(New TrianglePart(0, 1.0471975511966))
     t.Parts.Add(New TrianglePart())
-    AppTrace(String.Format("Initial: {0}", t.MakeString()))
+    'AppTrace(String.Format("Initial: {0}", t.MakeString()))
+    AppTrace(String.Format("Initial: {0}", t.ToString()))
     t.Solve()
-    AppTrace(String.Format("Solved: {0}", t.MakeString()))
+    'AppTrace(String.Format("Solved: {0}", t.MakeString()))
+    AppTrace(String.Format("Solved: {0}", t.ToString()))
 End Sub
 
 Public Class TrianglePartSideComparer
@@ -78,7 +80,7 @@ Public Class Triangle
     Private Sub SSA()
         SortSides()
         SortAngles()
-        Parts(1).Angle = Math.ASin(Math.Sin(Parts(2).Angle) * Parts(1).Side / Parts(2).Side)
+        Parts(1).Angle = Math.Asin(Math.Sin(Parts(2).Angle) * Parts(1).Side / Parts(2).Side)
     End Sub
     Private Sub SAS()
         SortSides()
@@ -125,7 +127,10 @@ Public Class Triangle
             Return cnt
         End Get
     End Property
-    Public Function MakeString() As String
+    'Public Function MakeString() As String
+    Public Overrides Function ToString() As String
+        'Return MyBase.ToString()
+        'End Function
         Dim s As String = ""
         For Each part As TrianglePart In Parts
             Dim sPart As String = "(Side=" & PieceDescription(piece:=part.Side) & ", Angle=" & PieceDescription(part.Angle) & ")"
