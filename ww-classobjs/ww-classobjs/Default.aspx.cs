@@ -54,6 +54,7 @@ namespace ww_classobjs
                     basicNoUIObj.DoEvents += basicNoUIObj_DoEvents;
                     basicNoUIObj.ErrorAlert += basicNoUIObj_ErrorAlert;
                     basicNoUIObj.Pause_ += basicNoUIObj_Pause_;
+                    basicNoUIObj.DebugPrint += basicNoUIObj_DebugPrint;
                     basicNoUIObj.Secret = new Guid(Utils.GetPatternString("ww-classobjs", "Guid[(]\"(.*)\"[)]"));
                     basicNoUIObj.Initialize();
                     basicNoUIObj.AddScriptableObjectModel(typeof(ScriptingLanguage));
@@ -68,13 +69,17 @@ namespace ww_classobjs
             }
         }
 
+        void basicNoUIObj_DebugPrint(object sender, WinWrap.Basic.Classic.TextEventArgs e)
+        {
+            AppendToTextBox1(e.Text);
+        }
+
         void basicNoUIObj_Pause_(object sender, EventArgs e)
         {
             WinWrap.Basic.BasicNoUIObj basicNoUIObj = sender as WinWrap.Basic.BasicNoUIObj;
             if (basicNoUIObj.Error == null)
             {
-                TextBox1.Text = Utils.FormatTimeoutError(basicNoUIObj, timedout_);
-                TextBox1.Visible = true;
+                AppendToTextBox1(Utils.FormatTimeoutError(basicNoUIObj, timedout_));
             }
             // Script execution has paused, terminate the script
             basicNoUIObj.Run = false;
@@ -83,8 +88,7 @@ namespace ww_classobjs
         void basicNoUIObj_ErrorAlert(object sender, EventArgs e)
         {
             WinWrap.Basic.BasicNoUIObj basicNoUIObj = sender as WinWrap.Basic.BasicNoUIObj;
-            TextBox1.Text = Utils.FormatError(basicNoUIObj.Error);
-            TextBox1.Visible = true;
+            AppendToTextBox1(Utils.FormatError(basicNoUIObj.Error));
         }
 
         void basicNoUIObj_DoEvents(object sender, EventArgs e)
@@ -109,14 +113,19 @@ namespace ww_classobjs
             RunWinWrap();
         }
 
+        private void AppendToTextBox1(string msg)
+        {
+            TextBox1.Text += msg;
+            TextBox1.Visible = true;
+        }
+
         #region IAppModel
 
         public void AppTrace(string msg)
         {
             if (TextBox1.Text.Length != 0)
-                TextBox1.Text = TextBox1.Text + Environment.NewLine;
-            TextBox1.Text = TextBox1.Text + msg;
-            TextBox1.Visible = true;
+                msg = Environment.NewLine + msg;
+            AppendToTextBox1(msg);
         }
 
         #endregion
