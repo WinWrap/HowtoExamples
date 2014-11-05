@@ -23,6 +23,10 @@ using VBdotNet;
  * abstract tests
  *   MS testing support in VS ?
  * spurious dot(: ".) in VS for "AppTrace("Solve: " & ex.ToString())"
+ * common code for VB.Net WWB.Net
+ * pass timelimit to error msg
+ * ScriptingExtensions
+ * Debug.Print listener
  * http://ww-classobjs.azurewebsites.net/
 */
 
