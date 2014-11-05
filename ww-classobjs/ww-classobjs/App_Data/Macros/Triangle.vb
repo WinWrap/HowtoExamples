@@ -9,7 +9,11 @@ Public Class Triangle
     Public Sub New()
         Parts = New List(Of TrianglePart)
     End Sub
-    Public Function Solve() As Boolean
+    Public Function Solve(Optional depth As Integer = 0) As Boolean
+        If depth > 5 Then
+            AppTrace("Can't be solved.")
+            Return True
+        End If
         If Solved Then Return True
         Try
             If Sides = 3 Then SSS()
@@ -19,8 +23,9 @@ Public Class Triangle
             If IsSSA() Then SSA()
         Catch ex As Exception
             AppTrace("Solve: " & ex.ToString())
+            Return True
         End Try
-        Return Solve()
+        Return Solve(depth + 1)
     End Function
     Private Function IsAAS() As Boolean
         If Angles < 2 Then Return False
