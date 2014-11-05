@@ -15,6 +15,7 @@ using VBdotNet;
  *   limit recursion
  *   verify sequencing
  *   try-catch when non-solvable is detectable
+ *   // test stackoverflow on ?x=
  * website monitoring
  *   Azure tools
  *   built
@@ -35,7 +36,7 @@ namespace ww_classobjs
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptingLanguage.SetAppModel(this);
-            (new Triangle()).Test();
+            //(new Triangle()).Test(); // test stackoverflow on ?x=y
             //Debug.Print((new Triangle()).Test()); // Debug is suppressed in released code
         }
 
