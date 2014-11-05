@@ -100,6 +100,12 @@
     <Compile Include="ScriptingLanguage.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VBdotNet\VBdotNet.vbproj">
+      <Project>{fa585ca1-d254-46b5-8951-699d699f9732}</Project>
+      <Name>VBdotNet</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

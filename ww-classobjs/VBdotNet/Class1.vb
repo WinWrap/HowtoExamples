@@ -1,22 +1,14 @@
 ﻿Public Class TrianglePartSideComparer
     Implements IComparer(Of TrianglePart)
     Public Function Compare(x As TrianglePart, y As TrianglePart) As Integer Implements IComparer(Of TrianglePart).Compare
-        'Return x.Side.CompareTo(y.Side)
-        'If x.Side = y.Side Then Return x.Angle.CompareTo(y.Angle)
-        'Return x.Side.CompareTo(y.Side)
         Return If(x.Side = y.Side, x.Angle.CompareTo(y.Angle), x.Side.CompareTo(y.Side))
-        'If x.Side = y.Side Then Return x.Angle.CompareTo(y.Angle) Else Return x.Side.CompareTo(y.Side)
     End Function
 End Class
 
 Public Class TrianglePartAngleComparer
     Implements IComparer(Of TrianglePart)
     Public Function Compare(x As TrianglePart, y As TrianglePart) As Integer Implements IComparer(Of TrianglePart).Compare
-        'Return x.Angle.CompareTo(y.Angle)
-        'If x.Angle = y.Angle Then Return x.Side.CompareTo(y.Side)
-        'Return x.Angle.CompareTo(y.Angle)
         Return If(x.Angle = y.Angle, x.Side.CompareTo(y.Side), x.Angle.CompareTo(y.Angle))
-        'If x.Angle = y.Angle Then Return x.Side.CompareTo(y.Side) Else Return x.Angle.CompareTo(y.Angle)
     End Function
 End Class
 
@@ -39,13 +31,11 @@ Public Class Triangle
     Private Function IsAAS() As Boolean
         If Angles < 2 Then Return False
         If Sides < 1 Then Return False ' invalid
-        SortAngles()
         SortSides()
         Return (Parts(1).Side = 0)
     End Function
     Private Sub AAS()
-        SortSides()
-        SortAngles() ' 2-way sort?
+        SortAngles()
         Parts(1).Side = Parts(2).Side * Math.Sin(Parts(1).Angle) / Math.Sin(Parts(2).Angle)
     End Sub
     Private Function IsSAS() As Boolean
@@ -59,7 +49,6 @@ Public Class Triangle
         Return (Parts(2).Side <> 0)
     End Function
     Private Sub SSA()
-        SortSides()
         SortAngles()
         Parts(1).Angle = Math.Asin(Math.Sin(Parts(2).Angle) * Parts(1).Side / Parts(2).Side)
     End Sub
@@ -108,10 +97,7 @@ Public Class Triangle
             Return cnt
         End Get
     End Property
-    'Public Function MakeString() As String
     Public Overrides Function ToString() As String
-        'Return MyBase.ToString()
-        'End Function
         Dim s As String = ""
         For Each part As TrianglePart In Parts
             Dim sPart As String = "(Side=" & PieceDescription(piece:=part.Side) & ", Angle=" & PieceDescription(part.Angle) & ")"
