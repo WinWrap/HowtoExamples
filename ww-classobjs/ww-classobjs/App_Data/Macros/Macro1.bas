@@ -10,29 +10,21 @@ End Sub
 
 Public Class Triangle
     ' http://www.mathsisfun.com/algebra/trig-solving-triangles.html
-    Public Parts As List(Of TrianglePart)
+    Private Parts As List(Of TrianglePart)
     Public Sub New()
         Parts = New List(Of TrianglePart)
     End Sub
-    Public Function Test() As String
-        AppTrace(System.DateTime.Now.ToString())
-        AppTrace("Solve for missing triangle sides and angles:")
-        Parts.Add(New TrianglePart(10, aangle:=1.0471975511966))
-        Parts.Add(New TrianglePart(0, 1.0471975511966))
-        Parts.Add(New TrianglePart())
-        AppTrace(String.Format("Initial: {0}", ToString()))
-        Dim b As Boolean = Solve()
-        AppTrace(String.Format("Solved: {0}", ToString()))
-        Dim result As String = String.Format("(new VBdotNet.Triangle()).Test() => {0}", b)
-        Return result
-    End Function
     Public Function Solve() As Boolean
         If Solved Then Return True
-        If Sides = 3 Then SSS()
-        If Angles = 2 Then AA()
-        If IsAAS() Then AAS()
-        If IsSAS() Then SAS()
-        If IsSSA() Then SSA()
+        Try
+            If Sides = 3 Then SSS()
+            If Angles = 2 Then AA()
+            If IsAAS() Then AAS()
+            If IsSAS() Then SAS()
+            If IsSSA() Then SSA()
+        Catch ex As Exception
+            AppTrace("Solve: " & ex.ToString())
+        End Try
         Return Solve()
     End Function
     Private Function IsAAS() As Boolean
@@ -73,15 +65,15 @@ Public Class Triangle
         Dim cr As New CosineRule(CosineRuleEnum.SSS, New List(Of Double)(New Double() {Parts(0).Side, Parts(1).Side, Parts(2).Side}))
         Parts(0).Angle = cr.Solve()
     End Sub
-    Public Sub SortSides()
+    Private Sub SortSides()
         Dim tc As New TrianglePartSideComparer
         Parts.Sort(tc)
     End Sub
-    Public Sub SortAngles()
+    Private Sub SortAngles()
         Dim tc As New TrianglePartAngleComparer
         Parts.Sort(tc)
     End Sub
-    Public ReadOnly Property Solved() As Boolean
+    Private ReadOnly Property Solved() As Boolean
         Get
             Return (Sides >= 3) And (Angles >= 3)
         End Get
@@ -118,6 +110,49 @@ Public Class Triangle
         Else
             Return piece.ToString()
         End If
+    End Function
+    Public Function Test() As String
+        Dim b As Boolean = Test001()
+        b = b And Test002()
+        b = b And Test003()
+        Dim result As String = String.Format("(new Triangle()).Test() => {0}", b)
+        Return result
+    End Function
+    Public Function Test001() As Boolean
+        Parts.Clear()
+        AppTrace(System.DateTime.Now.ToString())
+        AppTrace("Test001 Solve for missing triangle sides and angles:")
+        Parts.Add(New TrianglePart(10, aangle:=1.0471975511966))
+        Parts.Add(New TrianglePart(0, 1.0471975511966))
+        Parts.Add(New TrianglePart())
+        AppTrace(String.Format("  Initial: {0}", ToString()))
+        Dim b As Boolean = Solve()
+        AppTrace(String.Format("  Solved: {0}", ToString()))
+        Return b
+    End Function
+    Public Function Test002() As Boolean
+        Parts.Clear()
+        AppTrace(System.DateTime.Now.ToString())
+        AppTrace("Test002 Solve for missing triangle sides and angles:")
+        Parts.Add(New TrianglePart(10))
+        Parts.Add(New TrianglePart(10))
+        Parts.Add(New TrianglePart(10))
+        AppTrace(String.Format("  Initial: {0}", ToString()))
+        Dim b As Boolean = Solve()
+        AppTrace(String.Format("  Solved: {0}", ToString()))
+        Return b
+    End Function
+    Public Function Test003() As Boolean
+        Parts.Clear()
+        AppTrace(System.DateTime.Now.ToString())
+        AppTrace("Test003 Solve for missing triangle sides and angles:")
+        Parts.Add(New TrianglePart(21))
+        Parts.Add(New TrianglePart(10))
+        Parts.Add(New TrianglePart(10))
+        AppTrace(String.Format("  Initial: {0}", ToString()))
+        Dim b As Boolean = Solve()
+        AppTrace(String.Format("  Solved: {0}", ToString()))
+        Return b
     End Function
 End Class
 

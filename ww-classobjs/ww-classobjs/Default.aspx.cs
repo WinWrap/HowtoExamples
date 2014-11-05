@@ -1,8 +1,27 @@
-﻿using System;
+﻿using AppModel;
+using System;
 using System.Diagnostics;
-using AppModel;
+using VBdotNet;
 
 /*
+ * try catch on side a > sides b + c
+ *   VB.Net local: no catch, stackoverflowexception
+ *   VB.Net Azure: no catch, no failure indication
+ *   WWB.Net time limit exceeded
+ *     what is time limit
+ *     try increasing
+ * put triangle code in separate macro, sub main
+ * non-solvable triangle
+ *   limit recursion
+ *   verify sequencing
+ *   try-catch when non-solvable is detectable
+ * website monitoring
+ *   Azure tools
+ *   built
+ * assert (on internal illegal conditions)
+ * abstract tests
+ *   MS testing support in VS ?
+ * spurious dot(: ".) in VS for "AppTrace("Solve: " & ex.ToString())"
  * http://ww-classobjs.azurewebsites.net/
 */
 
@@ -16,7 +35,7 @@ namespace ww_classobjs
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptingLanguage.SetAppModel(this);
-            //Debug.Print((new VBdotNet.Triangle()).Test());
+            Debug.Print((new Triangle()).Test());
         }
 
         private void RunWinWrap()
