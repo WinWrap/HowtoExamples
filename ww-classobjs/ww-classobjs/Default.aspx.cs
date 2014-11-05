@@ -35,7 +35,8 @@ namespace ww_classobjs
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptingLanguage.SetAppModel(this);
-            Debug.Print((new Triangle()).Test());
+            (new Triangle()).Test();
+            //Debug.Print((new Triangle()).Test()); // Debug is suppressed in released code
         }
 
         private void RunWinWrap()

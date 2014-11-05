@@ -12,10 +12,10 @@
             If IsAAS() Then AAS()
             If IsSAS() Then SAS()
             If IsSSA() Then SSA()
+            Return Solve()
         Catch ex As Exception
             AppTrace("Solve: " & ex.ToString())
         End Try
-        Return Solve()
     End Function
     Private Function IsAAS() As Boolean
         If Angles < 2 Then Return False
