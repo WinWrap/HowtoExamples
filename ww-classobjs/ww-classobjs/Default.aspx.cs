@@ -59,7 +59,12 @@ namespace ww_classobjs
                     basicNoUIObj.Initialize();
                     basicNoUIObj.AddScriptableObjectModel(typeof(ScriptingLanguage));
                     //Button1.Text = basicNoUIObj.Evaluate("2+3");
+#if DEBUG
+                    basicNoUIObj.Sandboxed = false;
+                    string path = Utils.MacroPath("Macro2.bas");
+#else
                     string path = Utils.MacroPath("Macro1.bas");
+#endif
                     basicNoUIObj.RunFile(string.Format(@"""{0}""", path));
                 }
             }
