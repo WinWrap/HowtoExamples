@@ -94,13 +94,14 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="IAppModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scriptable.cs" />
-    <Compile Include="ScriptingLanguage.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AppModel\AppModel.csproj">
+      <Project>{927d62db-76e3-4ae1-ae0f-c1c42a2b67b4}</Project>
+      <Name>AppModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VBdotNet\VBdotNet.vbproj">
       <Project>{fa585ca1-d254-46b5-8951-699d699f9732}</Project>
       <Name>VBdotNet</Name>

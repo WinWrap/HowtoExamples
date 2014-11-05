@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 
-namespace ww_classobjs
+namespace AppModel
 {
     public interface IAppModel
     {

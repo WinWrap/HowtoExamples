@@ -1,24 +1,21 @@
-﻿Public Class TrianglePartSideComparer
-    Implements IComparer(Of TrianglePart)
-    Public Function Compare(x As TrianglePart, y As TrianglePart) As Integer Implements IComparer(Of TrianglePart).Compare
-        Return If(x.Side = y.Side, x.Angle.CompareTo(y.Angle), x.Side.CompareTo(y.Side))
-    End Function
-End Class
-
-Public Class TrianglePartAngleComparer
-    Implements IComparer(Of TrianglePart)
-    Public Function Compare(x As TrianglePart, y As TrianglePart) As Integer Implements IComparer(Of TrianglePart).Compare
-        Return If(x.Angle = y.Angle, x.Side.CompareTo(y.Side), x.Angle.CompareTo(y.Angle))
-    End Function
-End Class
-
-Public Class Triangle
+﻿Public Class Triangle
     ' http://www.mathsisfun.com/algebra/trig-solving-triangles.html
     Public Parts As List(Of TrianglePart)
     Public Sub New()
-        'AppTrace(System.DateTime.Now.ToString())
         Parts = New List(Of TrianglePart)
     End Sub
+    Public Function Test() As String
+        AppTrace(System.DateTime.Now.ToString())
+        AppTrace("Solve for missing triangle sides and angles:")
+        Parts.Add(New TrianglePart(10, aangle:=1.0471975511966))
+        Parts.Add(New TrianglePart(0, 1.0471975511966))
+        Parts.Add(New TrianglePart())
+        AppTrace(String.Format("Initial: {0}", ToString()))
+        Dim b As Boolean = Solve()
+        AppTrace(String.Format("Solved: {0}", ToString()))
+        Dim result As String = String.Format("(new VBdotNet.Triangle()).Test() => {0}", b)
+        Return result
+    End Function
     Public Function Solve() As Boolean
         If Solved Then Return True
         If Sides = 3 Then SSS()
@@ -168,5 +165,19 @@ Public Class CosineRule
         Next
         Dim result As String = String.Format("{0}: {1}", Rule.ToString(), sSides)
         Return result
+    End Function
+End Class
+
+Public Class TrianglePartSideComparer
+    Implements IComparer(Of TrianglePart)
+    Public Function Compare(x As TrianglePart, y As TrianglePart) As Integer Implements IComparer(Of TrianglePart).Compare
+        Return If(x.Side = y.Side, x.Angle.CompareTo(y.Angle), x.Side.CompareTo(y.Side))
+    End Function
+End Class
+
+Public Class TrianglePartAngleComparer
+    Implements IComparer(Of TrianglePart)
+    Public Function Compare(x As TrianglePart, y As TrianglePart) As Integer Implements IComparer(Of TrianglePart).Compare
+        Return If(x.Angle = y.Angle, x.Side.CompareTo(y.Side), x.Angle.CompareTo(y.Angle))
     End Function
 End Class

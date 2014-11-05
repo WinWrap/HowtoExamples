@@ -4,48 +4,28 @@ Imports System
 Imports System.Collections.Generic
 
 Sub Main()
-    AppTrace(System.DateTime.Now.ToString())
-    AppTrace("Solve for missing triangle sides and angles:")
     Dim t As New Triangle()
-    t.Parts.Add(New TrianglePart(10, aangle:=1.0471975511966))
-    t.Parts.Add(New TrianglePart(0, 1.0471975511966))
-    t.Parts.Add(New TrianglePart())
-    'AppTrace(String.Format("Initial: {0}", t.MakeString()))
-    AppTrace(String.Format("Initial: {0}", t.ToString()))
-    t.Solve()
-    'AppTrace(String.Format("Solved: {0}", t.MakeString()))
-    AppTrace(String.Format("Solved: {0}", t.ToString()))
+    AppTrace(t.Test())
 End Sub
-
-Public Class TrianglePartSideComparer
-    Implements IComparer(Of TrianglePart)
-    Public Function Compare(x As TrianglePart, y As TrianglePart) As Integer Implements IComparer(Of TrianglePart).Compare
-        'Return x.Side.CompareTo(y.Side)
-        'If x.Side = y.Side Then Return x.Angle.CompareTo(y.Angle)
-        'Return x.Side.CompareTo(y.Side)
-        Return If(x.Side = y.Side, x.Angle.CompareTo(y.Angle), x.Side.CompareTo(y.Side))
-        'If x.Side = y.Side Then Return x.Angle.CompareTo(y.Angle) Else Return x.Side.CompareTo(y.Side)
-    End Function
-End Class
-
-Public Class TrianglePartAngleComparer
-    Implements IComparer(Of TrianglePart)
-    Public Function Compare(x As TrianglePart, y As TrianglePart) As Integer Implements IComparer(Of TrianglePart).Compare
-        'Return x.Angle.CompareTo(y.Angle)
-        'If x.Angle = y.Angle Then Return x.Side.CompareTo(y.Side)
-        'Return x.Angle.CompareTo(y.Angle)
-        Return If(x.Angle = y.Angle, x.Side.CompareTo(y.Side), x.Angle.CompareTo(y.Angle))
-        'If x.Angle = y.Angle Then Return x.Side.CompareTo(y.Side) Else Return x.Angle.CompareTo(y.Angle)
-    End Function
-End Class
 
 Public Class Triangle
     ' http://www.mathsisfun.com/algebra/trig-solving-triangles.html
     Public Parts As List(Of TrianglePart)
     Public Sub New()
-        'AppTrace(System.DateTime.Now.ToString())
         Parts = New List(Of TrianglePart)
     End Sub
+    Public Function Test() As String
+        AppTrace(System.DateTime.Now.ToString())
+        AppTrace("Solve for missing triangle sides and angles:")
+        Parts.Add(New TrianglePart(10, aangle:=1.0471975511966))
+        Parts.Add(New TrianglePart(0, 1.0471975511966))
+        Parts.Add(New TrianglePart())
+        AppTrace(String.Format("Initial: {0}", ToString()))
+        Dim b As Boolean = Solve()
+        AppTrace(String.Format("Solved: {0}", ToString()))
+        Dim result As String = String.Format("(new VBdotNet.Triangle()).Test() => {0}", b)
+        Return result
+    End Function
     Public Function Solve() As Boolean
         If Solved Then Return True
         If Sides = 3 Then SSS()
@@ -58,13 +38,11 @@ Public Class Triangle
     Private Function IsAAS() As Boolean
         If Angles < 2 Then Return False
         If Sides < 1 Then Return False ' invalid
-        SortAngles()
         SortSides()
         Return (Parts(1).Side = 0)
     End Function
     Private Sub AAS()
-        SortSides()
-        SortAngles() ' 2-way sort?
+        SortAngles()
         Parts(1).Side = Parts(2).Side * Math.Sin(Parts(1).Angle) / Math.Sin(Parts(2).Angle)
     End Sub
     Private Function IsSAS() As Boolean
@@ -78,7 +56,6 @@ Public Class Triangle
         Return (Parts(2).Side <> 0)
     End Function
     Private Sub SSA()
-        SortSides()
         SortAngles()
         Parts(1).Angle = Math.Asin(Math.Sin(Parts(2).Angle) * Parts(1).Side / Parts(2).Side)
     End Sub
@@ -127,10 +104,7 @@ Public Class Triangle
             Return cnt
         End Get
     End Property
-    'Public Function MakeString() As String
     Public Overrides Function ToString() As String
-        'Return MyBase.ToString()
-        'End Function
         Dim s As String = ""
         For Each part As TrianglePart In Parts
             Dim sPart As String = "(Side=" & PieceDescription(piece:=part.Side) & ", Angle=" & PieceDescription(part.Angle) & ")"
@@ -201,5 +175,19 @@ Public Class CosineRule
         Next
         Dim result As String = String.Format("{0}: {1}", Rule.ToString(), sSides)
         Return result
+    End Function
+End Class
+
+Public Class TrianglePartSideComparer
+    Implements IComparer(Of TrianglePart)
+    Public Function Compare(x As TrianglePart, y As TrianglePart) As Integer Implements IComparer(Of TrianglePart).Compare
+        Return If(x.Side = y.Side, x.Angle.CompareTo(y.Angle), x.Side.CompareTo(y.Side))
+    End Function
+End Class
+
+Public Class TrianglePartAngleComparer
+    Implements IComparer(Of TrianglePart)
+    Public Function Compare(x As TrianglePart, y As TrianglePart) As Integer Implements IComparer(Of TrianglePart).Compare
+        Return If(x.Angle = y.Angle, x.Side.CompareTo(y.Side), x.Angle.CompareTo(y.Angle))
     End Function
 End Class

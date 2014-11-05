@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ww_classobjs
+namespace AppModel
 {
     [Scriptable]
     public static class ScriptingLanguage
