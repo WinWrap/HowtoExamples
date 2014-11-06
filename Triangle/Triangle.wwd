@@ -105,7 +105,7 @@ Class DialogParameter
     End Sub
 
     Public Sub ConditionalEnable(enables As String)
-        Enable = InStr(enables, Right(field, 1)) <> 0
+        Enable = enables.Contains(Right(field, 1))
     End Sub
 
     Public Property Enable As Boolean
