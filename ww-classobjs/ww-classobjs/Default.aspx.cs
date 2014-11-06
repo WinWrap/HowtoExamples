@@ -42,6 +42,9 @@ namespace ww_classobjs
             ScriptingLanguage.SetAppModel(this);
             //(new Triangle()).Test(); // test stackoverflow on ?x=y
             //Debug.Print((new Triangle()).Test()); // Debug is suppressed in released code
+            /*Triangle t = new Triangle(10, 10, 10, 0, 0, 0);
+            t.Solve();
+            Debug.Print(t.ToString());*/
         }
 
         private void RunWinWrap()
