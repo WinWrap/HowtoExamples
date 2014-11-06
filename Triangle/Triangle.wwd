@@ -1,0 +1,128 @@
+﻿'#Language "WWB.NET"
+
+'#Uses "Triangle.bas"
+
+Imports System
+Imports System.Collections.Generic
+
+Dim triangletypes As TriangleType()
+
+Sub Main()
+    triangletypes = New TriangleType() {
+        New TriangleType("SSS", "abc"),
+        New TriangleType("SAS", "Abc"),
+        New TriangleType("SSA", "Bbc"),
+        New TriangleType("AAA", "ABC"),
+        New TriangleType("AAS", "ACc"),
+        New TriangleType("ASA", "ABc")}
+    Begin Dialog UserDialog 390,196,"Triangle Solver",.DlgFunc ' %GRID:10,7,1,1
+        GroupBox 10,7,80,105,"Select",.GroupBox1
+        OptionGroup .Group1
+            OptionButton 20,21,60,14,"SSS"
+            OptionButton 20,35,60,14,"SAS"
+            OptionButton 20,49,60,14,"SSA"
+            OptionButton 20,63,60,14,"AAA"
+            OptionButton 20,77,60,14,"AAS"
+            OptionButton 20,91,60,14,"ASA"
+        Picture 120,14,110,63,"",0,.Picture1
+        GroupBox 260,7,120,63,"Sides"
+        Text 270,21,10,14,"a"
+        Text 270,35,10,14,"b"
+        Text 270,49,10,14,"c"
+        TextBox 280,21,90,14,.Sa
+        TextBox 280,35,90,14,.Sb
+        TextBox 280,49,90,14,.Sc
+        GroupBox 260,70,120,63,"Angles"
+        Text 270,84,10,14,"A"
+        Text 270,98,10,14,"B"
+        Text 270,112,10,14,"C"
+        TextBox 280,84,90,14,.AA
+        TextBox 280,98,90,14,.AB
+        TextBox 280,112,90,14,.AC
+        CancelButton 300,168,80,21
+        PushButton 150,91,70,21,"Solve",.Solve
+    End Dialog
+    Dim dlg As UserDialog
+    Dim result = Dialog(dlg)
+End Sub
+
+Rem See DialogFunc help topic for more information.
+Private Function DlgFunc(DlgItem$, Action%, SuppValue&) As Boolean
+    Select Case Action%
+    Case 1 ' Dialog box initialization
+        SelectTriangle(0)
+        DlgText "Sa", "3"
+        DlgText "Sb", "4"
+        DlgText "Sc", "5"
+    Case 2 ' Value changing or button pressed
+        Select Case DlgItem
+        Case "Group1"
+            SelectTriangle(DlgValue("Group1"))
+        Case "Solve"
+            SolveTriangle
+            DlgFunc = True
+        End Select
+        Rem DlgFunc = True ' Prevent button press from closing the dialog box
+    Case 3 ' TextBox or ComboBox text changed
+    Case 4 ' Focus changed
+    Case 5 ' Idle
+        Rem Wait .1 : DlgFunc = True ' Continue getting idle actions
+    Case 6 ' Function key
+    End Select
+End Function
+
+Sub SolveTriangle()
+    For Each di As String In {"AA", "AB", "AC", "Sa", "Sb", "Sc"}
+        If Not DlgEnable(di) Then DlgText di, "?"
+    Next
+    Dim Sa As Double = Val(DlgText("Sa"))
+    Dim Sb As Double = Val(DlgText("Sb"))
+    Dim Sc As Double = Val(DlgText("Sc"))
+    Dim AA As Double = Val(DlgText("AA")) * Math.PI/180
+    Dim AB As Double = Val(DlgText("AB")) * Math.PI/180
+    Dim AC As Double = Val(DlgText("AC")) * Math.PI/180
+    Dim t As New Triangle()
+    t.Parts.Add(New TrianglePart(Sa, AA))
+    t.Parts.Add(New TrianglePart(Sb, AB))
+    t.Parts.Add(New TrianglePart(Sc, AC))
+    Try
+        t.Solve()
+    Catch ex As Exception
+        MsgBox ex.Message
+    End Try
+    DlgText "Sa", CStr(t.Parts(0).Side)
+    DlgText "Sb", CStr(t.Parts(1).Side)
+    DlgText "Sc", CStr(t.Parts(2).Side)
+    DlgText "AA", CStr(t.Parts(0).Angle * 180/Math.PI)
+    DlgText "AB", CStr(t.Parts(1).Angle * 180/Math.PI)
+    DlgText "AC", CStr(t.Parts(2).Angle * 180/Math.PI)
+End Sub
+
+Sub SelectTriangle(index As Integer)
+    Dim tt As TriangleType = triangletypes(index)
+    DlgSetPicture "Picture1", MacroDir & "\triangle-" & tt.Category & ".bmp", 0
+    For Each di As String In {"AA", "AB", "AC", "Sa", "Sb", "Sc"}
+        DlgEnable di, False
+    Next
+    For i As Integer = 0 To Len(tt.Enables) - 1
+        If tt.Enables(i) = UCase(tt.Enables(i)) Then
+            DlgEnable "A" & tt.Enables(i)
+        Else
+            DlgEnable "S" & tt.Enables(i)
+        End If
+    Next
+End Sub
+
+Class TriangleType
+    Public Category As String
+    Public Enables As String
+
+    Public Sub New(acategory As String, aenables As String)
+        Category = acategory
+        Enables = aenables
+    End Sub
+
+    Public Overrides Function ToString() As String
+        Return String.Format("Category={0}, Enables={1}", Category, Enables)
+    End Function
+End Class
