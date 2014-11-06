@@ -24,8 +24,9 @@ Public Class Triangle
     End Function
 
     Public Sub Solve()
+        Dim n As Integer
         Do
-            Dim n As Integer = Sides + Angles
+            n = Sides + Angles
             If Angles = 2 Then TryAA()
             If Sides = 3 Then TrySSS()
             If Sides = 2 AndAlso Angles >= 1 Then TrySAS()
@@ -41,7 +42,6 @@ Public Class Triangle
         End Get
     End Property
 
-
     Private Sub TrySSA()
         SortAngles()
         If Side(2) <> 0 AndAlso Angle(1) = 0 Then
@@ -51,7 +51,7 @@ Public Class Triangle
             ' side b is Side(1)
             ' side c is Side(2)
             ' angle C is Angle(2)
-            Dim asin = Sin(Angle(2)) * Side(1) / Side(2)
+            Dim asin = Math.Sin(Angle(2)) * Side(1) / Side(2)
             ' cope with asin slightly out of range
             If asin < -1 Then asin = -1
             If asin > 1 Then asin = 1

@@ -30,8 +30,8 @@ Sub Main()
         TextBox 280,98,90,14,.AA
         TextBox 280,112,90,14,.AB
         TextBox 280,126,90,14,.AC
-        CancelButton 300,168,80,21
         PushButton 280,28,80,35,"Solve",.Solve
+        CancelButton 300,168,80,21
     End Dialog
     Dim dlg As UserDialog
     Dim result = Dialog(dlg)
