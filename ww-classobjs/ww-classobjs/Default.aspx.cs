@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using VBdotNet;
+using System.IO;
 
 /*
  * try catch on side a > sides b + c
@@ -27,6 +28,9 @@ using VBdotNet;
  * pass timelimit to error msg
  * ScriptingExtensions
  * Debug.Print listener
+ * IsPostBack ?
+ * Session in Azure ?
+ * http://stackoverflow.com/questions/2784878/continuously-reading-from-a-stream
  * http://ww-classobjs.azurewebsites.net/
 */
 
@@ -36,6 +40,8 @@ namespace ww_classobjs
     {
         private bool timedout_;
         private DateTime timelimit_;
+        //MemoryStream ms_;
+        //StreamWriter sw_;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -45,6 +51,104 @@ namespace ww_classobjs
             /*Triangle t = new Triangle(10, 10, 10, 0, 0, 0);
             t.Solve();
             Debug.Print(t.ToString());*/
+            //MyListener3();
+            if (!IsPostBack)
+            {
+                CreateMyListener();
+                Debug.Print("Page_Load: " + DateTime.Now.ToString());
+                PrintMyListener();
+                //Triangle t = new Triangle(10, 10, 10, 0, 0, 0);
+            }
+            else
+            {
+
+            }
+            //Debug.Print("Page_Load: " + DateTime.Now.ToString());
+            //PrintMyListener();
+            //PrintMyListener();
+        }
+
+        protected void Page_UnLoad(object sender, EventArgs e)
+        {
+            //PrintMyListener();
+            //ms_.Close();
+        }
+
+        private void CreateMyListener()
+        {
+            //ms_ = new MemoryStream();
+            var ms = new MemoryStream();
+            Session["ms_"] = ms;
+            //sw_ = new StreamWriter(ms_);
+            var sw = new StreamWriter(ms);
+            Session["sw_"] = sw;
+            //TextWriterTraceListener objTraceListener = new TextWriterTraceListener(sw_);
+            TextWriterTraceListener objTraceListener = new TextWriterTraceListener(sw);
+            System.Diagnostics.Trace.Listeners.Add(objTraceListener); // xxx System.Diagnostics ?
+        }
+
+        private void PrintMyListener()
+        {
+            //sw_.Flush();
+            StreamWriter sw = (StreamWriter)Session["sw_"];
+            sw.Flush();
+            //ms_.Position = 0;
+            MemoryStream ms = (MemoryStream)Session["ms_"];
+            ms.Position = 0;
+            /*var sr = new StreamReader(ms_);
+            var myStr = sr.ReadToEnd();
+            AppTrace(myStr);*/
+            //using (var sr = new StreamReader(ms_))
+            using (var sr = new StreamReader(ms))
+            {
+                var myStr = sr.ReadToEnd();
+                AppTrace(myStr);
+            }
+        }
+
+        private void MyListener3()
+        {
+            using (var ms = new MemoryStream())
+            {
+                var sw = new StreamWriter(ms);
+                TextWriterTraceListener objTraceListener = new TextWriterTraceListener(sw);
+                System.Diagnostics.Trace.Listeners.Add(objTraceListener);
+                Debug.Print(DateTime.Now.ToString());
+                sw.Flush();
+                ms.Position = 0;
+                var sr = new StreamReader(ms);
+                var myStr = sr.ReadToEnd();
+            }
+        }
+
+        private void MyListener2()
+        {
+            using (var ms = new MemoryStream())
+            {
+                var sw = new StreamWriter(ms);
+                sw.WriteLine("Hello World");
+                sw.Flush();
+                ms.Position = 0;
+                var sr = new StreamReader(ms);
+                var myStr = sr.ReadToEnd();
+                //Console.WriteLine(myStr);
+            }
+        }
+
+        private void MyListener()
+        {
+            //string afile = "C:\\AppLog.txt";
+            string afile = @"C:\Users\Public\Documents\AppLog.txt";
+            FileStream objStream = new FileStream(afile, FileMode.OpenOrCreate);
+            TextWriterTraceListener objTraceListener = new TextWriterTraceListener(objStream);
+            //Trace.Listeners.Add(objTraceListener);
+            System.Diagnostics.Trace.Listeners.Add(objTraceListener); // xxx
+            System.Diagnostics.Trace.WriteLine("Hello 15Seconds Reader -- This is first trace message");
+            System.Diagnostics.Trace.WriteLine("Hello again -- This is second trace message");
+            Debug.WriteLine("Hello again -- This is first debug message");
+            Debug.Print(DateTime.Now.ToString());
+            System.Diagnostics.Trace.Flush();
+            objStream.Close();
         }
 
         private void RunWinWrap()
