@@ -1,7 +1,0 @@
-9/24/2014 5:02:14 PM [5] Creating BasicNoUIObj
-9/24/2014 5:02:16 PM [5] Turn on BasicNoUIObj tracing
-9/24/2014 5:02:16 PM [5] Exception: Basic Object has not been initialized.
-   at af.a(Exception A_0)
-   at af.a(String A_0)
-   at WinWrap.Basic.BasicNoUIObj.Trace(TraceConstants categories)
-   at WebRole1._Default.Page_Load(Object sender, EventArgs e) in c:\Users\tbennett\Documents\GitHub\HowtoExamples\AzureCloudService2\WebRole1\Default.aspx.cs:line 41
