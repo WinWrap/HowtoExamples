@@ -107,6 +107,7 @@ Public Class Triangle
     Private Sub TrySSS()
         Debug.Print("TrySSS()")
         SortAngles()
+        Debug.Print("TrySSS()")
         If Angle(0) = 0 Then
             Debug.Print("If Angle(0) = 0 Then")
             ' Law of Cosines: a^2 = b^2 + c^2 - 2*b*c*cos(A)
@@ -130,6 +131,7 @@ Public Class Triangle
     End Sub
 
     Private Sub SortAngles()
+        Debug.Print("SortAngles()")
         Dim tc As New TriangleCornerAngleComparer
         Corners.Sort(tc)
     End Sub
@@ -205,6 +207,7 @@ End Class
 Public Class TriangleCornerAngleComparer
     Implements IComparer(Of TriangleCorner)
     Public Function Compare(x As TriangleCorner, y As TriangleCorner) As Integer Implements IComparer(Of TriangleCorner).Compare
+        'Debug.Print("TriangleCornerAngleComparer.Compage")
         Return If(x.Angle = y.Angle, x.Side.CompareTo(y.Side), x.Angle.CompareTo(y.Angle))
     End Function
 End Class
