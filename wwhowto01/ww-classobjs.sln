@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ww-classobjs", "ww-classobjs\ww-classobjs.csproj", "{544F6990-212D-4C40-8CF8-96FE5C254CCE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wwhowto01", "ww-classobjs\wwhowto01.csproj", "{544F6990-212D-4C40-8CF8-96FE5C254CCE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{257D915E-6C04-4E12-A560-806AFD49D3EB}"
 	ProjectSection(SolutionItems) = preProject
