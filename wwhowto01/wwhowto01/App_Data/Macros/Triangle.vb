@@ -107,7 +107,7 @@ Public Class Triangle
     Private Sub TrySSS()
         Debug.Print("TrySSS()")
         SortAngles()
-        Debug.Print("TrySSS()")
+        Debug.Print("xTrySSS()")
         If Angle(0) = 0 Then
             Debug.Print("If Angle(0) = 0 Then")
             ' Law of Cosines: a^2 = b^2 + c^2 - 2*b*c*cos(A)

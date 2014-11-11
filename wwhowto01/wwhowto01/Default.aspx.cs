@@ -46,7 +46,7 @@ namespace ww_classobjs
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptingLanguage.SetAppModel(this);
-            Triangle t = new Triangle(10, 10, 10, 0, 0, 0);
+            Triangle t = new Triangle(100, 10, 10, 0, 0, 0);
             t.Solve();
             Debug.Print(t.ToString());
         }
@@ -77,7 +77,7 @@ namespace ww_classobjs
             }
             catch (Exception e)
             {
-                string s = e.Message;
+                AppendToTextBox1(e.Message);
             }
         }
 
