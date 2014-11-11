@@ -30,14 +30,14 @@ namespace ww_classobjs
             return smatch;
         }
 
-        public static string FormatError(WinWrap.Basic.Error error)
+        public static string FormatError(WinWrap.Basic.Error error, WinWrap.Basic.IVirtualFileSystem vfs)
         {
             var sb = new StringBuilder();
             if (error != null)
             {
-                if (File.Exists(error.File))
+                if (vfs.Exists(error.File))
                 {
-                    string[] lines = File.ReadAllLines(error.File);
+                    string[] lines = vfs.Read(error.File).Split(new string[]{"\r\n"}, StringSplitOptions.None);
                     string line = lines[error.Line - 1];
                     if (error.Offset >= 0)
                         line = line.Insert(error.Offset, "!here!");

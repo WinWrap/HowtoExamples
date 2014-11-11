@@ -100,7 +100,7 @@ namespace ww_classobjs
         void basicNoUIObj_ErrorAlert(object sender, EventArgs e)
         {
             WinWrap.Basic.BasicNoUIObj basicNoUIObj = sender as WinWrap.Basic.BasicNoUIObj;
-            AppendToTextBox1(Utils.FormatError(basicNoUIObj.Error));
+            AppendToTextBox1(Utils.FormatError(basicNoUIObj.Error, basicNoUIObj.VirtualFileSystem));
         }
 
         void basicNoUIObj_DoEvents(object sender, EventArgs e)
