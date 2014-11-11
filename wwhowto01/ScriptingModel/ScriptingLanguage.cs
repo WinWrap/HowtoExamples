@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AppModel
+namespace ScriptingModel
 {
     [Scriptable]
     public static class ScriptingLanguage

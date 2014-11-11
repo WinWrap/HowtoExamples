@@ -9,7 +9,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace AppModel
+namespace ScriptingModel
 {
     //// http://www.winwrap.com/web/basic/reference/?p=WinWrap.Basic.BasicNoUIObj.AddScriptableObjectModel.html
     internal class ScriptableAttribute : Attribute

@@ -12,7 +12,7 @@ Public Class Triangle
         Corners.add(New TriangleCorner("A", Sa, AA))
         Corners.add(New TriangleCorner("B", Sb, AB))
         Corners.Add(New TriangleCorner("C", Sc, AC))
-        Debug.Print("New: " & ToString() & " at " & System.DateTime.Now.ToString())
+        Debug.Print("Triangle.New: " & ToString() & " at " & System.DateTime.Now.ToString())
     End Sub
 
     Public Function Angle(index As Integer) As Double

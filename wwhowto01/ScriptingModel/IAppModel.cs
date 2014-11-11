@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 using System.Collections.Generic;
 
-namespace AppModel
+namespace ScriptingModel
 {
     public interface IAppModel
     {

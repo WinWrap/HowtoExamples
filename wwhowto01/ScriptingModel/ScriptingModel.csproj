@@ -7,8 +7,8 @@
     <ProjectGuid>{927D62DB-76E3-4AE1-AE0F-C1C42A2B67B4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AppModel</RootNamespace>
-    <AssemblyName>AppModel</AssemblyName>
+    <RootNamespace>ScriptingModel</RootNamespace>
+    <AssemblyName>ScriptingModel</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
