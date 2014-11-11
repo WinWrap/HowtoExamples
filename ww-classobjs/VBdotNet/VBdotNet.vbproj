@@ -103,7 +103,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AppModel\ScriptingModel.csproj">
+    <ProjectReference Include="..\ScriptingModel\ScriptingModel.csproj">
       <Project>{927d62db-76e3-4ae1-ae0f-c1c42a2b67b4}</Project>
       <Name>ScriptingModel</Name>
     </ProjectReference>
