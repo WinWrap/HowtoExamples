@@ -46,7 +46,9 @@ namespace ww_classobjs
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptingLanguage.SetAppModel(this);
-            //Triangle t = new Triangle(10, 10, 10, 0, 0, 0);
+            Triangle t = new Triangle(10, 10, 10, 0, 0, 0);
+            t.Solve();
+            Debug.Print(t.ToString());
         }
 
         protected void Page_UnLoad(object sender, EventArgs e)

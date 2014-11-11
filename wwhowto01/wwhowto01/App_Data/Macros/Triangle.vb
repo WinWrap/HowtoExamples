@@ -32,6 +32,7 @@ Public Class Triangle
             If Sides = 2 AndAlso Angles >= 1 Then TrySAS()
             If Sides = 2 AndAlso Angles >= 1 Then TrySSA()
             If Sides = 1 AndAlso Angles >= 2 Then TryAAS()
+            Debug.Print(ToString())
         Loop While Sides + Angles > n ' continue while making progress
         SortNames()
     End Sub
@@ -44,6 +45,7 @@ Public Class Triangle
 
 
     Private Sub TrySSA()
+        Debug.Print("TrySSA()")
         SortAngles()
         If Side(2) <> 0 AndAlso Angle(1) = 0 Then
             ' Law of Sines: a/sin(A) = b/sin(B) = c/sin(C)
@@ -61,6 +63,7 @@ Public Class Triangle
     End Sub
 
     Private Sub TrySAS()
+        Debug.Print("TrySAS()")
         SortSides()
         If Angle(0) <> 0 AndAlso Side(0) = 0 Then
             ' Law of Cosines: a^2 = b^2 + c^2 - 2*b*c*cos(A)
@@ -74,6 +77,7 @@ Public Class Triangle
     End Sub
 
     Private Sub TryAA()
+        Debug.Print("TryAA()")
         SortAngles()
         If Angle(0) = 0 Then
             ' Law of Angles: A + B + C = 180
@@ -86,6 +90,7 @@ Public Class Triangle
     End Sub
 
     Private Sub TryAAS()
+        Debug.Print("TryAAS()")
         SortSides()
         If Side(1) = 0 Then
             SortAngles()
@@ -100,8 +105,10 @@ Public Class Triangle
     End Sub
 
     Private Sub TrySSS()
+        Debug.Print("TrySSS()")
         SortAngles()
         If Angle(0) = 0 Then
+            Debug.Print("If Angle(0) = 0 Then")
             ' Law of Cosines: a^2 = b^2 + c^2 - 2*b*c*cos(A)
             ' solve for A: A = acos((b^2 + c^2 - a^2)/(2*b*c))
             ' side a is Side(0)
