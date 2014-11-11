@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\ww-classobjs.pubxml" />
+    <None Include="Properties\PublishProfiles\wwhowto01.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -76,11 +77,11 @@
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Polar Engineering\WinWrap Basic v10 - For Azure Websites 4.0\REDIST\ww10_64.dll">
       <Link>App_Data\WinWrapBasic10\ww10_64.dll</Link>
     </Content>
-    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Polar Engineering\WinWrap Basic\Certificates\Application-b37a4137.htm">
-      <Link>App_Data\WinWrapBasic10\Application-b37a4137.htm</Link>
+    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\Polar Engineering\WinWrap Basic\Certificates\Application-07a7c96d.htm">
+      <Link>App_Data\WinWrapBasic10\Application-07a7c96d.htm</Link>
     </Content>
-    <Content Include="..\..\..\Working-business\config\ww-classobjs-strings.txt">
-      <Link>App_Data\WinWrapBasic10\ww-classobjs-strings.txt</Link>
+    <Content Include="..\..\..\Working-business\config\wwhowto01-strings.txt">
+      <Link>App_Data\WinWrapBasic10\wwhowto01-strings.txt</Link>
     </Content>
     <Content Include="App_Data\Macros\Macro2.bas" />
     <Content Include="App_Data\Macros\Macro1.bas" />

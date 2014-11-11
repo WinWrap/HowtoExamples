@@ -29,6 +29,7 @@ using System.IO;
  * Debug.Print listener
  * IsPostBack ?
  * Session in Azure ?
+ * failed web silently with no cert
  * http://stackoverflow.com/questions/2784878/continuously-reading-from-a-stream
  * http://ww-classobjs.azurewebsites.net/
 */
@@ -161,7 +162,8 @@ namespace ww_classobjs
                     basicNoUIObj.ErrorAlert += basicNoUIObj_ErrorAlert;
                     basicNoUIObj.Pause_ += basicNoUIObj_Pause_;
                     basicNoUIObj.DebugPrint += basicNoUIObj_DebugPrint;
-                    basicNoUIObj.Secret = new Guid(Utils.GetPatternString("ww-classobjs", "Guid[(]\"(.*)\"[)]"));
+                    //basicNoUIObj.Secret = new Guid(Utils.GetPatternString("ww-classobjs", "Guid[(]\"(.*)\"[)]"));
+                    basicNoUIObj.Secret = new Guid(Utils.GetPatternString("wwhowto01", "Guid[(]\"(.*)\"[)]"));
                     basicNoUIObj.Initialize();
                     basicNoUIObj.AddScriptableObjectModel(typeof(ScriptingLanguage));
                     //Button1.Text = basicNoUIObj.Evaluate("2+3");
