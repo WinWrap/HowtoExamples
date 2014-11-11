@@ -72,7 +72,7 @@ namespace ww_classobjs
                     basicNoUIObj.AddScriptableObjectModel(typeof(ScriptingLanguage));
                     //Button1.Text = basicNoUIObj.Evaluate("2+3");
                     basicNoUIObj.VirtualFileSystem = new VirtualFileSystem();
-                    basicNoUIObj.RunFile("Macro2.bas");
+                    basicNoUIObj.RunFile("Macro1.bas");
                 }
             }
             catch (Exception e)

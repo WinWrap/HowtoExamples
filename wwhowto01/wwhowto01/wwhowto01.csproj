@@ -83,7 +83,6 @@
     <Content Include="..\..\..\Working-business\config\wwhowto01-strings.txt">
       <Link>App_Data\WinWrapBasic10\wwhowto01-strings.txt</Link>
     </Content>
-    <Content Include="App_Data\Macros\Macro2.bas" />
     <Content Include="App_Data\Macros\Macro1.bas" />
     <Content Include="App_Data\Macros\Triangle.vb" />
     <Content Include="Default.aspx" />
