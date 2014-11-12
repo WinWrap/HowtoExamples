@@ -10,9 +10,9 @@ Public Class Triangle
 
     Public Sub New(Sa As Double, Sb As Double, Sc As Double,
         AA As Double, AB As Double, AC As Double)
-        Corners.add(New TriangleCorner("A", Sa, AA))
-        Corners.add(New TriangleCorner("B", Sb, AB))
-        Corners.Add(New TriangleCorner("C", Sc, AC))
+        Corners.Add(New TriangleCorner("A", Sa, AA * Math.PI / 180))
+        Corners.Add(New TriangleCorner("B", Sb, AB * Math.PI / 180))
+        Corners.Add(New TriangleCorner("C", Sc, AC * Math.PI / 180))
         Debug.Print("Triangle.New: " & ToString())
     End Sub
 
@@ -159,8 +159,8 @@ Public Class Triangle
     Public Overrides Function ToString() As String
         Dim s As String = ""
         For Each Corner As TriangleCorner In Corners
-            'Dim sCorner As String = "(Side=" & PieceDescription(Corner.Side) & ", Angle=" & PieceDescription(Corner.Angle * 180 / Math.PI) & ")"
-            Dim sCorner As String = "(Side=" & PieceDescription(Corner.Side) & ", Angle=" & PieceDescription(Corner.Angle) & ")"
+            Dim sCorner As String = "(Side=" & PieceDescription(Corner.Side) & ", Angle=" & PieceDescription(Corner.Angle * 180 / Math.PI) & ")"
+            'Dim sCorner As String = "(Side=" & PieceDescription(Corner.Side) & ", Angle=" & PieceDescription(Corner.Angle) & ")"
             s = If(s <> "", s & " ", s) & sCorner
         Next
         Return s
