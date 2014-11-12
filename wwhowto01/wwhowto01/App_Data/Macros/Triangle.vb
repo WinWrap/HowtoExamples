@@ -1,4 +1,5 @@
-﻿'#Language "WWB.NET"
+﻿'Attribute VB_Name = "Triangle"
+'#Language "WWB.NET"
 
 Imports System
 Imports System.Collections.Generic
@@ -12,7 +13,7 @@ Public Class Triangle
         Corners.add(New TriangleCorner("A", Sa, AA))
         Corners.add(New TriangleCorner("B", Sb, AB))
         Corners.Add(New TriangleCorner("C", Sc, AC))
-        Debug.Print("Triangle.New: " & ToString() & " at " & System.DateTime.Now.ToString())
+        Debug.Print("Triangle.New: " & ToString())
     End Sub
 
     Public Function Angle(index As Integer) As Double
@@ -27,13 +28,12 @@ Public Class Triangle
         Dim n As Integer
         Do
             n = Sides + Angles
-            If Angles = 2 Then TryAA()
             If Sides = 3 Then TrySSS()
             If Sides = 2 AndAlso Angles >= 1 Then TrySAS()
             If Sides = 2 AndAlso Angles >= 1 Then TrySSA()
             If Sides = 1 AndAlso Angles >= 2 Then TryAAS()
-            Debug.Print(ToString())
-        Loop While Sides + Angles > n ' continue while making progress
+            If Angles = 2 Then TryAA()
+        Loop While Not Solved AndAlso Sides + Angles > n ' continue while making progress
         SortNames()
     End Sub
 
@@ -43,9 +43,7 @@ Public Class Triangle
         End Get
     End Property
 
-
     Private Sub TrySSA()
-        Debug.Print("TrySSA()")
         SortAngles()
         If Side(2) <> 0 AndAlso Angle(1) = 0 Then
             ' Law of Sines: a/sin(A) = b/sin(B) = c/sin(C)
@@ -63,7 +61,6 @@ Public Class Triangle
     End Sub
 
     Private Sub TrySAS()
-        Debug.Print("TrySAS()")
         SortSides()
         If Angle(0) <> 0 AndAlso Side(0) = 0 Then
             ' Law of Cosines: a^2 = b^2 + c^2 - 2*b*c*cos(A)
@@ -72,12 +69,11 @@ Public Class Triangle
             ' side b is Side(1)
             ' side c Side(2)
             ' side a is Side(0)
-            Corners(0).Side = Math.Sqrt(Side(1) ^ 2 + Side(2) ^ 2 - 2 * Side(1) * Side(2) * Math.Cos(Angle(0)))
+            Corners(0).Side = Math.Sqrt(Side(1)^2 + Side(2)^2 - 2 * Side(1) * Side(2) * Math.Cos(Angle(0)))
         End If
     End Sub
 
     Private Sub TryAA()
-        Debug.Print("TryAA()")
         SortAngles()
         If Angle(0) = 0 Then
             ' Law of Angles: A + B + C = 180
@@ -90,7 +86,6 @@ Public Class Triangle
     End Sub
 
     Private Sub TryAAS()
-        Debug.Print("TryAAS()")
         SortSides()
         If Side(1) = 0 Then
             SortAngles()
@@ -105,18 +100,15 @@ Public Class Triangle
     End Sub
 
     Private Sub TrySSS()
-        Debug.Print("TrySSS()")
         SortAngles()
-        Debug.Print("xTrySSS()")
         If Angle(0) = 0 Then
-            Debug.Print("If Angle(0) = 0 Then")
             ' Law of Cosines: a^2 = b^2 + c^2 - 2*b*c*cos(A)
             ' solve for A: A = acos((b^2 + c^2 - a^2)/(2*b*c))
             ' side a is Side(0)
             ' side b is Side(1)
             ' side c is Side(2)
             ' angle A is Angle(0)
-            Corners(0).Angle = Math.Acos((Side(1) ^ 2 + Side(2) ^ 2 - Side(0) ^ 2) / (2 * Side(1) * Side(2)))
+            Corners(0).Angle = Math.Acos((Side(1)^2 + Side(2)^2 - Side(0)^2) / (2 * Side(1) * Side(2)))
         End If
     End Sub
 
@@ -131,7 +123,6 @@ Public Class Triangle
     End Sub
 
     Private Sub SortAngles()
-        Debug.Print("SortAngles()")
         Dim tc As New TriangleCornerAngleComparer
         Corners.Sort(tc)
     End Sub
@@ -167,7 +158,7 @@ Public Class Triangle
     Public Overrides Function ToString() As String
         Dim s As String = ""
         For Each Corner As TriangleCorner In Corners
-            Dim sCorner As String = "(Side=" & PieceDescription(Corner.Side) & ", Angle=" & PieceDescription(Corner.Angle * 180 / Math.Pi) & ")"
+            Dim sCorner As String = "(Side=" & PieceDescription(Corner.Side) & ", Angle=" & PieceDescription(Corner.Angle * 180/Math.Pi) & ")"
             s = If(s <> "", s & " ", s) & sCorner
         Next
         Return s
@@ -207,7 +198,6 @@ End Class
 Public Class TriangleCornerAngleComparer
     Implements IComparer(Of TriangleCorner)
     Public Function Compare(x As TriangleCorner, y As TriangleCorner) As Integer Implements IComparer(Of TriangleCorner).Compare
-        'Debug.Print("TriangleCornerAngleComparer.Compage")
         Return If(x.Angle = y.Angle, x.Side.CompareTo(y.Side), x.Angle.CompareTo(y.Angle))
     End Function
 End Class

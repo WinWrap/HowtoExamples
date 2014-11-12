@@ -6,12 +6,15 @@ Imports System
 Imports System.Collections.Generic
 
 Sub Main()
-    Dim t As New Triangle(10, 10, 10, 0, 0, 0)
-    Debug.Print(t.ToString())
-    'Debug.Print(TypeName(t))
+    Dim t As Triangle
+
+    t = New Triangle(10, 10, 10, 0, 0, 0)
     t.Solve()
     Debug.Print(t.ToString())
 
-    '(New Triangle(10, 10, 10, 0, 0, 0)).Solve
-    'Debug.Print("Hello")
+    t = New Triangle(100, 10, 10, 0, 0, 0)
+    t.Solve()
+    Debug.Print(t.ToString())
+
+    '(New Triangle(10, 10, 10, 0, 0, 0)).Solve()
 End Sub
