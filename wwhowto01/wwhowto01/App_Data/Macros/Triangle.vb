@@ -14,6 +14,9 @@ Public Class Triangle
         Corners.Add(New TriangleCorner("B", Sb, AB * Math.PI / 180))
         Corners.Add(New TriangleCorner("C", Sc, AC * Math.PI / 180))
         Debug.Print("Triangle.New: " & ToString())
+        If Sides + Angles = 6 AndAlso True Then ' check for valid triangle ? xxx
+            Throw New System.Exception("Over specified triangle") '
+        End If
     End Sub
 
     Public Function Angle(index As Integer) As Double
@@ -38,7 +41,7 @@ Public Class Triangle
         Return Me
     End Function
 
-    Public ReadOnly Property Solved As Boolean
+    Public ReadOnly Property Solved As Boolean ' check for valid triangle xxx
         Get
             Return Sides = 3 AndAlso Angles = 3
         End Get
@@ -109,7 +112,10 @@ Public Class Triangle
             ' side b is Side(1)
             ' side c is Side(2)
             ' angle A is Angle(0)
-            Corners(0).Angle = Math.Acos((Side(1)^2 + Side(2)^2 - Side(0)^2) / (2 * Side(1) * Side(2)))
+            Corners(0).Angle = Math.Acos((Side(1) ^ 2 + Side(2) ^ 2 - Side(0) ^ 2) / (2 * Side(1) * Side(2)))
+            If Double.IsNaN(Corners(0).Angle) Then
+                Throw New System.Exception("Sides can not make a triangle.")
+            End If
         End If
     End Sub
 

@@ -4,6 +4,7 @@
 
 Public Module Test
     Public Function RunAll() As Boolean
+        'Dim d As Double = Math.Acos(-1.01)
         'Dim t As New Triangle(10, 10, 10, 0, 0, 0)
         't.Solve()
         'Debug.Print(t.ToString())
