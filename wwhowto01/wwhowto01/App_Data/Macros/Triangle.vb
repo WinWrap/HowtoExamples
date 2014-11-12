@@ -24,7 +24,7 @@ Public Class Triangle
         Return Corners(index).Side
     End Function
 
-    Public Sub Solve()
+    Public Function Solve()
         Dim n As Integer
         Do
             n = Sides + Angles
@@ -35,7 +35,8 @@ Public Class Triangle
             If Angles = 2 Then TryAA()
         Loop While Not Solved AndAlso Sides + Angles > n ' continue while making progress
         SortNames()
-    End Sub
+        Return Me
+    End Function
 
     Public ReadOnly Property Solved As Boolean
         Get
@@ -158,7 +159,8 @@ Public Class Triangle
     Public Overrides Function ToString() As String
         Dim s As String = ""
         For Each Corner As TriangleCorner In Corners
-            Dim sCorner As String = "(Side=" & PieceDescription(Corner.Side) & ", Angle=" & PieceDescription(Corner.Angle * 180/Math.Pi) & ")"
+            'Dim sCorner As String = "(Side=" & PieceDescription(Corner.Side) & ", Angle=" & PieceDescription(Corner.Angle * 180 / Math.PI) & ")"
+            Dim sCorner As String = "(Side=" & PieceDescription(Corner.Side) & ", Angle=" & PieceDescription(Corner.Angle) & ")"
             s = If(s <> "", s & " ", s) & sCorner
         Next
         Return s

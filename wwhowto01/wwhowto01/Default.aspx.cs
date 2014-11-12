@@ -32,6 +32,7 @@ using VBdotNet;
  * Session in Azure ?
  * failed web silently with no cert
  * ScriptingLanguage.cs does not belong to the project being debugged
+ * input radians, output degrees
  * http://stackoverflow.com/questions/2784878/continuously-reading-from-a-stream
  * http://ww-classobjs.azurewebsites.net/
 */
@@ -46,9 +47,11 @@ namespace ww_classobjs
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptingLanguage.SetAppModel(this);
-            Triangle t = new Triangle(100, 10, 10, 0, 0, 0);
+            /*Triangle t = new Triangle(100, 10, 10, 0, 0, 0);
             t.Solve();
-            Debug.Print(t.ToString());
+            Debug.Print(t.ToString());*/
+            bool b = Test.RunAll();
+            Debug.Print(b.ToString());
         }
 
         protected void Page_UnLoad(object sender, EventArgs e)

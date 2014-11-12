@@ -64,6 +64,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\wwhowto01\App_Data\Macros\Test.vb">
+      <Link>Test.vb</Link>
+    </Compile>
     <Compile Include="..\wwhowto01\App_Data\Macros\Triangle.vb">
       <Link>Triangle.vb</Link>
     </Compile>

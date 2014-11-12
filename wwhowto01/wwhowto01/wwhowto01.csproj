@@ -84,6 +84,7 @@
       <Link>App_Data\WinWrapBasic10\wwhowto01-strings.txt</Link>
     </Content>
     <Content Include="App_Data\Macros\Macro1.bas" />
+    <Content Include="App_Data\Macros\Test.vb" />
     <Content Include="App_Data\Macros\Triangle.vb" />
     <Content Include="Default.aspx" />
     <Content Include="Web.config" />
