@@ -69,7 +69,10 @@ namespace ww_classobjs
                     basicNoUIObj.DoEvents += basicNoUIObj_DoEvents;
                     basicNoUIObj.ErrorAlert += basicNoUIObj_ErrorAlert;
                     basicNoUIObj.Pause_ += basicNoUIObj_Pause_;
+#if DEBUG
+                    // Debug.Print in a script shown on webpage when running locally
                     basicNoUIObj.DebugPrint += basicNoUIObj_DebugPrint;
+#endif
                     basicNoUIObj.Secret = new Guid(Utils.GetPatternString("wwhowto01", "Guid[(]\"(.*)\"[)]"));
                     basicNoUIObj.Initialize();
                     basicNoUIObj.AddScriptableObjectModel(typeof(ScriptingLanguage));

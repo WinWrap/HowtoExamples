@@ -41,7 +41,7 @@ Public Class Triangle
         Return Me
     End Function
 
-    Public ReadOnly Property Solved As Boolean ' check for valid triangle xxx
+    Public ReadOnly Property Solved As Boolean
         Get
             Return Sides = 3 AndAlso Angles = 3
         End Get
