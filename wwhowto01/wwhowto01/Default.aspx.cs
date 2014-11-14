@@ -47,7 +47,10 @@ namespace ww_classobjs
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptingLanguage.SetAppModel(this);
-            bool b = Test.RunAll();
+            //bool b = Test.RunAll();
+            /*Triangle t = new Triangle(10, 10, 10, 0, 0, 0);
+            t.Solve();
+            TextBoxAngleA.Text = t.Angle(0).ToString();*/
         }
 
         protected void Page_UnLoad(object sender, EventArgs e)
@@ -136,11 +139,92 @@ namespace ww_classobjs
 
         #region IAppModel
 
-        public void AppTrace(string msg)
+        public double SideA
         {
-            AppendToTextBox1(msg + Environment.NewLine);
+            get
+            {
+                return TextBoxSideA.Text.Length!=0 ? 0 : Convert.ToDouble(TextBoxSideA.Text);
+            }
+            set
+            {
+                TextBoxSideA.Text = value.ToString();
+            }
+        }
+
+        public double SideB
+        {
+            get
+            {
+                return TextBoxSideA.Text.Length==0 ? 0 : Convert.ToDouble(TextBoxSideB.Text);
+            }
+            set
+            {
+                TextBoxSideB.Text = value.ToString();
+            }
+        }
+
+        public double SideC
+        {
+            get
+            {
+                return TextBoxSideA.Text.Length==0 ? 0 : Convert.ToDouble(TextBoxSideC.Text);
+            }
+            set
+            {
+                TextBoxSideC.Text = value.ToString();
+            }
+        }
+
+        public double AngleA
+        {
+            get
+            {
+                return TextBoxSideA.Text.Length==0 ? 0 : (Convert.ToDouble(TextBoxAngleA.Text) * Math.PI / 180);
+            }
+            set
+            {
+                TextBoxAngleA.Text = (value * 180 / Math.PI).ToString();
+            }
+        }
+
+        public double AngleB
+        {
+            get
+            {
+                return TextBoxSideA.Text.Length==0 ? 0 : Convert.ToDouble(TextBoxAngleB.Text) * Math.PI / 180;
+            }
+            set
+            {
+                TextBoxAngleB.Text = (value * 180 / Math.PI).ToString();
+            }
+        }
+
+        public double AngleC
+        {
+            get
+            {
+                return TextBoxSideA.Text.Length==0 ? 0 : Convert.ToDouble(TextBoxAngleC.Text) * Math.PI / 180;
+            }
+            set
+            {
+                TextBoxAngleC.Text = (value * 180 / Math.PI).ToString();
+            }
         }
 
         #endregion
+
+        protected void RadioButtonList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (RadioButtonList1.Text == "SSA")
+            {
+                TextBoxSideA.Enabled = false;
+                TextBoxSideA.Text = "";
+                TextBoxSideB.Enabled = true;
+                TextBoxSideC.Enabled = true;
+                TextBoxAngleA.Enabled = false;
+                TextBoxAngleB.Enabled = true;
+                TextBoxAngleC.Enabled = false;
+            }
+        }
     }
 }

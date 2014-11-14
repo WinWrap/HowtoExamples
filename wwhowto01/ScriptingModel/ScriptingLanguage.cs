@@ -14,10 +14,81 @@ namespace ScriptingModel
         }
 
         [Scriptable]
-        public static void AppTrace(string msg)
+        public static double SideA
         {
-            AppModel.AppTrace(msg);
+            get
+            {
+                return AppModel.SideA;
+            }
+            set
+            {
+                AppModel.SideA = value;
+            }
         }
 
+        [Scriptable]
+        public static double SideB
+        {
+            get
+            {
+                return AppModel.SideB;
+            }
+            set
+            {
+                AppModel.SideB = value;
+            }
+        }
+
+        [Scriptable]
+        public static double SideC
+        {
+            get
+            {
+                return AppModel.SideC;
+            }
+            set
+            {
+                AppModel.SideC = value;
+            }
+        }
+
+        [Scriptable]
+        public static double AngleA
+        {
+            get
+            {
+                return AppModel.AngleA;
+            }
+            set
+            {
+                AppModel.AngleA = value;
+            }
+        }
+
+        [Scriptable]
+        public static double AngleB
+        {
+            get
+            {
+                return AppModel.AngleB;
+            }
+            set
+            {
+                AppModel.AngleB = value;
+            }
+        }
+
+        [Scriptable]
+        public static double AngleC
+        {
+            get
+            {
+                return AppModel.AngleC;
+            }
+            set
+            {
+                AppModel.AngleC = value;
+            }
+        }
     }
 }

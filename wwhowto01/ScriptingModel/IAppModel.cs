@@ -13,6 +13,11 @@ namespace ScriptingModel
 {
     public interface IAppModel
     {
-        void AppTrace(string msg);
+        double SideA { get; set; }
+        double SideB { get; set; }
+        double SideC { get; set; }
+        double AngleA { get; set; }
+        double AngleB { get; set; }
+        double AngleC { get; set; }
     }
 }
