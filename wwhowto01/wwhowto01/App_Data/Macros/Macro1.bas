@@ -18,8 +18,8 @@ Sub Main()
     'Debug.Print(t.ToString())
 
     'Debug.Print(CType(New Triangle(100, 10, 10, 0, 0, 0), Triangle).Solve().ToString())
-    Debug.Print(CType(New Triangle(10, 10, 10, 60, 60, 50), Triangle).Solve().ToString())
+    'Debug.Print(CType(New Triangle(10, 10, 10, 60, 60, 50), Triangle).Solve().ToString())
 
-    'Dim b As Boolean = Test.RunAll()
-    'Debug.Print(b.ToString())
+    Dim b As Boolean = Test.RunAll()
+    Debug.Print(b.ToString())
 End Sub

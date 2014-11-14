@@ -76,6 +76,7 @@ namespace ww_classobjs
                     basicNoUIObj.Secret = new Guid(Utils.GetPatternString("wwhowto01", "Guid[(]\"(.*)\"[)]"));
                     basicNoUIObj.Initialize();
                     basicNoUIObj.AddScriptableObjectModel(typeof(ScriptingLanguage));
+                    //basicNoUIObj.AddReference(typeof(String).Assembly);
                     //Button1.Text = basicNoUIObj.Evaluate("2+3");
                     basicNoUIObj.VirtualFileSystem = new VirtualFileSystem();
                     basicNoUIObj.RunFile("Macro1.bas");

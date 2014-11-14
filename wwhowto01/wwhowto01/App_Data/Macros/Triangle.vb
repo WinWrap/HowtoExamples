@@ -134,7 +134,7 @@ Public Class Triangle
         Corners.Sort(tc)
     End Sub
 
-    Private ReadOnly Property Sides() As Integer
+    Private ReadOnly Property Sides() As Integer ' comment
         Get
             Dim cnt As Integer = 0
             For Each Corner As TriangleCorner In Corners
