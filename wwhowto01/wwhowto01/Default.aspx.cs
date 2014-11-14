@@ -143,7 +143,7 @@ namespace ww_classobjs
         {
             get
             {
-                return TextBoxSideA.Text.Length!=0 ? 0 : Convert.ToDouble(TextBoxSideA.Text);
+                return TextBoxSideA.Text.Length==0 ? 0 : Convert.ToDouble(TextBoxSideA.Text);
             }
             set
             {
@@ -180,7 +180,7 @@ namespace ww_classobjs
             get
             {
                 double value = 0;
-                double.TryParse(TextBoxSideA.Text, out value);
+                double.TryParse(TextBoxAngleA.Text, out value);
                 return value * Math.PI / 180;
                 //string s = TextBoxSideA.Text.Length == 0 ? "0" : TextBoxSideA.Text;
                 //return TextBoxSideA.Text.Length==0 ? 0 : (Convert.ToDouble(TextBoxAngleA.Text) * Math.PI / 180);
@@ -197,7 +197,10 @@ namespace ww_classobjs
         {
             get
             {
-                return TextBoxSideA.Text.Length==0 ? 0 : Convert.ToDouble(TextBoxAngleB.Text) * Math.PI / 180;
+                double value = 0;
+                double.TryParse(TextBoxAngleB.Text, out value);
+                return value * Math.PI / 180;
+                //return TextBoxSideA.Text.Length==0 ? 0 : Convert.ToDouble(TextBoxAngleB.Text) * Math.PI / 180;
             }
             set
             {
@@ -209,7 +212,10 @@ namespace ww_classobjs
         {
             get
             {
-                return TextBoxSideA.Text.Length==0 ? 0 : Convert.ToDouble(TextBoxAngleC.Text) * Math.PI / 180;
+                double value = 0;
+                double.TryParse(TextBoxAngleC.Text, out value);
+                return value * Math.PI / 180;
+                //return TextBoxSideA.Text.Length==0 ? 0 : Convert.ToDouble(TextBoxAngleC.Text) * Math.PI / 180;
             }
             set
             {
@@ -224,7 +230,7 @@ namespace ww_classobjs
             if (RadioButtonList1.Text == "SSA")
             {
                 TextBoxSideA.Enabled = false;
-                TextBoxSideA.Text = "";
+                TextBoxSideA.Text = "0";
                 TextBoxSideB.Enabled = true;
                 TextBoxSideC.Enabled = true;
                 TextBoxAngleA.Enabled = false;
