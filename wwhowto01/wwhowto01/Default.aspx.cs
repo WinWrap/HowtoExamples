@@ -179,7 +179,10 @@ namespace ww_classobjs
         {
             get
             {
-                return TextBoxSideA.Text.Length==0 ? 0 : (Convert.ToDouble(TextBoxAngleA.Text) * Math.PI / 180);
+                string s = TextBoxSideA.Text.Length == 0 ? "0" : TextBoxSideA.Text;
+                //return TextBoxSideA.Text.Length==0 ? 0 : (Convert.ToDouble(TextBoxAngleA.Text) * Math.PI / 180);
+                //return Convert.ToDouble(TextBoxSideA.Text.Length==0 ? "0" : TextBoxAngleA.Text) * Math.PI / 180;
+                return Convert.ToDouble(s) * Math.PI / 180;
             }
             set
             {
