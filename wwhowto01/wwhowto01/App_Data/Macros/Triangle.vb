@@ -10,11 +10,11 @@ Public Class Triangle
 
     Public Sub New(Sa As Double, Sb As Double, Sc As Double,
         AA As Double, AB As Double, AC As Double)
-        Corners.Add(New TriangleCorner("A", Sa, AA * Math.PI / 180))
-        Corners.Add(New TriangleCorner("B", Sb, AB * Math.PI / 180))
-        Corners.Add(New TriangleCorner("C", Sc, AC * Math.PI / 180))
+        Corners.Add(New TriangleCorner("A", Sa, AA))
+        Corners.Add(New TriangleCorner("B", Sb, AB))
+        Corners.Add(New TriangleCorner("C", Sc, AC))
         Debug.Print("Triangle.New: " & ToString())
-        If Sides + Angles = 6 AndAlso True Then ' check for valid triangle ? xxx
+        If Sides + Angles > 3 AndAlso True Then
             Throw New System.Exception("Over specified triangle") '
         End If
     End Sub
@@ -113,9 +113,9 @@ Public Class Triangle
             ' side c is Side(2)
             ' angle A is Angle(0)
             Corners(0).Angle = Math.Acos((Side(1) ^ 2 + Side(2) ^ 2 - Side(0) ^ 2) / (2 * Side(1) * Side(2)))
-            If Double.IsNaN(Corners(0).Angle) Then
-                Throw New System.Exception("Sides can not make a triangle.")
-            End If
+            'If Double.IsNaN(Corners(0).Angle) Then
+            'Throw New System.Exception("Sides can not make a triangle.")
+            'End If
         End If
     End Sub
 
@@ -134,7 +134,7 @@ Public Class Triangle
         Corners.Sort(tc)
     End Sub
 
-    Private ReadOnly Property Sides() As Integer ' comment
+    Private ReadOnly Property Sides() As Integer ' count sides
         Get
             Dim cnt As Integer = 0
             For Each Corner As TriangleCorner In Corners
@@ -165,8 +165,7 @@ Public Class Triangle
     Public Overrides Function ToString() As String
         Dim s As String = ""
         For Each Corner As TriangleCorner In Corners
-            Dim sCorner As String = "(Side=" & PieceDescription(Corner.Side) & ", Angle=" & PieceDescription(Corner.Angle * 180 / Math.PI) & ")"
-            'Dim sCorner As String = "(Side=" & PieceDescription(Corner.Side) & ", Angle=" & PieceDescription(Corner.Angle) & ")"
+            Dim sCorner As String = "(Side=" & PieceDescription(Corner.Side) & ", Angle=" & PieceDescription(Corner.Angle) & ")"
             s = If(s <> "", s & " ", s) & sCorner
         Next
         Return s

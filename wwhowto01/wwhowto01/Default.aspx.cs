@@ -47,11 +47,7 @@ namespace ww_classobjs
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptingLanguage.SetAppModel(this);
-            /*Triangle t = new Triangle(100, 10, 10, 0, 0, 0);
-            t.Solve();
-            Debug.Print(t.ToString());*/
             bool b = Test.RunAll();
-            Debug.Print(b.ToString());
         }
 
         protected void Page_UnLoad(object sender, EventArgs e)
@@ -69,10 +65,10 @@ namespace ww_classobjs
                     basicNoUIObj.DoEvents += basicNoUIObj_DoEvents;
                     basicNoUIObj.ErrorAlert += basicNoUIObj_ErrorAlert;
                     basicNoUIObj.Pause_ += basicNoUIObj_Pause_;
-#if DEBUG
+//#if DEBUG
                     // Debug.Print in a script shown on webpage when running locally
                     basicNoUIObj.DebugPrint += basicNoUIObj_DebugPrint;
-#endif
+//#endif
                     basicNoUIObj.Secret = new Guid(Utils.GetPatternString("wwhowto01", "Guid[(]\"(.*)\"[)]"));
                     basicNoUIObj.Initialize();
                     basicNoUIObj.AddScriptableObjectModel(typeof(ScriptingLanguage));
