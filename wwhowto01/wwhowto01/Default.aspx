@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Table ID="Table1" runat="server" Height="69px" HorizontalAlign="Center">
+            <asp:Table ID="Table1" runat="server" Height="69px" HorizontalAlign="Center" CellPadding="10">
                 <asp:TableRow runat="server">
                     <asp:TableCell RowSpan="2" runat="server">
                         <asp:RadioButtonList ID="RadioButtonList1" runat="server" AutoPostBack="True" OnSelectedIndexChanged="RadioButtonList1_SelectedIndexChanged">
@@ -21,7 +21,7 @@
                             <asp:ListItem Value="AAS">AAS</asp:ListItem>
                         </asp:RadioButtonList>
                     </asp:TableCell>
-                    <asp:TableCell runat="server">
+                    <asp:TableCell runat="server" HorizontalAlign="Center">
                         <asp:Image ID="ImageTriangle" runat="server" /></asp:TableCell>
                     <asp:TableCell runat="server">
                         <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Solve" Height="100%" Width="100%" />
@@ -39,13 +39,6 @@
                         A&nbsp;<asp:TextBox ID="TextBoxAngleA" runat="server"></asp:TextBox><br />
                         B&nbsp;<asp:TextBox ID="TextBoxAngleB" runat="server"></asp:TextBox><br />
                         C&nbsp;<asp:TextBox ID="TextBoxAngleC" runat="server"></asp:TextBox>
-                    </asp:TableCell>
-                </asp:TableRow>
-                <asp:TableRow runat="server">
-                    <asp:TableCell runat="server"></asp:TableCell>
-                    <asp:TableCell runat="server"></asp:TableCell>
-                    <asp:TableCell runat="server" HorizontalAlign="Right">
-                        <asp:Button ID="ButtonCancel" runat="server" Text="Cancel" />
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>

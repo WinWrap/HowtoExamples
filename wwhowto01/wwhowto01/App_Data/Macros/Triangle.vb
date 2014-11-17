@@ -13,7 +13,6 @@ Public Class Triangle
         Corners.Add(New TriangleCorner("A", Sa, AA))
         Corners.Add(New TriangleCorner("B", Sb, AB))
         Corners.Add(New TriangleCorner("C", Sc, AC))
-        Debug.Print("Triangle.New: " & ToString())
         If Sides + Angles > 3 AndAlso True Then
             Throw New System.Exception("Over specified triangle") '
         End If

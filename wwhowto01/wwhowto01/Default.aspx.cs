@@ -6,34 +6,11 @@ using VBdotNet;
 using System.Web.UI.WebControls;
 
 /*
- * try catch on side a > sides b + c
- *   VB.Net local: no catch, stackoverflowexception
- *   VB.Net Azure: no catch, no failure indication
- *   WWB.Net time limit exceeded
- *     what is time limit
- *     try increasing
- * put triangle code in separate macro, sub main
- * non-solvable triangle
- *   limit recursion
- *   verify sequencing
- *   try-catch when non-solvable is detectable
- *   // test stackoverflow on ?x=
  * website monitoring
  *   Azure tools
  *   built
- * assert (on internal illegal conditions)
- * abstract tests
- *   MS testing support in VS ?
- * spurious dot(: ".) in VS for "AppTrace("Solve: " & ex.ToString())"
- * common code for VB.Net WWB.Net
  * pass timelimit to error msg
- * ScriptingExtensions
- * Debug.Print listener
- * IsPostBack ?
- * Session in Azure ?
  * failed web silently with no cert
- * ScriptingLanguage.cs does not belong to the project being debugged
- * input radians, output degrees
  * http://stackoverflow.com/questions/2784878/continuously-reading-from-a-stream
  * http://ww-classobjs.azurewebsites.net/
 */
@@ -47,17 +24,11 @@ namespace ww_classobjs
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ImageTriangle.ImageUrl = @"Images\triangle-ssa.bmp";
             if (!IsPostBack)
             {
                 SetTextBoxes("SSS");
             }
             ScriptingLanguage.SetAppModel(this);
-            var x = TextBoxSideA;
-            //bool b = Test.RunAll();
-            /*Triangle t = new Triangle(10, 10, 10, 0, 0, 0);
-            t.Solve();
-            TextBoxAngleA.Text = t.Angle(0).ToString();*/
         }
 
         protected void Page_UnLoad(object sender, EventArgs e)
@@ -256,28 +227,34 @@ namespace ww_classobjs
                     TextBoxSideA.Enabled = true;
                     TextBoxSideB.Enabled = true;
                     TextBoxSideC.Enabled = true;
+                    ImageTriangle.ImageUrl = @"Images\triangle-sss.bmp";
                     break;
                 case "SAS":
                     TextBoxSideB.Enabled = true;
                     TextBoxSideC.Enabled = true;
                     TextBoxAngleA.Enabled = true;
+                    ImageTriangle.ImageUrl = @"Images\triangle-sas.bmp";
                     break;
                 case "SSA":
                     TextBoxSideB.Enabled = true;
                     TextBoxSideC.Enabled = true;
                     TextBoxAngleB.Enabled = true;
+                    ImageTriangle.ImageUrl = @"Images\triangle-ssa.bmp";
+                    break;
+                case "AAA":
+                    ImageTriangle.ImageUrl = @"Images\triangle-aaa.bmp";
                     break;
                 case "ASA":
                     TextBoxSideC.Enabled = true;
                     TextBoxAngleA.Enabled = true;
                     TextBoxAngleB.Enabled = true;
+                    ImageTriangle.ImageUrl = @"Images\triangle-asa.bmp";
                     break;
                 case "AAS":
                     TextBoxSideC.Enabled = true;
                     TextBoxAngleA.Enabled = true;
                     TextBoxAngleC.Enabled = true;
-                    break;
-                default:
+                    ImageTriangle.ImageUrl = @"Images\triangle-aas.bmp";
                     break;
             }
         }
