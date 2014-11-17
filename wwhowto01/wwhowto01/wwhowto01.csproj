@@ -84,6 +84,12 @@
     <Content Include="..\..\..\Working-business\config\wwhowto01-strings.txt">
       <Link>App_Data\WinWrapBasic10\wwhowto01-strings.txt</Link>
     </Content>
+    <Content Include="Images\triangle-aaa.bmp" />
+    <Content Include="Images\triangle-aas.bmp" />
+    <Content Include="Images\triangle-asa.bmp" />
+    <Content Include="Images\triangle-sas.bmp" />
+    <Content Include="Images\triangle-ssa.bmp" />
+    <Content Include="Images\triangle-sss.bmp" />
     <Content Include="App_Data\Macros\Macro1.bas" />
     <Content Include="App_Data\Macros\Test.vb" />
     <Content Include="App_Data\Macros\Triangle.vb" />

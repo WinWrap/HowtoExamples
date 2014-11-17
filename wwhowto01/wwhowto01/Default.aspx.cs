@@ -47,6 +47,7 @@ namespace ww_classobjs
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            ImageTriangle.ImageUrl = @"Images\triangle-ssa.bmp";
             if (!IsPostBack)
             {
                 SetTextBoxes("SSS");
