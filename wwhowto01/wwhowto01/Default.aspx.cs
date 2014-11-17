@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using VBdotNet;
+using System.Web.UI.WebControls;
 
 /*
  * try catch on side a > sides b + c
@@ -46,7 +47,12 @@ namespace ww_classobjs
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                SetTextBoxes("SSS");
+            }
             ScriptingLanguage.SetAppModel(this);
+            var x = TextBoxSideA;
             //bool b = Test.RunAll();
             /*Triangle t = new Triangle(10, 10, 10, 0, 0, 0);
             t.Solve();
@@ -68,10 +74,10 @@ namespace ww_classobjs
                     basicNoUIObj.DoEvents += basicNoUIObj_DoEvents;
                     basicNoUIObj.ErrorAlert += basicNoUIObj_ErrorAlert;
                     basicNoUIObj.Pause_ += basicNoUIObj_Pause_;
-//#if DEBUG
+                    //#if DEBUG
                     // Debug.Print in a script shown on webpage when running locally
                     basicNoUIObj.DebugPrint += basicNoUIObj_DebugPrint;
-//#endif
+                    //#endif
                     basicNoUIObj.Secret = new Guid(Utils.GetPatternString("wwhowto01", "Guid[(]\"(.*)\"[)]"));
                     basicNoUIObj.Initialize();
                     basicNoUIObj.AddScriptableObjectModel(typeof(ScriptingLanguage));
@@ -143,7 +149,7 @@ namespace ww_classobjs
         {
             get
             {
-                return texttolength(TextBoxSideA.Text);
+                return texttolength(TextBoxSideA);
             }
             set
             {
@@ -155,7 +161,7 @@ namespace ww_classobjs
         {
             get
             {
-                return texttolength(TextBoxSideB.Text);
+                return texttolength(TextBoxSideB);
             }
             set
             {
@@ -167,7 +173,7 @@ namespace ww_classobjs
         {
             get
             {
-                return texttolength(TextBoxSideC.Text);
+                return texttolength(TextBoxSideC);
             }
             set
             {
@@ -179,7 +185,7 @@ namespace ww_classobjs
         {
             get
             {
-                return texttodegrees(TextBoxAngleA.Text);
+                return texttodegrees(TextBoxAngleA);
             }
             set
             {
@@ -191,8 +197,7 @@ namespace ww_classobjs
         {
             get
             {
-                return texttodegrees(TextBoxAngleB.Text);
-                //return TextBoxSideA.Text.Length==0 ? 0 : Convert.ToDouble(TextBoxAngleB.Text) * Math.PI / 180;
+                return texttodegrees(TextBoxAngleB);
             }
             set
             {
@@ -204,7 +209,7 @@ namespace ww_classobjs
         {
             get
             {
-                return texttodegrees(TextBoxAngleC.Text);
+                return texttodegrees(TextBoxAngleC);
             }
             set
             {
@@ -214,32 +219,71 @@ namespace ww_classobjs
 
         #endregion
 
-        private double texttodegrees(string text)
+        private double texttolength(TextBox box)
         {
-                double value = 0;
-                double.TryParse(text, out value);
-                return value * Math.PI / 180;
+            string s = box.Enabled ? box.Text : "";
+            double value = 0;
+            double.TryParse(s, out value);
+            return value;
         }
 
-        private double texttolength(string text)
+        private double texttodegrees(TextBox box)
         {
-                double value = 0;
-                double.TryParse(text, out value);
-                return value;
+            string s = box.Enabled ? box.Text : "";
+            double value = 0;
+            double.TryParse(s, out value);
+            return value * Math.PI / 180;
+        }
+
+        private void SetTextBoxes(string datatype)
+        {
+            TextBoxSideA.Enabled = false;
+            TextBoxSideB.Enabled = false;
+            TextBoxSideC.Enabled = false;
+            TextBoxAngleA.Enabled = false;
+            TextBoxAngleB.Enabled = false;
+            TextBoxAngleC.Enabled = false;
+            TextBoxSideA.Text = "3";
+            TextBoxSideB.Text = "4";
+            TextBoxSideC.Text = "5";
+            TextBoxAngleA.Text = "36.869897645844";
+            TextBoxAngleB.Text = "53.130102354156";
+            TextBoxAngleC.Text = "90";
+            switch (datatype)
+            {
+                case "SSS":
+                    TextBoxSideA.Enabled = true;
+                    TextBoxSideB.Enabled = true;
+                    TextBoxSideC.Enabled = true;
+                    break;
+                case "SAS":
+                    TextBoxSideB.Enabled = true;
+                    TextBoxSideC.Enabled = true;
+                    TextBoxAngleA.Enabled = true;
+                    break;
+                case "SSA":
+                    TextBoxSideB.Enabled = true;
+                    TextBoxSideC.Enabled = true;
+                    TextBoxAngleB.Enabled = true;
+                    break;
+                case "ASA":
+                    TextBoxSideC.Enabled = true;
+                    TextBoxAngleA.Enabled = true;
+                    TextBoxAngleB.Enabled = true;
+                    break;
+                case "AAS":
+                    TextBoxSideC.Enabled = true;
+                    TextBoxAngleA.Enabled = true;
+                    TextBoxAngleC.Enabled = true;
+                    break;
+                default:
+                    break;
+            }
         }
 
         protected void RadioButtonList1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (RadioButtonList1.Text == "SSA")
-            {
-                TextBoxSideA.Enabled = false;
-                TextBoxSideA.Text = "";
-                TextBoxSideB.Enabled = true;
-                TextBoxSideC.Enabled = true;
-                TextBoxAngleA.Enabled = false;
-                TextBoxAngleB.Enabled = true;
-                TextBoxAngleC.Enabled = false;
-            }
+            SetTextBoxes(RadioButtonList1.Text);
         }
     }
 }

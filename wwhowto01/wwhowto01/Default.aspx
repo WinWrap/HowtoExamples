@@ -32,15 +32,15 @@
                 <asp:TableRow runat="server">
                     <asp:TableCell runat="server">
                         <asp:Label ID="LabelSides" runat="server" Text="Sides"></asp:Label><br />
-                        a&nbsp;<asp:TextBox ID="TextBoxSideA" runat="server" Text="3"></asp:TextBox><br />
-                        b&nbsp;<asp:TextBox ID="TextBoxSideB" runat="server" Text="4"></asp:TextBox><br />
-                        c&nbsp;<asp:TextBox ID="TextBoxSideC" runat="server" Text="5"></asp:TextBox>
+                        a&nbsp;<asp:TextBox ID="TextBoxSideA" runat="server"></asp:TextBox><br />
+                        b&nbsp;<asp:TextBox ID="TextBoxSideB" runat="server"></asp:TextBox><br />
+                        c&nbsp;<asp:TextBox ID="TextBoxSideC" runat="server"></asp:TextBox>
                     </asp:TableCell>
                     <asp:TableCell runat="server">
                         <asp:Label ID="LabelAngles" runat="server" Text="Angles"></asp:Label><br />
-                        A&nbsp;<asp:TextBox ID="TextBoxAngleA" runat="server" Text="" Enabled="False"></asp:TextBox><br />
-                        B&nbsp;<asp:TextBox ID="TextBoxAngleB" runat="server" Text="" Enabled="False"></asp:TextBox><br />
-                        C&nbsp;<asp:TextBox ID="TextBoxAngleC" runat="server" Text="" Enabled="False"></asp:TextBox>
+                        A&nbsp;<asp:TextBox ID="TextBoxAngleA" runat="server"></asp:TextBox><br />
+                        B&nbsp;<asp:TextBox ID="TextBoxAngleB" runat="server"></asp:TextBox><br />
+                        C&nbsp;<asp:TextBox ID="TextBoxAngleC" runat="server"></asp:TextBox>
                     </asp:TableCell>
                 </asp:TableRow>
                 <asp:TableRow runat="server">
