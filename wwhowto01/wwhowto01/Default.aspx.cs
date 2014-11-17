@@ -143,7 +143,7 @@ namespace ww_classobjs
         {
             get
             {
-                return TextBoxSideA.Text.Length==0 ? 0 : Convert.ToDouble(TextBoxSideA.Text);
+                return texttolength(TextBoxSideA.Text);
             }
             set
             {
@@ -155,7 +155,7 @@ namespace ww_classobjs
         {
             get
             {
-                return TextBoxSideA.Text.Length==0 ? 0 : Convert.ToDouble(TextBoxSideB.Text);
+                return texttolength(TextBoxSideB.Text);
             }
             set
             {
@@ -167,7 +167,7 @@ namespace ww_classobjs
         {
             get
             {
-                return TextBoxSideA.Text.Length==0 ? 0 : Convert.ToDouble(TextBoxSideC.Text);
+                return texttolength(TextBoxSideC.Text);
             }
             set
             {
@@ -179,13 +179,7 @@ namespace ww_classobjs
         {
             get
             {
-                double value = 0;
-                double.TryParse(TextBoxAngleA.Text, out value);
-                return value * Math.PI / 180;
-                //string s = TextBoxSideA.Text.Length == 0 ? "0" : TextBoxSideA.Text;
-                //return TextBoxSideA.Text.Length==0 ? 0 : (Convert.ToDouble(TextBoxAngleA.Text) * Math.PI / 180);
-                //return Convert.ToDouble(TextBoxSideA.Text.Length==0 ? "0" : TextBoxAngleA.Text) * Math.PI / 180;
-                //return Convert.ToDouble(s) * Math.PI / 180;
+                return texttodegrees(TextBoxAngleA.Text);
             }
             set
             {
@@ -197,9 +191,7 @@ namespace ww_classobjs
         {
             get
             {
-                double value = 0;
-                double.TryParse(TextBoxAngleB.Text, out value);
-                return value * Math.PI / 180;
+                return texttodegrees(TextBoxAngleB.Text);
                 //return TextBoxSideA.Text.Length==0 ? 0 : Convert.ToDouble(TextBoxAngleB.Text) * Math.PI / 180;
             }
             set
@@ -212,10 +204,7 @@ namespace ww_classobjs
         {
             get
             {
-                double value = 0;
-                double.TryParse(TextBoxAngleC.Text, out value);
-                return value * Math.PI / 180;
-                //return TextBoxSideA.Text.Length==0 ? 0 : Convert.ToDouble(TextBoxAngleC.Text) * Math.PI / 180;
+                return texttodegrees(TextBoxAngleC.Text);
             }
             set
             {
@@ -225,12 +214,26 @@ namespace ww_classobjs
 
         #endregion
 
+        private double texttodegrees(string text)
+        {
+                double value = 0;
+                double.TryParse(text, out value);
+                return value * Math.PI / 180;
+        }
+
+        private double texttolength(string text)
+        {
+                double value = 0;
+                double.TryParse(text, out value);
+                return value;
+        }
+
         protected void RadioButtonList1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (RadioButtonList1.Text == "SSA")
             {
                 TextBoxSideA.Enabled = false;
-                TextBoxSideA.Text = "0";
+                TextBoxSideA.Text = "";
                 TextBoxSideB.Enabled = true;
                 TextBoxSideC.Enabled = true;
                 TextBoxAngleA.Enabled = false;
