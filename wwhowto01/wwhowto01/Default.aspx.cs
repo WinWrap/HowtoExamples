@@ -11,7 +11,6 @@ using System.Web.UI.WebControls;
  *   built
  * pass timelimit to error msg
  * failed web silently with no cert
- * http://stackoverflow.com/questions/2784878/continuously-reading-from-a-stream
  * http://ww-classobjs.azurewebsites.net/
 */
 
@@ -29,11 +28,6 @@ namespace ww_classobjs
                 SetTextBoxes("SSS");
             }
             ScriptingLanguage.SetAppModel(this);
-        }
-
-        protected void Page_UnLoad(object sender, EventArgs e)
-        {
-
         }
 
         private void RunWinWrap()
@@ -107,6 +101,7 @@ namespace ww_classobjs
         protected void Button1_Click(object sender, EventArgs e)
         {
             RunWinWrap();
+            Button1.Text = "Solved";
         }
 
         private void AppendToTextBox1(string msg)
@@ -209,6 +204,7 @@ namespace ww_classobjs
 
         private void SetTextBoxes(string datatype)
         {
+            Button1.Text = "Solve";
             TextBoxSideA.Enabled = false;
             TextBoxSideB.Enabled = false;
             TextBoxSideC.Enabled = false;

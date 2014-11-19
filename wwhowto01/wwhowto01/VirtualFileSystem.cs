@@ -5,6 +5,8 @@ using System.Web;
 
 using WinWrap.Basic;
 
+//  * https://raw.githubusercontent.com/WinWrap/HowtoExamples/master/wwhowto01/wwhowto01/App_Data/Macros/Macro1.bas
+
 namespace ww_classobjs
 {
     public class VirtualFileSystem : IVirtualFileSystem
