@@ -11,6 +11,7 @@ using System.Web.UI.WebControls;
  *   built
  * pass timelimit to error msg
  * failed web silently with no cert
+ * namespace names
  * http://ww-classobjs.azurewebsites.net/
 */
 

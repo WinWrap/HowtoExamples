@@ -42,7 +42,7 @@
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
-            
+            <asp:Image ID="ImageUser" runat="server" />
             <br />
             <asp:TextBox ID="TextBox1" runat="server" Height="310px" TextMode="MultiLine" Width="100%" Visible="False"></asp:TextBox>
         </div>
