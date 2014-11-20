@@ -14,6 +14,19 @@ namespace ScriptingModel
         }
 
         [Scriptable]
+        public static ClientImage TriangleImage
+        {
+            get
+            {
+                return AppModel.TriangleImage;
+            }
+            set
+            {
+                AppModel.TriangleImage = value;
+            }
+        }
+
+        [Scriptable]
         public static double SideA
         {
             get

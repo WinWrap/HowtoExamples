@@ -19,5 +19,6 @@ namespace ScriptingModel
         double AngleA { get; set; }
         double AngleB { get; set; }
         double AngleC { get; set; }
+        ClientImage TriangleImage { get; set; }
     }
 }

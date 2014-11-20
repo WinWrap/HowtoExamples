@@ -12,6 +12,8 @@ using System.Web.UI.WebControls;
  * pass timelimit to error msg
  * failed web silently with no cert
  * namespace names
+ * Button1 -> ButtonSolve
+ * user and developer macroes
  * http://ww-classobjs.azurewebsites.net/
 */
 
@@ -21,6 +23,7 @@ namespace ww_classobjs
     {
         private bool timedout_;
         private DateTime timelimit_;
+        private ClientImage clientImage_;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,6 +31,8 @@ namespace ww_classobjs
             {
                 SetTextBoxes("SSS");
             }
+            clientImage_ = new ClientImage(500, 500);
+
             ScriptingLanguage.SetAppModel(this);
         }
 
@@ -52,6 +57,7 @@ namespace ww_classobjs
                     //Button1.Text = basicNoUIObj.Evaluate("2+3");
                     basicNoUIObj.VirtualFileSystem = new VirtualFileSystem();
                     basicNoUIObj.RunFile("Macro1.bas");
+                    ImageUser.ImageUrl = clientImage_.ImageUrl();
                 }
             }
             catch (Exception e)
@@ -182,6 +188,18 @@ namespace ww_classobjs
             set
             {
                 TextBoxAngleC.Text = (value * 180 / Math.PI).ToString();
+            }
+        }
+
+        public ClientImage TriangleImage
+        {
+            get
+            {
+                return clientImage_;
+            }
+            set
+            {
+                clientImage_ = value;
             }
         }
 

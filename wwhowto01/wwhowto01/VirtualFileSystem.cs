@@ -10,6 +10,8 @@ namespace ww_classobjs
 {
     public class VirtualFileSystem : IVirtualFileSystem
     {
+        private bool local_ = true;
+
         public string Combine(string baseScriptPath, string name)
         {
             // ignore baseScriptPath in this example
@@ -22,12 +24,18 @@ namespace ww_classobjs
         }
         public bool Exists(string scriptPath) // xxx when used?
         {
-            var request = (HttpWebRequest)WebRequest.Create(ActualFileName(scriptPath));
-            request.Method = "HEAD";
-            var response = (HttpWebResponse)request.GetResponse();
-            var success = response.StatusCode == HttpStatusCode.OK;
-            return success;
-            //return System.IO.File.Exists(ActualFileName(scriptPath));
+            if (local_)
+            {
+                return System.IO.File.Exists(ActualFileName(scriptPath));
+            }
+            else
+            {
+                var request = (HttpWebRequest)WebRequest.Create(ActualFileName(scriptPath));
+                request.Method = "HEAD";
+                var response = (HttpWebResponse)request.GetResponse();
+                var success = response.StatusCode == HttpStatusCode.OK;
+                return success;
+            }
         }
         public string GetCaption(string scriptPath)
         {
@@ -42,14 +50,20 @@ namespace ww_classobjs
         }
         public string Read(string scriptPath)
         {
-            var webRequest = WebRequest.Create(ActualFileName(scriptPath));
-            using (var response = webRequest.GetResponse())
-            using (var content = response.GetResponseStream())
-            using (var reader = new StreamReader(content)) 
+            if (local_)
             {
-                return reader.ReadToEnd(); // xxx
+                return System.IO.File.ReadAllText(ActualFileName(scriptPath));
             }
-            //return System.IO.File.ReadAllText(ActualFileName(scriptPath));
+            else
+            {
+                var webRequest = WebRequest.Create(ActualFileName(scriptPath));
+                using (var response = webRequest.GetResponse())
+                using (var content = response.GetResponseStream())
+                using (var reader = new StreamReader(content))
+                {
+                    return reader.ReadToEnd(); // xxx
+                }
+            }
         }
         public void Write(string scriptPath, string text)
         {
@@ -57,8 +71,14 @@ namespace ww_classobjs
         }
         private string ActualFileName(string scriptPath)
         {
-            //return Utils.MacroPath(scriptPath);
-            return string.Format(@"https://raw.githubusercontent.com/WinWrap/HowtoExamples/master/wwhowto01/wwhowto01/App_Data/Macros/{0}", scriptPath);
+            if (local_)
+            {
+                return Utils.MacroPath(scriptPath);
+            }
+            else
+            {
+                return string.Format(@"https://raw.githubusercontent.com/WinWrap/HowtoExamples/master/wwhowto01/wwhowto01/App_Data/Macros/{0}", scriptPath);
+            }
         }
     }
 }
