@@ -57,6 +57,7 @@ namespace ww_classobjs
                     //Button1.Text = basicNoUIObj.Evaluate("2+3");
                     basicNoUIObj.VirtualFileSystem = new VirtualFileSystem();
                     basicNoUIObj.RunFile("Macro1.bas");
+                    DrawTriangle();
                     ImageUser.ImageUrl = clientImage_.ImageUrl();
                 }
             }
@@ -64,6 +65,36 @@ namespace ww_classobjs
             {
                 AppendToTextBox1(e.Message);
             }
+        }
+
+        private void DrawTriangle()
+        {
+            int sa = Convert.ToInt32(SideA);
+            int sb = Convert.ToInt32(SideB);
+            int sc = Convert.ToInt32(SideC);
+            int aa = Convert.ToInt32(AngleA);
+            int ab = Convert.ToInt32(AngleB);
+            int ac = Convert.ToInt32(AngleC);
+            int w = clientImage_.Width;
+            int h = clientImage_.Height;
+            clientImage_.DrawLine(0, 0, w - 1, h - 1);
+            int x1, x2, y1, y2;
+            x1 = w * 3 / 10;
+            y1 = h * 9 / 10;
+            int scale = w / sc / 2;
+            x2 = x1 + sc * scale;
+            y2 = y1;
+            clientImage_.DrawLine(x1, y1, x2, y2);
+            x1 = w * 3 / 10;
+            y1 = h * 9 / 10;
+            x2 = x1 + sb * scale * Convert.ToInt32(Math.Cos(AngleA));
+            y2 = y1 - sb * scale * Convert.ToInt32(Math.Sin(AngleA));
+            clientImage_.DrawLine(x1, y1, x2, y2);
+            x2 = x1 + sc * scale;
+            y2 = y1;
+            x2 = x2 - sa * scale * Convert.ToInt32(Math.Cos(AngleB));
+            y2 = y2 - sa * scale * Convert.ToInt32(Math.Sin(AngleB));
+            //clientImage_.DrawLine(x1, y1, x2, y2);
         }
 
         void basicNoUIObj_DebugPrint(object sender, WinWrap.Basic.Classic.TextEventArgs e)
@@ -207,7 +238,8 @@ namespace ww_classobjs
 
         private double texttolength(TextBox box)
         {
-            string s = box.Enabled ? box.Text : "";
+            //string s = box.Enabled ? box.Text : "";
+            string s = box.Text;
             double value = 0;
             double.TryParse(s, out value);
             return value;
@@ -215,7 +247,8 @@ namespace ww_classobjs
 
         private double texttodegrees(TextBox box)
         {
-            string s = box.Enabled ? box.Text : "";
+            //string s = box.Enabled ? box.Text : "";
+            string s = box.Text;
             double value = 0;
             double.TryParse(s, out value);
             return value * Math.PI / 180;
@@ -230,12 +263,12 @@ namespace ww_classobjs
             TextBoxAngleA.Enabled = false;
             TextBoxAngleB.Enabled = false;
             TextBoxAngleC.Enabled = false;
-            TextBoxSideA.Text = "3";
+            /*TextBoxSideA.Text = "3";
             TextBoxSideB.Text = "4";
             TextBoxSideC.Text = "5";
             TextBoxAngleA.Text = "36.869897645844";
             TextBoxAngleB.Text = "53.130102354156";
-            TextBoxAngleC.Text = "90";
+            TextBoxAngleC.Text = "90";*/
             switch (datatype)
             {
                 case "SSS":
