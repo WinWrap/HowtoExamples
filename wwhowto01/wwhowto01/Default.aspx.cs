@@ -4,8 +4,10 @@ using System.Diagnostics;
 using System.IO;
 using VBdotNet;
 using System.Web.UI.WebControls;
+//using System.Windows.Shapes;
 
 /*
+ * http://wwhowto01.azurewebsites.net/
  * website monitoring
  *   Azure tools
  *   built
@@ -14,7 +16,10 @@ using System.Web.UI.WebControls;
  * namespace names
  * Button1 -> ButtonSolve
  * user and developer macroes
- * http://ww-classobjs.azurewebsites.net/
+ * bind to class
+ * TriangleImage not available in Triangle.vb
+ * remove TriangleData, create MacroUser.bas
+ * use referal to id user, limit to edw, winwrap, elaborate vfs
 */
 
 namespace ww_classobjs
@@ -57,7 +62,8 @@ namespace ww_classobjs
                     //Button1.Text = basicNoUIObj.Evaluate("2+3");
                     basicNoUIObj.VirtualFileSystem = new VirtualFileSystem();
                     basicNoUIObj.RunFile("Macro1.bas");
-                    DrawTriangle();
+                    //DrawTriangle();
+                    basicNoUIObj.RunFile("Macro2.bas");
                     ImageUser.ImageUrl = clientImage_.ImageUrl();
                 }
             }
@@ -69,32 +75,27 @@ namespace ww_classobjs
 
         private void DrawTriangle()
         {
-            int sa = Convert.ToInt32(SideA);
-            int sb = Convert.ToInt32(SideB);
-            int sc = Convert.ToInt32(SideC);
-            int aa = Convert.ToInt32(AngleA);
-            int ab = Convert.ToInt32(AngleB);
-            int ac = Convert.ToInt32(AngleC);
+            int scale = 100;
+            int sa = Convert.ToInt32(SideA * scale);
+            int sb = Convert.ToInt32(SideB * scale);
+            int sc = Convert.ToInt32(SideC * scale);
             int w = clientImage_.Width;
             int h = clientImage_.Height;
-            clientImage_.DrawLine(0, 0, w - 1, h - 1);
             int x1, x2, y1, y2;
-            x1 = w * 3 / 10;
-            y1 = h * 9 / 10;
-            int scale = w / sc / 2;
-            x2 = x1 + sc * scale;
+            x1 = 0;
+            y1 = 0;
+            x2 = x1 + sc;
             y2 = y1;
+            //Line ln = new Line();
+            //ln.X1 = x1;
+            //clientImage_.DrawLine(Convert.ToInt32(ln.X1), y1, x2, y2);
             clientImage_.DrawLine(x1, y1, x2, y2);
-            x1 = w * 3 / 10;
-            y1 = h * 9 / 10;
-            x2 = x1 + sb * scale * Convert.ToInt32(Math.Cos(AngleA));
-            y2 = y1 - sb * scale * Convert.ToInt32(Math.Sin(AngleA));
+            x2 = x1 + Convert.ToInt32(sb * Math.Cos(AngleA));
+            y2 = y1 + Convert.ToInt32(sb * Math.Sin(AngleA));
             clientImage_.DrawLine(x1, y1, x2, y2);
-            x2 = x1 + sc * scale;
-            y2 = y1;
-            x2 = x2 - sa * scale * Convert.ToInt32(Math.Cos(AngleB));
-            y2 = y2 - sa * scale * Convert.ToInt32(Math.Sin(AngleB));
-            //clientImage_.DrawLine(x1, y1, x2, y2);
+            x1 = x2 + Convert.ToInt32(sa * Math.Cos(AngleB));
+            y1 = y2 - Convert.ToInt32(sa * Math.Sin(AngleB));
+            clientImage_.DrawLine(x1, y1, x2, y2);
         }
 
         void basicNoUIObj_DebugPrint(object sender, WinWrap.Basic.Classic.TextEventArgs e)
@@ -263,10 +264,10 @@ namespace ww_classobjs
             TextBoxAngleA.Enabled = false;
             TextBoxAngleB.Enabled = false;
             TextBoxAngleC.Enabled = false;
-            /*TextBoxSideA.Text = "3";
-            TextBoxSideB.Text = "4";
-            TextBoxSideC.Text = "5";
-            TextBoxAngleA.Text = "36.869897645844";
+            TextBoxSideA.Text = "3";
+            TextBoxSideB.Text = "3";
+            TextBoxSideC.Text = "3";
+            /*TextBoxAngleA.Text = "36.869897645844";
             TextBoxAngleB.Text = "53.130102354156";
             TextBoxAngleC.Text = "90";*/
             switch (datatype)

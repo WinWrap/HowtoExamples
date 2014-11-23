@@ -16,5 +16,4 @@ Sub Main()
     AngleA = t.Angle(0)
     AngleB = t.Angle(1)
     AngleC = t.Angle(2)
-    'TriangleImage.DrawLine(0, 0, 300, 300)
 End Sub

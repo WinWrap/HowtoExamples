@@ -59,7 +59,7 @@ Public Class Triangle
             ' cope with asin slightly out of range
             If asin < -1 Then asin = -1
             If asin > 1 Then asin = 1
-            Corners(1).Angle = Math.ASin(asin)
+            Corners(1).Angle = Math.Asin(asin)
         End If
     End Sub
 
@@ -72,7 +72,7 @@ Public Class Triangle
             ' side b is Side(1)
             ' side c Side(2)
             ' side a is Side(0)
-            Corners(0).Side = Math.Sqrt(Side(1)^2 + Side(2)^2 - 2 * Side(1) * Side(2) * Math.Cos(Angle(0)))
+            Corners(0).Side = Math.Sqrt(Side(1) ^ 2 + Side(2) ^ 2 - 2 * Side(1) * Side(2) * Math.Cos(Angle(0)))
         End If
     End Sub
 
