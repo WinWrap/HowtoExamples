@@ -7,8 +7,10 @@
     <title></title>
 </head>
 <body>
+
     <form id="form1" runat="server">
         <div>
+            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="http://wwhowto01.azurewebsites.net/">HyperLink</asp:HyperLink>
             <asp:Table ID="Table1" runat="server" Height="69px" HorizontalAlign="Center" CellPadding="10">
                 <asp:TableRow runat="server">
                     <asp:TableCell RowSpan="2" runat="server">

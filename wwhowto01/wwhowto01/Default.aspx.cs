@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using VBdotNet;
 using System.Web.UI.WebControls;
-//using System.Windows.Shapes;
+using System.Web;
 
 /*
  * http://wwhowto01.azurewebsites.net/
@@ -35,6 +35,16 @@ namespace ww_classobjs
             if (!IsPostBack)
             {
                 SetTextBoxes("SSS");
+                string s = Request.QueryString["Code"];
+                if (s == null)
+                {
+                    Session["Code"] = @"https://raw.githubusercontent.com/WinWrap/HowtoExamples/master/wwhowto01/wwhowto01/App_Data/Macros";
+                }
+                else
+                {
+                    /*Session["Code"] = "https://github.com/WinWrap/HowtoExamples/tree/master/wwhowto01/wwhowto01/App_Data/Macros/";*/
+                }
+                //AppendToTextBox1(s == null ? "null" : s);
             }
             clientImage_ = new ClientImage(500, 500);
 
@@ -61,9 +71,11 @@ namespace ww_classobjs
                     //basicNoUIObj.AddReference(typeof(String).Assembly);
                     //Button1.Text = basicNoUIObj.Evaluate("2+3");
                     basicNoUIObj.VirtualFileSystem = new VirtualFileSystem();
-                    basicNoUIObj.RunFile("Macro1.bas");
+                    basicNoUIObj.RunFile("local/Macro1.bas");
                     //DrawTriangle();
-                    basicNoUIObj.RunFile("Macro2.bas");
+                    //basicNoUIObj.RunFile("local/Macro2.bas");
+                    string macroName = String.Format(@"{0}/{1}", Session["Code"].ToString(), "Macro2.bas");
+                    basicNoUIObj.RunFile(macroName);
                     ImageUser.ImageUrl = clientImage_.ImageUrl();
                 }
             }

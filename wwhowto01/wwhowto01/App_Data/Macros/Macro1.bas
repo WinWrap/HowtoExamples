@@ -1,7 +1,6 @@
 ﻿'#Language "WWB.NET"
 
-'#uses "Triangle.vb"
-'#uses "Test.vb"
+'#uses "local/Triangle.vb"
 
 Imports System
 Imports System.Collections.Generic
