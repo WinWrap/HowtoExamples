@@ -98,9 +98,6 @@ namespace ww_classobjs
             y1 = 0;
             x2 = x1 + sc;
             y2 = y1;
-            //Line ln = new Line();
-            //ln.X1 = x1;
-            //clientImage_.DrawLine(Convert.ToInt32(ln.X1), y1, x2, y2);
             clientImage_.DrawLine(x1, y1, x2, y2);
             x2 = x1 + Convert.ToInt32(sb * Math.Cos(AngleA));
             y2 = y1 + Convert.ToInt32(sb * Math.Sin(AngleA));
