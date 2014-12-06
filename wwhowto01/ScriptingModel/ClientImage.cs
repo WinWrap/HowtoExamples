@@ -10,8 +10,19 @@ namespace ScriptingModel
     public class ClientImage
     {
         private Bitmap Bitmap { get; set; }
-        [Scriptable] public int Width { get { return Bitmap.Width; } }
-        [Scriptable] public int Height { get { return Bitmap.Height; } }
+        [Scriptable]
+        public int Width { get { return Bitmap.Width; } }
+        [Scriptable]
+        public int Height { get { return Bitmap.Height; } }
+
+        [Scriptable]
+        public event Action Started;
+
+        public void Start()
+        {
+            if (Started != null)
+                Started();
+        }
 
         public ClientImage(int width, int height)
         {

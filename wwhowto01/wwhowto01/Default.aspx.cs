@@ -321,5 +321,54 @@ namespace ww_classobjs
         {
             SetTextBoxes(RadioButtonList1.Text);
         }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            TextBox2.Text = DateTime.Now.ToString();
+            try
+            {
+                using (var basicNoUIObj = new WinWrap.Basic.BasicNoUIObj())
+                {
+                    basicNoUIObj.Begin += basicNoUIObj_Begin;
+                    basicNoUIObj.DoEvents += basicNoUIObj_DoEvents;
+                    basicNoUIObj.ErrorAlert += basicNoUIObj_ErrorAlert;
+                    basicNoUIObj.Pause_ += basicNoUIObj_Pause_;
+                    //#if DEBUG
+                    // Debug.Print in a script shown on webpage when running locally
+                    basicNoUIObj.DebugPrint += basicNoUIObj_DebugPrint;
+                    //#endif
+                    basicNoUIObj.Secret = new Guid(Utils.GetPatternString("wwhowto01", "Guid[(]\"(.*)\"[)]"));
+                    basicNoUIObj.Initialize();
+                    basicNoUIObj.AddScriptableObjectModel(typeof(ScriptingLanguage));
+                    //basicNoUIObj.AddReference(typeof(String).Assembly);
+                    //Button1.Text = basicNoUIObj.Evaluate("2+3");
+                    basicNoUIObj.VirtualFileSystem = new VirtualFileSystem();
+                    /*basicNoUIObj.RunFile("local/Macro1.bas");
+                    //DrawTriangle();
+                    //basicNoUIObj.RunFile("local/Macro2.bas");
+                    string macroName = String.Format(@"{0}/{1}", Session["Code"].ToString(), "Macro2.bas");
+                    basicNoUIObj.RunFile(macroName);*/
+                    using (var module = basicNoUIObj.ModuleInstance("local/Good.bas", false))
+                    {
+                        if (module == null)
+                        {
+                            string serror = Utils.FormatError(basicNoUIObj.Error, basicNoUIObj.VirtualFileSystem);
+                            TextBox1.Text = serror;
+                            TextBox1.Visible = true;
+                        }
+                        else
+                        {
+                            
+                            ScriptingLanguage.TriangleImage.Start();
+                            ImageUser.ImageUrl = clientImage_.ImageUrl();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                AppendToTextBox1(ex.Message);
+            }
+        }
     }
 }

@@ -46,6 +46,9 @@
             </asp:Table>
             <asp:Image ID="ImageUser" runat="server" />
             <br />
+            <asp:Button ID="Button2" runat="server" Text="Button" OnClick="Button2_Click" Width="258px" />
+            <asp:TextBox ID="TextBox2" runat="server" Width="333px"></asp:TextBox>
+            <br />
             <asp:TextBox ID="TextBox1" runat="server" Height="310px" TextMode="MultiLine" Width="100%" Visible="False"></asp:TextBox>
         </div>
     </form>
