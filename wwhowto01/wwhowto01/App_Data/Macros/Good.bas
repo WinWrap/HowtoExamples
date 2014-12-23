@@ -4,15 +4,13 @@
 
 Imports System
 
-' Subscribe events for object mangaged by host (TheIncident)
+' Subscribe events for object mangaged by host (TriangleImage)
 ' http://www.winwrap.com/web/basic/language/?p=doc_withevents__def.htm
-'Dim WithEvents anincident1 As Incident = TheIncident
 Dim WithEvents anincident1 As ClientImage = TriangleImage
 
 Private Sub anincident1_Started() Handles anincident1.Started
     'Debug.Print("asdf")
     'xxx()
-    'anincident1.EraseLines()
     Dim t As New Triangle(SideA, SideB, SideC, AngleA, AngleB, AngleC)
     t.Solve()
     SideA = t.Side(0)
