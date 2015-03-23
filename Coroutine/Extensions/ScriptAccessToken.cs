@@ -25,7 +25,7 @@ namespace Extensions
         /// <summary>
         /// All script access references to this script access token.
         /// </summary>
-        List<ScriptAccessRef> accessrefs_ = new List<ScriptAccessRef>();
+        private List<ScriptAccessRef> accessrefs_ = new List<ScriptAccessRef>();
 
         /// <summary>
         /// Create a script access token.
@@ -62,7 +62,7 @@ namespace Extensions
         }
 
         /// <summary>
-        /// Unlock the script access token if has been locked by this script access reference.
+        /// Unlock the script access token if it is only locked by this script access reference.
         /// </summary>
         /// <param name="accessref">A script access reference to this script access token.</param>
         public void Unlock(ScriptAccessRef accessref)
@@ -88,7 +88,10 @@ namespace Extensions
         /// <param name="engineid">Script engine identifier.</param>
         public void UnlockAll(int engineid)
         {
-            foreach (ScriptAccessRef accessref in accessrefs_.Where(accessref => accessref.EngineId == engineid))
+            // create temp list of script access references for this script engine
+            List<ScriptAccessRef> accessrefs = new List<ScriptAccessRef>(accessrefs_.Where(accessref => accessref.EngineId == engineid));
+            // unlock each script access reference for this script engine
+            foreach (ScriptAccessRef accessref in accessrefs)
                 Unlock(accessref);
         }
     }

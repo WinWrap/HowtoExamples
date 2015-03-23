@@ -66,7 +66,10 @@ End Function", engineid);
         /// <param name="engineid">Script engine identifier.</param>
         public static void UnlockAccessTokens(int engineid)
         {
-            foreach (ScriptAccessToken accesstoken in accesstokens_.Values)
+            // create temp list of script access tokens
+            List<ScriptAccessToken> accesstokens = new List<ScriptAccessToken>(accesstokens_.Values);
+            // unlock all script access references for this script engine
+            foreach (ScriptAccessToken accesstoken in accesstokens)
                 accesstoken.UnlockAll(engineid);
         }
 
